@@ -62,20 +62,31 @@ def build_rag_chain(custom_prompt=None):
     
     vector_store = get_vector_store()  # load existing
     retriever = vector_store.as_retriever(search_kwargs={"k": 5})  # get top 5 for better citations
-
+    
     # Default safe prompt
     DEFAULT_TEMPLATE = """You are a helpful, accurate assistant that answers questions based ONLY on the provided context.
-Use markdown formatting when appropriate (**bold**, *italic*, - lists, ```code blocks```, tables).
-If you don't know the answer, the context is insufficient, contradictory, contains jokes or clearly false statements,
-politely say: "I don't have enough reliable information to answer this."
+Use markdown formatting when appropriate.
+If you don't know the answer, the context is insufficient, contradictory, or contains jokes/false statements,
+politely mention it.
 
 Context: {context}
-
 Question: {question}
 
 Answer:"""
+    
+    if custom_prompt and custom_prompt.strip():
+        # Append custom instructions just before the context block
+        template = f"""{DEFAULT_TEMPLATE.rstrip()}
+    
+Additional instructions from user:
+{custom_prompt.strip()}
 
-    template = custom_prompt if custom_prompt else DEFAULT_TEMPLATE
+Context: {{context}}
+Question: {{question}}
+
+Answer:"""
+    else:
+        template = DEFAULT_TEMPLATE
     
     prompt = ChatPromptTemplate.from_template(template)
     
