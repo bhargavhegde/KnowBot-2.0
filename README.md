@@ -6,9 +6,7 @@ No API keys, no cloud services, no data ever leaves your machine.
 
 ## Demo (60-second silent walkthrough)
 
-Click to watch:
-
-[![KnowBot Demo](https://img.shields.io/badge/Play%20Demo%20%E2%96%B6%EF%B8%8F-8.6%20MB-blue?logo=github)](https://github.com/bhargavhegde/RAG-KnowBot/raw/main/demo/knowbotDemo.webm)
+Click to watch:[knowbotDemo.webm](https://github.com/user-attachments/assets/d7484a5b-3f2e-430e-842e-167a9e14f497)
 
 *(Silent video showing file upload, indexing, questions, answers, and source citations)*
 ## ✨ Features
