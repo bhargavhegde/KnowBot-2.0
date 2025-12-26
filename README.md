@@ -6,11 +6,11 @@ No API keys, no cloud services, no data ever leaves your machine.
 
 ## Demo (60-second silent walkthrough)
 
-[![KnowBot in Action](demo/thumbnail.png)](https://github.com/bhargavhegde/RAG-KnowBot/raw/main/demo/knowbot_demo.mp4)
+Click to watch:
 
-Click the image above to play the 60-second silent demo.
+[![KnowBot Demo](https://img.shields.io/badge/Play%20Demo%20%E2%96%B6%EF%B8%8F-8.6%20MB-blue?logo=github)](https://github.com/bhargavhegde/RAG-KnowBot/raw/main/demo/knowbotDemo.webm)
 
-
+*(Silent video showing file upload, indexing, questions, answers, and source citations)*
 ## ✨ Features
 
 - 100% local execution using Ollama + Llama 3.1 8B  
