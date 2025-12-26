@@ -108,8 +108,4 @@ knowbot/
 
 MIT License
 
----
 
-Made with ❤️ for privacy, learning, and local AI  
-Feel free to ⭐ the repo if you find it useful!
-```
