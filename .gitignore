@@ -27,3 +27,13 @@ Thumbs.db
 # Large archives
 *.zip
 *.tar.gz
+
+# Node.js / Frontend
+node_modules/
+.next/
+frontend/.next/
+frontend/node_modules/
+*.tsbuildinfo
+
+# Docker
+.docker/

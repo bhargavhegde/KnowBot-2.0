@@ -1,0 +1,25 @@
+# Django Core
+Django>=5.0
+djangorestframework>=3.14
+django-cors-headers>=4.3
+
+# Database
+psycopg2-binary>=2.9
+
+# Celery & Redis
+celery>=5.3
+redis>=5.0
+
+# LangChain RAG Stack
+langchain>=0.3.0
+langchain-community>=0.3.0
+langchain-ollama>=0.3.0
+langchain-text-splitters>=0.3.0
+langchain-chroma>=0.1.4
+
+# Document Processing
+pypdf>=5.0.0
+
+# Utilities
+python-dotenv>=1.0.0
+gunicorn>=21.0
