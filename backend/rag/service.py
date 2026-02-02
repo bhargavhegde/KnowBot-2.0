@@ -23,6 +23,15 @@ from langchain_community.document_loaders import PyPDFLoader, TextLoader
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough
+from langchain_core.documents import Document as LangchainDocument
+
+# OCR support for scanned documents
+try:
+    from rag.ocr import process_document_with_ocr, is_ocr_available, is_image_file
+    OCR_ENABLED = is_ocr_available()
+except ImportError:
+    OCR_ENABLED = False
+    print("Warning: OCR module not available")
 
 
 # Configuration from Django settings
@@ -75,15 +84,54 @@ class DocumentProcessor:
             raise FileNotFoundError(f"File not found: {file_path}")
         
         ext = path.suffix.lower()
+        documents = []
         
-        if ext == '.pdf':
-            loader = PyPDFLoader(str(path))
+        # Check if this is an image file - use OCR
+        if ext in ['.png', '.jpg', '.jpeg', '.tiff', '.tif', '.bmp', '.gif']:
+            if not OCR_ENABLED:
+                raise ValueError(f"OCR is required for image files but not available: {ext}")
+            
+            ocr_results = process_document_with_ocr(str(path))
+            for result in ocr_results:
+                doc = LangchainDocument(
+                    page_content=result['text'],
+                    metadata={
+                        'source': str(path),
+                        'page': result.get('page', 1),
+                        'ocr_applied': True
+                    }
+                )
+                documents.append(doc)
+        
+        elif ext == '.pdf':
+            # Try OCR first for scanned PDFs
+            if OCR_ENABLED:
+                ocr_results = process_document_with_ocr(str(path))
+                if ocr_results is not None:  # None means PDF has native text
+                    print(f"Using OCR for scanned PDF: {path.name}")
+                    for result in ocr_results:
+                        doc = LangchainDocument(
+                            page_content=result['text'],
+                            metadata={
+                                'source': str(path),
+                                'page': result.get('page', 1),
+                                'ocr_applied': True
+                            }
+                        )
+                        documents.append(doc)
+            
+            # If no OCR results, use standard PDF loader
+            if not documents:
+                loader = PyPDFLoader(str(path))
+                documents = loader.load()
+        
         elif ext in ['.txt', '.md']:
             loader = TextLoader(str(path))
+            documents = loader.load()
+        
         else:
             raise ValueError(f"Unsupported file type: {ext}")
         
-        documents = loader.load()
         chunks = self.text_splitter.split_documents(documents)
         
         # Add user_id to metadata for filtering
@@ -126,6 +174,16 @@ class DocumentProcessor:
                 all_chunks.extend(chunks)
             except Exception as e:
                 print(f"Error loading {md_file}: {e}")
+        
+        # Process image files (OCR)
+        if OCR_ENABLED:
+            for img_ext in ['png', 'jpg', 'jpeg', 'tiff', 'tif', 'bmp']:
+                for img_file in data_path.glob(f"**/*.{img_ext}"):
+                    try:
+                        chunks = self.load_single_document(str(img_file))
+                        all_chunks.extend(chunks)
+                    except Exception as e:
+                        print(f"Error loading image {img_file}: {e}")
         
         print(f"Loaded and chunked {len(all_chunks)} pieces from documents.")
         return all_chunks

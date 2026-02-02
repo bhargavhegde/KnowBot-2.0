@@ -50,8 +50,8 @@ class DocumentUploadSerializer(serializers.Serializer):
     file = serializers.FileField()
     
     def validate_file(self, value):
-        # Check file extension
-        allowed_extensions = ['.pdf', '.txt', '.md']
+        # Check file extension (including images for OCR)
+        allowed_extensions = ['.pdf', '.txt', '.md', '.png', '.jpg', '.jpeg', '.tiff', '.tif', '.bmp']
         ext = '.' + value.name.split('.')[-1].lower() if '.' in value.name else ''
         
         if ext not in allowed_extensions:

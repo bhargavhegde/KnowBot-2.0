@@ -7,10 +7,14 @@ ENV PYTHONUNBUFFERED=1
 # Set work directory
 WORKDIR /app
 
-# Install system dependencies
+# Install system dependencies (including Tesseract OCR for scanned documents)
 RUN apt-get update && apt-get install -y \
     gcc \
     libpq-dev \
+    tesseract-ocr \
+    tesseract-ocr-eng \
+    libmagic1 \
+    poppler-utils \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Python dependencies
