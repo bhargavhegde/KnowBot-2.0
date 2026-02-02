@@ -116,14 +116,45 @@ class DocumentViewSet(viewsets.ModelViewSet):
         mime_type, _ = mimetypes.guess_type(file_path)
         return FileResponse(open(file_path, 'rb'), content_type=mime_type or 'application/octet-stream')
     
+    @action(detail=False, methods=['post'], url_path='reset')
+    def reset_knowledge(self, request):
+        """Wipe user's vector store and documents."""
+        try:
+            # Wipe ChromaDB
+            manager = VectorStoreManager(user_id=request.user.id)
+            manager.reset_vector_store()
+            
+            # Delete files from disk
+            data_dir = Path(settings.DATA_DIR)
+            documents = self.get_queryset()
+            for doc in documents:
+                try:
+                    path = Path(doc.file_path)
+                    if path.exists():
+                        path.unlink()
+                except Exception as e:
+                    print(f"Error unlinking file {doc.file_path}: {e}")
+            
+            # Delete DB records
+            documents.delete()
+            
+            return Response({'message': 'Knowledge base reset successfully'})
+        except Exception as e:
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
     def destroy(self, request, *args, **kwargs):
         document = self.get_object()
         try:
+            # Delete from Vector Store first
+            manager = VectorStoreManager(user_id=request.user.id)
+            manager.delete_from_vector_store(document.file_path)
+            
+            # Delete file from disk
             file_path = Path(document.file_path)
             if file_path.exists():
                 file_path.unlink()
         except Exception as e:
-            print(f"Error deleting file: {e}")
+            print(f"Error deleting file/vectors: {e}")
         return super().destroy(request, *args, **kwargs)
 
 

@@ -250,6 +250,31 @@ class VectorStoreManager:
         
         return vector_store
     
+    def delete_from_vector_store(self, file_path: str):
+        """Delete all chunks associated with a specific file path."""
+        try:
+            collection = self.client.get_collection(self.collection_name)
+            # Try deleting by file_path usage in metadata (new schema)
+            collection.delete(where={"file_path": file_path})
+            # Also try deleting by source (legacy/fallback)
+            collection.delete(where={"source": file_path})
+            print(f"Deleted vectors for {file_path}")
+        except Exception as e:
+            print(f"Error deleting vectors for {file_path}: {e}")
+            
+    def reset_vector_store(self):
+        """Delete entire collection for the user."""
+        try:
+            collection = self.client.get_collection(self.collection_name)
+            if self.user_id:
+                collection.delete(where={"user_id": str(self.user_id)})
+                print(f"Deleted all vectors for user {self.user_id}")
+            else:
+                self.client.delete_collection(self.collection_name)
+                print("Deleted entire collection")
+        except Exception as e:
+            print(f"Error resetting vector store: {e}")
+    
     def load_vector_store(self) -> Chroma:
         """Load existing vector store."""
         vector_store = Chroma(
