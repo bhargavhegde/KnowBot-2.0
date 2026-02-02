@@ -62,12 +62,7 @@ export function ChatContainer() {
                 </div>
             </div>
 
-            {/* Persistent Hologram Background */}
-            <div className="absolute inset-0 z-0 flex items-center justify-center opacity-40 pointer-events-none overflow-hidden">
-                <div className="scale-100 transform transition-transform duration-1000 mt-20">
-                    <BrainHologram />
-                </div>
-            </div>
+
 
             {/* Messages Area */}
             <div className="flex-1 overflow-y-auto px-8 py-8 space-y-6 custom-scrollbar relative z-10">
