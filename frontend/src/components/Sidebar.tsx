@@ -163,11 +163,11 @@ export function Sidebar() {
     };
 
     return (
-        <div className="w-80 bg-[#161b22] border-r border-white/5 flex flex-col h-full shadow-2xl">
+        <div className="w-80 glass flex flex-col h-full shadow-2xl border-r border-white/10 relative z-10">
             {/* Header */}
-            <div className="px-6 py-6 border-b border-white/5">
+            <div className="px-6 py-6 border-b border-white/5 bg-white/5">
                 <h2 className="text-xl font-bold tracking-tight text-white flex items-center gap-2">
-                    🧠 KnowBot
+                    <span className="text-2xl">🧠</span> KnowBot
                 </h2>
             </div>
 
@@ -178,7 +178,7 @@ export function Sidebar() {
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
-                        className="bg-red-500/10 border-l-2 border-red-500 px-4 py-2 text-xs text-red-200"
+                        className="bg-red-500/20 border-l-2 border-red-500 px-4 py-2 text-xs text-red-100 backdrop-blur-sm"
                     >
                         {error}
                         <button onClick={() => setError(null)} className="float-right hover:text-white">✕</button>
@@ -188,37 +188,38 @@ export function Sidebar() {
 
             {/* Upload Area */}
             <div className="px-6 py-6 border-b border-white/5">
-                <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-4">Documents</h3>
+                <h3 className="text-[10px] font-bold text-blue-400 uppercase tracking-widest mb-4">Documents</h3>
                 <div
                     {...getRootProps()}
-                    className={`border border-dashed rounded-xl p-6 text-center cursor-pointer
-                    transition-all duration-200 ${isDragActive
-                            ? 'border-indigo-500 bg-indigo-500/5 ring-4 ring-indigo-500/10'
-                            : 'border-white/10 hover:border-indigo-500/50 hover:bg-white/5'}`}
+                    className={`border border-dashed rounded-2xl p-6 text-center cursor-pointer
+                    transition-all duration-300 group
+                    ${isDragActive
+                            ? 'border-blue-500 bg-blue-500/10 scale-[1.02]'
+                            : 'border-white/10 hover:border-blue-400/50 hover:bg-white/5'}`}
                 >
                     <input {...getInputProps()} />
                     {isUploading ? (
-                        <div className="text-sm font-medium text-indigo-400">Uploading...</div>
+                        <div className="text-sm font-medium text-blue-400 animate-pulse">Uploading...</div>
                     ) : (
-                        <div className="text-gray-400 text-sm">
-                            <span className="text-xl block mb-2">📁</span>
-                            <div className="font-medium text-gray-300 mb-1">Upload File</div>
-                            <div className="text-[10px] text-gray-500 uppercase tracking-tighter">PDF, TXT, MD</div>
+                        <div className="text-gray-400 text-sm group-hover:text-blue-300 transition-colors">
+                            <span className="text-2xl block mb-2 opacity-70 group-hover:scale-110 transition-transform duration-300">📄</span>
+                            <div className="font-medium mb-1">Upload File</div>
+                            <div className="text-[9px] text-gray-500 uppercase tracking-widest">PDF • TXT • MD</div>
                         </div>
                     )}
                 </div>
             </div>
 
             {/* Document List */}
-            <div className="flex-1 overflow-y-auto px-6 py-4">
+            <div className="flex-1 overflow-y-auto px-6 py-4 custom-scrollbar">
                 {documents.length > 0 && (
                     <div className="space-y-3">
                         {documents.map((doc) => (
                             <motion.div
                                 key={doc.id}
-                                initial={{ opacity: 0, scale: 0.95 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                className="bg-white/5 hover:bg-white/[0.08] rounded-xl p-3 border border-white/5 transition-all group"
+                                initial={{ opacity: 0, x: -10 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                className="bg-white/5 hover:bg-white/10 rounded-xl p-3 border border-white/5 transition-all group hover:border-blue-500/30 hover:shadow-lg hover:shadow-blue-500/10"
                             >
                                 <div className="flex items-start justify-between gap-3">
                                     <div className="flex-1 min-w-0">
@@ -234,13 +235,13 @@ export function Sidebar() {
                                             )}
                                         </div>
                                     </div>
-                                    <div className="flex gap-1">
+                                    <div className="flex gap-1 opacity-60 group-hover:opacity-100 transition-opacity">
                                         <button
                                             onClick={(e) => {
                                                 e.stopPropagation();
                                                 handlePreview(doc);
                                             }}
-                                            className="text-gray-500 hover:text-indigo-400 p-1 rounded-lg transition-colors"
+                                            className="text-gray-400 hover:text-blue-400 p-1.5 rounded-lg hover:bg-blue-500/10 transition-colors"
                                             title="Preview"
                                         >
                                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -253,11 +254,13 @@ export function Sidebar() {
                                                 e.stopPropagation();
                                                 handleDeleteDocument(doc.id);
                                             }}
-                                            className="text-gray-500 hover:text-red-400 p-1 rounded-lg transition-colors"
+                                            className="text-gray-400 hover:text-red-400 p-1.5 rounded-lg hover:bg-red-500/10 transition-colors"
                                             title="Delete"
                                         >
+                                            {/* Trash 2 Icon - "Cute Dustbin" */}
                                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-4v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 11v6m4-6v6" />
                                             </svg>
                                         </button>
                                     </div>
