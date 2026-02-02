@@ -3,6 +3,8 @@
 import React, { createContext, useContext, useState, useCallback, useEffect } from 'react';
 import { apiService, Message, ChatSession } from '@/lib/api';
 
+import { useAuth } from './AuthContext';
+
 interface ChatContextType {
     messages: Message[];
     sessions: ChatSession[];
@@ -20,6 +22,7 @@ interface ChatContextType {
 const ChatContext = createContext<ChatContextType | undefined>(undefined);
 
 export function ChatProvider({ children }: { children: React.ReactNode }) {
+    const { user } = useAuth();
     const [messages, setMessages] = useState<Message[]>([]);
     const [sessions, setSessions] = useState<ChatSession[]>([]);
     const [currentSessionId, setCurrentSessionId] = useState<number | null>(null);
@@ -124,10 +127,17 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
         }
     }, [currentSessionId]);
 
-    // Initial fetch
+    // Handle auth state changes
     useEffect(() => {
-        fetchSessions();
-    }, [fetchSessions]);
+        if (user) {
+            fetchSessions();
+        } else {
+            // User logged out - clear state
+            setMessages([]);
+            setSessions([]);
+            setCurrentSessionId(null);
+        }
+    }, [user, fetchSessions]);
 
     return (
         <ChatContext.Provider value={{
