@@ -107,10 +107,23 @@ export function BrainHologram() {
                         transition={{ duration: 2, delay: 0.5 }}
                     />
                 </g>
+
+                {/* Text: KnowBot 2.0 */}
+                <foreignObject x="0" y="320" width="400" height="80">
+                    <div className="flex justify-center items-center h-full">
+                        <div className="text-4xl font-black italic tracking-widest text-transparent bg-clip-text bg-gradient-to-b from-white to-blue-400 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]" style={{ fontFamily: 'system-ui' }}>
+                            <span className="inline-block relative">
+                                KNOWBOT
+                                <span className="absolute inset-0 text-transparent bg-clip-text bg-gradient-to-t from-blue-500/20 to-transparent blur-sm transform translate-y-1">KNOWBOT</span>
+                            </span>
+                            <span className="ml-3 text-cyan-400">2.0</span>
+                        </div>
+                    </div>
+                </foreignObject>
             </svg>
 
             {/* Holographic Base Ring */}
-            <div className="absolute top-[85%] w-32 h-8 border-2 border-blue-400/30 rounded-[100%] animate-spin-slow blur-[1px]"></div>
+            <div className="absolute top-[75%] w-48 h-12 border-2 border-blue-400/20 rounded-[100%] animate-spin-slow blur-[1px]"></div>
         </div>
     );
 }

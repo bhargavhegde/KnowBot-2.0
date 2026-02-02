@@ -42,8 +42,8 @@ export default function Home() {
 
       {/* Main Chat Area */}
       <div className="flex-1 flex flex-col relative z-0">
-        {/* Background Prism Effect */}
-        <div className="absolute inset-0 z-[-1] opacity-30 bg-[url('/grid.svg')] pointer-events-none"></div>
+        {/* Aurora Nebula Background */}
+        <div className="aurora-bg"></div>
         <ChatContainer />
       </div>
     </main>
