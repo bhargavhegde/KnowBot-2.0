@@ -33,6 +33,16 @@ except ImportError:
     OCR_ENABLED = False
     print("Warning: OCR module not available")
 
+# Hybrid search (BM25 + Semantic)
+try:
+    from rag.hybrid_search import (
+        is_bm25_available, update_bm25_index, create_hybrid_retriever, get_bm25_index
+    )
+    HYBRID_SEARCH_ENABLED = is_bm25_available()
+except ImportError:
+    HYBRID_SEARCH_ENABLED = False
+    print("Warning: Hybrid search module not available")
+
 
 # Configuration from Django settings
 CHUNK_SIZE = 800
@@ -222,6 +232,12 @@ class VectorStoreManager:
         
         vector_store.add_documents(chunks)
         print(f"Added {len(chunks)} chunks to vector store for user {self.user_id}")
+        
+        # Also update BM25 index for hybrid search
+        if HYBRID_SEARCH_ENABLED:
+            update_bm25_index(chunks, user_id=self.user_id)
+            print(f"Updated BM25 index with {len(chunks)} chunks")
+        
         return vector_store
     
     def load_vector_store(self) -> Chroma:
@@ -299,19 +315,43 @@ Answer:"""
         
         return ChatPromptTemplate.from_template(template)
     
-    def get_retriever(self, k: int = 5):
-        """Get retriever from vector store with user-specific filtering."""
+    def get_retriever(self, k: int = 5, use_hybrid: bool = True):
+        """
+        Get retriever from vector store with user-specific filtering.
+        
+        Args:
+            k: Number of documents to retrieve
+            use_hybrid: If True and available, use hybrid BM25+semantic search
+        """
         vector_store = self.vector_store_manager.load_vector_store()
         
-        # Use metadata filtering to only retrieve user's documents
+        # Base vector retriever with user filtering
         if self.user_id is not None:
-            return vector_store.as_retriever(
+            vector_retriever = vector_store.as_retriever(
                 search_kwargs={
                     "k": k,
                     "filter": {"user_id": str(self.user_id)}
                 }
             )
-        return vector_store.as_retriever(search_kwargs={"k": k})
+        else:
+            vector_retriever = vector_store.as_retriever(search_kwargs={"k": k})
+        
+        # Use hybrid retriever if available and enabled
+        if use_hybrid and HYBRID_SEARCH_ENABLED:
+            try:
+                hybrid_retriever = create_hybrid_retriever(
+                    vector_retriever=vector_retriever,
+                    user_id=self.user_id,
+                    semantic_weight=0.6,
+                    bm25_weight=0.4
+                )
+                print(f"Using hybrid retriever (60% semantic, 40% BM25)")
+                return hybrid_retriever
+            except Exception as e:
+                print(f"Hybrid retriever failed, falling back to vector: {e}")
+                return vector_retriever
+        
+        return vector_retriever
     
     def build_chain(self):
         """Build the complete RAG chain."""
