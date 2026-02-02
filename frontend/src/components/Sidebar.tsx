@@ -10,6 +10,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useDropzone } from 'react-dropzone';
 import { apiService, Document } from '@/lib/api';
 import { useAuth } from '@/context/AuthContext';
+import { BrainAvatar } from './BrainAvatar';
 
 export function Sidebar() {
     const { user, logout } = useAuth();
@@ -165,10 +166,8 @@ export function Sidebar() {
     return (
         <div className="w-80 glass flex flex-col h-full shadow-2xl border-r border-white/10 relative z-10">
             {/* Header */}
-            <div className="px-6 py-6 border-b border-white/5 bg-white/5">
-                <h2 className="text-xl font-bold tracking-tight text-white flex items-center gap-2">
-                    <span className="text-2xl">🧠</span> KnowBot
-                </h2>
+            <div className="px-6 py-4 border-b border-white/5 bg-white/5 flex items-center justify-center">
+                <BrainAvatar />
             </div>
 
             {/* Error Display */}

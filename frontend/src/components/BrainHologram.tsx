@@ -3,9 +3,26 @@
 import { motion } from 'framer-motion';
 
 export function BrainHologram() {
+    // Wing shapes composed of crystal shards
+    const leftWing = [
+        "M 150,200 L 100,100 L 140,140 Z",
+        "M 100,100 L 50,80 L 90,120 Z",
+        "M 50,80 L 20,50 L 60,90 Z",
+        "M 140,140 L 80,180 L 130,220 Z",
+        "M 80,180 L 40,220 L 90,240 Z"
+    ];
+
+    const rightWing = [
+        "M 250,200 L 300,100 L 260,140 Z",
+        "M 300,100 L 350,80 L 310,120 Z",
+        "M 350,80 L 380,50 L 340,90 Z",
+        "M 260,140 L 320,180 L 270,220 Z",
+        "M 320,180 L 360,220 L 310,240 Z"
+    ];
+
     return (
         <div className="relative w-96 h-96 flex items-center justify-center">
-            {/* Ambient Glow */}
+            {/* Ambient Nebula */}
             <motion.div
                 className="absolute inset-0 bg-blue-500/10 rounded-full blur-[80px]"
                 animate={{
@@ -15,91 +32,85 @@ export function BrainHologram() {
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
             />
 
-            {/* Core Neural Network - Dynamic Particles */}
-            <div className="absolute inset-0">
-                {[...Array(12)].map((_, i) => (
-                    <motion.div
-                        key={i}
-                        className="absolute w-2 h-2 bg-cyan-400 rounded-full blur-[1px]"
-                        initial={{
-                            x: 192, // center (w-96 is 384px, /2 = 192)
-                            y: 192,
-                            scale: 0,
-                            opacity: 0
-                        }}
-                        animate={{
-                            x: 192 + Math.cos(i * 30 * Math.PI / 180) * 120, // Orbit radius
-                            y: 192 + Math.sin(i * 30 * Math.PI / 180) * 120,
-                            scale: [0, 1.5, 0],
-                            opacity: [0, 1, 0]
-                        }}
-                        transition={{
-                            duration: 3,
-                            repeat: Infinity,
-                            delay: i * 0.2,
-                            ease: "easeInOut"
-                        }}
-                    />
-                ))}
-            </div>
-
-            {/* Rotating Rings (Hologram Effect) */}
-            <svg viewBox="0 0 400 400" className="w-full h-full absolute animate-spin-slow">
+            <svg viewBox="0 0 400 400" className="w-full h-full drop-shadow-[0_0_20px_rgba(59,130,246,0.6)]">
                 <defs>
-                    <linearGradient id="holoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="#3b82f6" stopOpacity="0" />
-                        <stop offset="50%" stopColor="#60a5fa" stopOpacity="0.5" />
-                        <stop offset="100%" stopColor="#93c5fd" stopOpacity="0" />
+                    <linearGradient id="holoWing" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#60a5fa" stopOpacity="0.8" />
+                        <stop offset="100%" stopColor="#3b82f6" stopOpacity="0.4" />
+                    </linearGradient>
+                    <linearGradient id="brainGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stopColor="#93c5fd" />
+                        <stop offset="100%" stopColor="#3b82f6" />
                     </linearGradient>
                 </defs>
 
-                {/* Outer Ring */}
-                <motion.circle
-                    cx="200" cy="200" r="160"
-                    fill="none"
-                    stroke="url(#holoGradient)"
-                    strokeWidth="1"
-                    strokeDasharray="20 40"
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                />
-                {/* Inner Ring */}
-                <motion.circle
-                    cx="200" cy="200" r="120"
-                    fill="none"
-                    stroke="rgba(147, 197, 253, 0.2)"
-                    strokeWidth="2"
-                    strokeDasharray="4 8"
-                    animate={{ rotate: -360 }}
-                    transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                />
+                {/* Left Wing Animation */}
+                <g>
+                    {leftWing.map((path, i) => (
+                        <motion.path
+                            key={`l-${i}`}
+                            d={path}
+                            fill="url(#holoWing)"
+                            stroke="rgba(255,255,255,0.4)"
+                            strokeWidth="1"
+                            initial={{ opacity: 0, x: 20, rotate: 10 }}
+                            animate={{ opacity: 1, x: 0, rotate: 0 }}
+                            transition={{
+                                duration: 1.5,
+                                delay: i * 0.1,
+                                type: "spring",
+                                stiffness: 50
+                            }}
+                        />
+                    ))}
+                </g>
+
+                {/* Right Wing Animation */}
+                <g>
+                    {rightWing.map((path, i) => (
+                        <motion.path
+                            key={`r-${i}`}
+                            d={path}
+                            fill="url(#holoWing)"
+                            stroke="rgba(255,255,255,0.4)"
+                            strokeWidth="1"
+                            initial={{ opacity: 0, x: -20, rotate: -10 }}
+                            animate={{ opacity: 1, x: 0, rotate: 0 }}
+                            transition={{
+                                duration: 1.5,
+                                delay: i * 0.1,
+                                type: "spring",
+                                stiffness: 50
+                            }}
+                        />
+                    ))}
+                </g>
+
+                {/* Central Brain */}
+                <g transform="translate(150, 150) scale(1)">
+                    <motion.path
+                        d="M30,50 Q30,20 50,20 Q70,20 70,50 Q70,80 50,80 Q30,80 30,50"
+                        fill="url(#brainGrad)"
+                        stroke="#bfdbfe"
+                        strokeWidth="1"
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        transition={{ duration: 0.8, ease: "backOut" }}
+                    />
+                    {/* Brain folds */}
+                    <motion.path
+                        d="M40,35 Q50,30 60,35 M35,50 Q50,45 65,50 M40,65 Q50,70 60,65"
+                        stroke="rgba(255,255,255,0.3)"
+                        strokeWidth="1"
+                        fill="none"
+                        animate={{ pathLength: [0, 1] }}
+                        transition={{ duration: 2, delay: 0.5 }}
+                    />
+                </g>
             </svg>
 
-            {/* Central Brain SVG wireframe */}
-            <svg viewBox="0 0 100 100" className="w-64 h-64 drop-shadow-[0_0_20px_rgba(59,130,246,0.6)]">
-                <motion.path
-                    d="M30,50 Q30,20 50,20 Q70,20 70,50 Q70,80 50,80 Q30,80 30,50"
-                    fill="none"
-                    stroke="#60a5fa"
-                    strokeWidth="0.5"
-                    initial={{ pathLength: 0 }}
-                    animate={{ pathLength: 1 }}
-                    transition={{ duration: 2, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
-                />
-                {/* Synapses */}
-                <motion.path
-                    d="M40,50 L60,50 M50,40 L50,60 M42,42 L58,58 M42,58 L58,42"
-                    stroke="#93c5fd"
-                    strokeWidth="0.5"
-                    animate={{ opacity: [0.2, 1, 0.2] }}
-                    transition={{ duration: 1.5, repeat: Infinity }}
-                />
-                <circle cx="50" cy="50" r="28" fill="url(#holoGradient)" opacity="0.1" />
-            </svg>
-
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                <div className="w-48 h-1 bg-blue-500/50 blur-xl"></div>
-            </div>
+            {/* Holographic Base Ring */}
+            <div className="absolute top-[85%] w-32 h-8 border-2 border-blue-400/30 rounded-[100%] animate-spin-slow blur-[1px]"></div>
         </div>
     );
 }
