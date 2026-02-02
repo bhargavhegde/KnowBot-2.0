@@ -12,7 +12,7 @@ KnowBot has evolved from a simple Streamlit script into a professional-grade ful
 
 - **Next-Gen Cybernetic UI**: Built with Next.js 15, Framer Motion, and Tailwind CSS. Features glassmorphism, holographic effects, and a custom-animated "Cyber Brain" avatar.
 - **Persistent Chat History**: Full multi-session support. Save, resume, or delete your "neural threads" at any time.
-- **Neural Knowledge Sync**: The AI explicitly tracks which files it has indexed, providing "Laser Eye" scanning feedback during document retrieval.
+- **Neural Knowledge Sync**: The AI explicitly tracks which files it has indexed feedback during document retrieval.
 - **Enterprise-Ready Backend**: Django REST Framework handles orchestration, while **Celery + Redis** manage asynchronous document indexing.
 - **Secure Multi-User**: Built-in authentication system with JWT. Your knowledge base is isolated to your account.
 - **Async Indexing**: Upload mega-files and watch them process in the background without blocking the UI.
@@ -91,8 +91,6 @@ KnowBot-2.0/
 
 ## 📌 Features in Detail
 
-### ☄️ Laser-Eye Scanning
-When KnowBot retrieves information from your documents, the "Cyber Brain" avatar performs a visual scan, projecting a laser beam towards the text. This visual feedback tells you exactly when the RAG engine is working.
 
 ### 🧠 System Prompts
 Customize your AI's personality. Switch between a professional analyst, a creative tutor, or a strict fact-checker via the sidebar.
