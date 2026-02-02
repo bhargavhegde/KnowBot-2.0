@@ -101,6 +101,21 @@ class DocumentViewSet(viewsets.ModelViewSet):
             'error_message': document.error_message
         })
     
+    @action(detail=True, methods=['get'], url_path='preview')
+    def preview(self, request, pk=None):
+        """Serve the document file for preview."""
+        import mimetypes
+        from django.http import FileResponse
+        
+        document = self.get_object()
+        file_path = Path(document.file_path)
+        
+        if not file_path.exists():
+            return Response({'error': 'File not found'}, status=status.HTTP_404_NOT_FOUND)
+            
+        mime_type, _ = mimetypes.guess_type(file_path)
+        return FileResponse(open(file_path, 'rb'), content_type=mime_type or 'application/octet-stream')
+    
     def destroy(self, request, *args, **kwargs):
         document = self.get_object()
         try:

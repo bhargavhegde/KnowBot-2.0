@@ -99,12 +99,18 @@ def extract_text_from_image(image_path: str, language: str = 'eng') -> str:
         raise RuntimeError("OCR libraries not installed. Install pytesseract and Pillow.")
     
     try:
+        print(f"DEBUG: Starting OCR for image: {image_path}")
         image = Image.open(image_path)
+        print(f"DEBUG: Image loaded. Format: {image.format}, Size: {image.size}, Mode: {image.mode}")
+        
         # Convert to RGB if necessary (handles RGBA, grayscale, etc.)
         if image.mode not in ('L', 'RGB'):
             image = image.convert('RGB')
+            print("DEBUG: Converted image to RGB")
         
         text = pytesseract.image_to_string(image, lang=language)
+        print(f"DEBUG: OCR Extraction complete. Text length: {len(text.strip())}")
+        print(f"DEBUG: First 50 chars: {text.strip()[:50]}")
         return text.strip()
     
     except Exception as e:
