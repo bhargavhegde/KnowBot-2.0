@@ -133,7 +133,6 @@ class DocumentProcessor:
                                 'ocr_applied': True
                             }
                         )
-The above content does NOT show the entire file contents. If you need to view any lines of the file which were not shown to complete your task, call this tool again to view those lines.
                         documents.append(doc)
             
             # If no OCR results, use standard PDF loader
