@@ -2,6 +2,9 @@
 
 # KnowBot - Personal RAG Chatbot (100% Local & Private)
 
+> [!NOTE]
+> This project has been restored to the stable Streamlit version after a migration attempt. All files are verified and working locally.
+
 A beautiful, fully offline personal knowledge chatbot that lets you chat with your own documents using **Retrieval-Augmented Generation (RAG)**.  
 No API keys, no cloud services, no data ever leaves your machine.
 
