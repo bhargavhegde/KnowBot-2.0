@@ -12532,3 +12532,280 @@ Successfully loaded Tiltfile (64.903432ms)
       backend │ 
       backend │ WARNING: This is a development server. Do not use it in a production setting. Use a production WSGI or ASGI server instead.
       backend │ For more information on production servers see: https://docs.djangoproject.com/en/5.2/howto/deployment/
+      backend │ [02/Feb/2026 16:36:45] "OPTIONS /api/documents/5/ HTTP/1.1" 200 0
+      backend │ [02/Feb/2026 16:36:45] "DELETE /api/documents/5/ HTTP/1.1" 204 0
+      backend │ [02/Feb/2026 16:36:45] "GET /api/documents/ HTTP/1.1" 200 2
+       celery │ [2026-02-02 16:36:50,193: INFO/MainProcess] Task api.tasks.index_document_task[19414358-187f-4ab8-a83a-9498d8f1e91e] received
+      backend │ [02/Feb/2026 16:36:50] "POST /api/documents/upload/ HTTP/1.1" 201 314
+      backend │ [02/Feb/2026 16:36:50] "GET /api/documents/ HTTP/1.1" 200 319
+       ollama │ time=2026-02-02T16:36:50.263Z level=WARN source=types.go:966 msg="invalid option provided" option=mirostat
+       ollama │ time=2026-02-02T16:36:50.263Z level=WARN source=types.go:966 msg="invalid option provided" option=mirostat_tau
+       ollama │ time=2026-02-02T16:36:50.263Z level=WARN source=types.go:966 msg="invalid option provided" option=tfs_z
+       ollama │ time=2026-02-02T16:36:50.263Z level=WARN source=types.go:966 msg="invalid option provided" option=mirostat_eta
+       ollama │ [GIN] 2026/02/02 - 16:36:51 | 200 |  899.067908ms |      172.18.0.7 | POST     "/api/embed"
+       celery │ [2026-02-02 16:36:51,158: INFO/ForkPoolWorker-16] HTTP Request: POST http://ollama:11434/api/embed "HTTP/1.1 200 OK"
+       celery │ [2026-02-02 16:36:51,190: WARNING/ForkPoolWorker-16] Vector store created and saved.
+       celery │ [2026-02-02 16:36:51,192: INFO/ForkPoolWorker-16] Task api.tasks.index_document_task[19414358-187f-4ab8-a83a-9498d8f1e91e] succeeded in 0.9982717769998999s: {'success': True, 'document_id': 6, 'chunks': 7}
+      backend │ [02/Feb/2026 16:36:52] "OPTIONS /api/documents/6/status/ HTTP/1.1" 200 0
+      backend │ [02/Feb/2026 16:36:52] "GET /api/documents/6/status/ HTTP/1.1" 200 70
+      backend │ [02/Feb/2026 16:36:52] "GET /api/documents/ HTTP/1.1" 200 341
+      backend │ Loaded vector store for collection: user_3
+       ollama │ time=2026-02-02T16:37:02.359Z level=WARN source=types.go:966 msg="invalid option provided" option=tfs_z
+       ollama │ time=2026-02-02T16:37:02.359Z level=WARN source=types.go:966 msg="invalid option provided" option=mirostat_eta
+       ollama │ time=2026-02-02T16:37:02.359Z level=WARN source=types.go:966 msg="invalid option provided" option=mirostat_tau
+       ollama │ time=2026-02-02T16:37:02.359Z level=WARN source=types.go:966 msg="invalid option provided" option=mirostat
+       ollama │ [GIN] 2026/02/02 - 16:37:02 | 200 |   27.939661ms |      172.18.0.5 | POST     "/api/embed"
+       ollama │ time=2026-02-02T16:37:02.392Z level=WARN source=types.go:966 msg="invalid option provided" option=mirostat_tau
+       ollama │ time=2026-02-02T16:37:02.392Z level=WARN source=types.go:966 msg="invalid option provided" option=tfs_z
+       ollama │ time=2026-02-02T16:37:02.392Z level=WARN source=types.go:966 msg="invalid option provided" option=mirostat
+       ollama │ time=2026-02-02T16:37:02.392Z level=WARN source=types.go:966 msg="invalid option provided" option=mirostat_eta
+       ollama │ [GIN] 2026/02/02 - 16:37:02 | 200 |   30.209055ms |      172.18.0.5 | POST     "/api/embed"
+       ollama │ [GIN] 2026/02/02 - 16:37:08 | 200 |  5.779002583s |      172.18.0.5 | POST     "/api/chat"
+      backend │ [02/Feb/2026 16:37:08] "POST /api/chat/ HTTP/1.1" 200 283
+      backend │ Loaded vector store for collection: user_3
+       ollama │ time=2026-02-02T16:37:20.335Z level=WARN source=types.go:966 msg="invalid option provided" option=mirostat_eta
+       ollama │ time=2026-02-02T16:37:20.335Z level=WARN source=types.go:966 msg="invalid option provided" option=mirostat_tau
+       ollama │ time=2026-02-02T16:37:20.335Z level=WARN source=types.go:966 msg="invalid option provided" option=tfs_z
+       ollama │ time=2026-02-02T16:37:20.335Z level=WARN source=types.go:966 msg="invalid option provided" option=mirostat
+       ollama │ [GIN] 2026/02/02 - 16:37:20 | 200 |   30.521831ms |      172.18.0.5 | POST     "/api/embed"
+       ollama │ time=2026-02-02T16:37:20.370Z level=WARN source=types.go:966 msg="invalid option provided" option=tfs_z
+       ollama │ time=2026-02-02T16:37:20.370Z level=WARN source=types.go:966 msg="invalid option provided" option=mirostat
+       ollama │ time=2026-02-02T16:37:20.370Z level=WARN source=types.go:966 msg="invalid option provided" option=mirostat_eta
+       ollama │ time=2026-02-02T16:37:20.370Z level=WARN source=types.go:966 msg="invalid option provided" option=mirostat_tau
+       ollama │ [GIN] 2026/02/02 - 16:37:20 | 200 |   31.671021ms |      172.18.0.5 | POST     "/api/embed"
+       ollama │ [GIN] 2026/02/02 - 16:37:24 | 200 |  3.784606531s |      172.18.0.5 | POST     "/api/chat"
+      backend │ [02/Feb/2026 16:37:24] "POST /api/chat/ HTTP/1.1" 200 206
+     frontend │  GET / 200 in 35ms (compile: 5ms, render: 30ms)
+      backend │ [02/Feb/2026 16:37:25] "GET /api/auth/me/ HTTP/1.1" 200 45
+      backend │ [02/Feb/2026 16:37:25] "GET /api/documents/ HTTP/1.1" 200 341
+      backend │ [02/Feb/2026 16:37:25] "GET /api/prompts/active/ HTTP/1.1" 200 46
+      backend │ [02/Feb/2026 16:37:25] "GET /api/documents/ HTTP/1.1" 200 341
+      backend │ [02/Feb/2026 16:37:25] "GET /api/prompts/active/ HTTP/1.1" 200 46
+      backend │ [02/Feb/2026 16:37:27] "OPTIONS /api/documents/6/ HTTP/1.1" 200 0
+      backend │ [02/Feb/2026 16:37:27] "DELETE /api/documents/6/ HTTP/1.1" 204 0
+      backend │ [02/Feb/2026 16:37:27] "GET /api/documents/ HTTP/1.1" 200 2
+       celery │ [2026-02-02 16:37:31,115: INFO/MainProcess] Task api.tasks.index_document_task[5539ded0-6708-4f26-bdcf-92229007e0ac] received
+      backend │ [02/Feb/2026 16:37:31] "POST /api/documents/upload/ HTTP/1.1" 201 314
+      backend │ [02/Feb/2026 16:37:31] "GET /api/documents/ HTTP/1.1" 200 319
+       ollama │ time=2026-02-02T16:37:31.189Z level=WARN source=types.go:966 msg="invalid option provided" option=tfs_z
+       ollama │ time=2026-02-02T16:37:31.189Z level=WARN source=types.go:966 msg="invalid option provided" option=mirostat_tau
+       ollama │ time=2026-02-02T16:37:31.189Z level=WARN source=types.go:966 msg="invalid option provided" option=mirostat
+       ollama │ time=2026-02-02T16:37:31.189Z level=WARN source=types.go:966 msg="invalid option provided" option=mirostat_eta
+       ollama │ [GIN] 2026/02/02 - 16:37:32 | 200 |  913.983603ms |      172.18.0.7 | POST     "/api/embed"
+       celery │ [2026-02-02 16:37:32,097: INFO/ForkPoolWorker-16] HTTP Request: POST http://ollama:11434/api/embed "HTTP/1.1 200 OK"
+       celery │ [2026-02-02 16:37:32,128: WARNING/ForkPoolWorker-16] Vector store created and saved.
+       celery │ [2026-02-02 16:37:32,130: INFO/ForkPoolWorker-16] Task api.tasks.index_document_task[5539ded0-6708-4f26-bdcf-92229007e0ac] succeeded in 1.01432973899864s: {'success': True, 'document_id': 7, 'chunks': 7}
+      backend │ [02/Feb/2026 16:37:33] "OPTIONS /api/documents/7/status/ HTTP/1.1" 200 0
+      backend │ [02/Feb/2026 16:37:33] "GET /api/documents/7/status/ HTTP/1.1" 200 70
+      backend │ [02/Feb/2026 16:37:33] "GET /api/documents/ HTTP/1.1" 200 341
+      backend │ Loaded vector store for collection: user_3
+       ollama │ time=2026-02-02T16:37:37.278Z level=WARN source=types.go:966 msg="invalid option provided" option=mirostat
+       ollama │ time=2026-02-02T16:37:37.278Z level=WARN source=types.go:966 msg="invalid option provided" option=mirostat_eta
+       ollama │ time=2026-02-02T16:37:37.279Z level=WARN source=types.go:966 msg="invalid option provided" option=mirostat_tau
+       ollama │ time=2026-02-02T16:37:37.279Z level=WARN source=types.go:966 msg="invalid option provided" option=tfs_z
+       ollama │ [GIN] 2026/02/02 - 16:37:37 | 200 |     30.7226ms |      172.18.0.5 | POST     "/api/embed"
+       ollama │ time=2026-02-02T16:37:37.312Z level=WARN source=types.go:966 msg="invalid option provided" option=mirostat
+       ollama │ time=2026-02-02T16:37:37.312Z level=WARN source=types.go:966 msg="invalid option provided" option=tfs_z
+       ollama │ time=2026-02-02T16:37:37.312Z level=WARN source=types.go:966 msg="invalid option provided" option=mirostat_eta
+       ollama │ time=2026-02-02T16:37:37.312Z level=WARN source=types.go:966 msg="invalid option provided" option=mirostat_tau
+       ollama │ [GIN] 2026/02/02 - 16:37:37 | 200 |   29.824296ms |      172.18.0.5 | POST     "/api/embed"
+       ollama │ [GIN] 2026/02/02 - 16:37:45 | 200 |   7.85341823s |      172.18.0.5 | POST     "/api/chat"
+      backend │ [02/Feb/2026 16:37:45] "POST /api/chat/ HTTP/1.1" 200 365
+           db │ 2026-02-02 16:40:38.039 UTC [55] LOG:  checkpoint starting: time
+           db │ 2026-02-02 16:40:39.375 UTC [55] LOG:  checkpoint complete: wrote 14 buffers (0.1%); 0 WAL file(s) added, 0 removed, 0 recycled; write=1.312 s, sync=0.009 s, total=1.337 s; sync files=14, longest=0.005 s, average=0.001 s; distance=19 kB, estimate=357 kB; lsn=0/1A4F950, redo lsn=0/1A4F918
+       celery │ 
+       celery │ worker: Warm shutdown (MainProcess)
+       celery │ /usr/local/lib/python3.11/site-packages/celery/platforms.py:841: SecurityWarning: You're running the worker with superuser privileges: this is
+       celery │ absolutely not recommended!
+       celery │ 
+       celery │ Please specify a different user using the --uid option.
+       celery │ 
+       celery │ User information: uid=0 euid=0 gid=0 egid=0
+       celery │ 
+       celery │   warnings.warn(SecurityWarning(ROOT_DISCOURAGED.format(
+       celery │  
+       celery │  -------------- celery@a3bed5da9520 v5.6.2 (recovery)
+       celery │ --- ***** ----- 
+       celery │ -- ******* ---- Linux-6.8.0-90-generic-x86_64-with-glibc2.41 2026-02-02 16:41:36
+       celery │ - *** --- * --- 
+       celery │ - ** ---------- [config]
+       celery │ - ** ---------- .> app:         knowbot:0x73b1ec0f8ad0
+       celery │ - ** ---------- .> transport:   redis://redis:6379/0
+       celery │ - ** ---------- .> results:     redis://redis:6379/0
+       celery │ - *** --- * --- .> concurrency: 16 (prefork)
+       celery │ -- ******* ---- .> task events: OFF (enable -E to monitor tasks in this worker)
+       celery │ --- ***** ----- 
+       celery │  -------------- [queues]
+       celery │                 .> celery           exchange=celery(direct) key=celery
+       celery │                 
+       celery │ 
+       celery │ [tasks]
+       celery │   . api.tasks.cleanup_orphaned_files_task
+       celery │   . api.tasks.index_document_task
+       celery │   . api.tasks.reindex_all_documents_task
+       celery │   . knowbot.celery.debug_task
+       celery │ 
+       celery │ [2026-02-02 16:41:37,646: INFO/MainProcess] Connected to redis://redis:6379/0
+       celery │ [2026-02-02 16:41:37,648: INFO/MainProcess] mingle: searching for neighbors
+       celery │ [2026-02-02 16:41:38,654: INFO/MainProcess] mingle: all alone
+       celery │ [2026-02-02 16:41:38,672: INFO/MainProcess] celery@a3bed5da9520 ready.
+     frontend │  GET / 200 in 42ms (compile: 3ms, render: 39ms)
+      backend │ [02/Feb/2026 16:42:17] "GET /api/auth/me/ HTTP/1.1" 200 45
+      backend │ [02/Feb/2026 16:42:17] "GET /api/documents/ HTTP/1.1" 200 341
+      backend │ [02/Feb/2026 16:42:17] "GET /api/documents/ HTTP/1.1" 200 341
+      backend │ [02/Feb/2026 16:42:17] "GET /api/prompts/active/ HTTP/1.1" 200 46
+      backend │ [02/Feb/2026 16:42:17] "GET /api/prompts/active/ HTTP/1.1" 200 46
+      backend │ [02/Feb/2026 16:42:19] "OPTIONS /api/documents/7/ HTTP/1.1" 200 0
+      backend │ [02/Feb/2026 16:42:19] "DELETE /api/documents/7/ HTTP/1.1" 204 0
+      backend │ [02/Feb/2026 16:42:19] "GET /api/documents/ HTTP/1.1" 200 2
+       celery │ [2026-02-02 16:42:23,265: INFO/MainProcess] Task api.tasks.index_document_task[b7b1c592-7a6a-4315-841f-4b2ea58eaa7f] received
+      backend │ [02/Feb/2026 16:42:23] "POST /api/documents/upload/ HTTP/1.1" 201 314
+      backend │ [02/Feb/2026 16:42:23] "GET /api/documents/ HTTP/1.1" 200 316
+       celery │ [2026-02-02 16:42:23,400: INFO/ForkPoolWorker-16] Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+       ollama │ time=2026-02-02T16:42:23.468Z level=WARN source=types.go:966 msg="invalid option provided" option=mirostat
+       ollama │ time=2026-02-02T16:42:23.468Z level=WARN source=types.go:966 msg="invalid option provided" option=mirostat_eta
+       ollama │ time=2026-02-02T16:42:23.468Z level=WARN source=types.go:966 msg="invalid option provided" option=mirostat_tau
+       ollama │ time=2026-02-02T16:42:23.468Z level=WARN source=types.go:966 msg="invalid option provided" option=tfs_z
+       ollama │ [GIN] 2026/02/02 - 16:42:24 | 200 |  840.043953ms |      172.18.0.7 | POST     "/api/embed"
+       celery │ [2026-02-02 16:42:24,304: INFO/ForkPoolWorker-16] HTTP Request: POST http://ollama:11434/api/embed "HTTP/1.1 200 OK"
+       celery │ [2026-02-02 16:42:24,336: WARNING/ForkPoolWorker-16] Vector store updated for collection: user_3
+       celery │ [2026-02-02 16:42:24,340: INFO/ForkPoolWorker-16] Task api.tasks.index_document_task[b7b1c592-7a6a-4315-841f-4b2ea58eaa7f] succeeded in 1.0733655619987985s: {'success': True, 'document_id': 8, 'chunks': 7, 'user_id': 3}
+      backend │ [02/Feb/2026 16:42:25] "OPTIONS /api/documents/8/status/ HTTP/1.1" 200 0
+      backend │ [02/Feb/2026 16:42:25] "GET /api/documents/8/status/ HTTP/1.1" 200 70
+      backend │ [02/Feb/2026 16:42:25] "GET /api/documents/ HTTP/1.1" 200 341
+      backend │ Loaded vector store for collection: user_3
+       ollama │ time=2026-02-02T16:42:30.253Z level=WARN source=types.go:966 msg="invalid option provided" option=mirostat
+       ollama │ time=2026-02-02T16:42:30.253Z level=WARN source=types.go:966 msg="invalid option provided" option=mirostat_tau
+       ollama │ time=2026-02-02T16:42:30.253Z level=WARN source=types.go:966 msg="invalid option provided" option=tfs_z
+       ollama │ time=2026-02-02T16:42:30.253Z level=WARN source=types.go:966 msg="invalid option provided" option=mirostat_eta
+       ollama │ [GIN] 2026/02/02 - 16:42:30 | 200 |   28.672515ms |      172.18.0.5 | POST     "/api/embed"
+      backend │ Internal Server Error: /api/chat/
+      backend │ [02/Feb/2026 16:42:30] "POST /api/chat/ HTTP/1.1" 500 107
+      backend │ Loaded vector store for collection: user_3
+       ollama │ time=2026-02-02T16:42:39.085Z level=WARN source=types.go:966 msg="invalid option provided" option=tfs_z
+       ollama │ time=2026-02-02T16:42:39.085Z level=WARN source=types.go:966 msg="invalid option provided" option=mirostat
+       ollama │ time=2026-02-02T16:42:39.085Z level=WARN source=types.go:966 msg="invalid option provided" option=mirostat_eta
+       ollama │ time=2026-02-02T16:42:39.085Z level=WARN source=types.go:966 msg="invalid option provided" option=mirostat_tau
+       ollama │ [GIN] 2026/02/02 - 16:42:39 | 200 |   25.525432ms |      172.18.0.5 | POST     "/api/embed"
+      backend │ Internal Server Error: /api/chat/
+      backend │ [02/Feb/2026 16:42:39] "POST /api/chat/ HTTP/1.1" 500 107
+       celery │ 
+       celery │ worker: Warm shutdown (MainProcess)
+     frontend │ [?25h
+           db │ 2026-02-02 16:44:08.083 UTC [1] LOG:  received fast shutdown request
+           db │ 2026-02-02 16:44:08.084 UTC [1] LOG:  aborting any active transactions
+        redis │ 1:signal-handler (1770050648) Received SIGTERM scheduling shutdown...
+           db │ 2026-02-02 16:44:08.088 UTC [1] LOG:  background worker "logical replication launcher" (PID 60) exited with exit code 1
+           db │ 2026-02-02 16:44:08.088 UTC [55] LOG:  shutting down
+           db │ 2026-02-02 16:44:08.089 UTC [55] LOG:  checkpoint starting: shutdown immediate
+           db │ 2026-02-02 16:44:08.094 UTC [55] LOG:  checkpoint complete: wrote 14 buffers (0.1%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.001 s, sync=0.002 s, total=0.006 s; sync files=14, longest=0.001 s, average=0.001 s; distance=19 kB, estimate=323 kB; lsn=0/1A54808, redo lsn=0/1A54808
+           db │ 2026-02-02 16:44:08.102 UTC [1] LOG:  database system is shut down
+        redis │ 1:M 02 Feb 2026 16:44:08.116 * User requested shutdown...
+        redis │ 1:M 02 Feb 2026 16:44:08.117 * Saving the final RDB snapshot before exiting.
+        redis │ 1:M 02 Feb 2026 16:44:08.119 * DB saved on disk
+        redis │ 1:M 02 Feb 2026 16:44:08.119 # Redis is now ready to exit, bye bye...
+           db │ WARNING: healthcheck: /var/run/postgresql:5432 - accepting connections
+           db │ 
+           db │ WARNING: healthcheck: PONG
+           db │ 
+           db │ 
+           db │ PostgreSQL Database directory appears to contain a database; Skipping initialization
+           db │ 
+           db │ 2026-02-02 16:44:53.697 UTC [1] LOG:  starting PostgreSQL 16.11 on x86_64-pc-linux-musl, compiled by gcc (Alpine 15.2.0) 15.2.0, 64-bit
+           db │ 2026-02-02 16:44:53.697 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+           db │ 2026-02-02 16:44:53.697 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+           db │ 2026-02-02 16:44:53.698 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+           db │ 2026-02-02 16:44:53.702 UTC [29] LOG:  database system was shut down at 2026-02-02 16:44:08 UTC
+           db │ 2026-02-02 16:44:53.708 UTC [1] LOG:  database system is ready to accept connections
+        redis │ 1:C 02 Feb 2026 16:44:53.700 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+        redis │ 1:C 02 Feb 2026 16:44:53.700 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+        redis │ 1:C 02 Feb 2026 16:44:53.700 * Redis version=7.4.7, bits=64, commit=00000000, modified=0, pid=1, just started
+        redis │ 1:C 02 Feb 2026 16:44:53.700 # Warning: no config file specified, using the default config. In order to specify a config file use redis-server /path/to/redis.conf
+        redis │ 1:M 02 Feb 2026 16:44:53.700 * Increased maximum number of open files to 10032 (it was originally set to 1024).
+        redis │ 1:M 02 Feb 2026 16:44:53.700 * monotonic clock: POSIX clock_gettime
+        redis │ 1:M 02 Feb 2026 16:44:53.701 * Running mode=standalone, port=6379.
+        redis │ 1:M 02 Feb 2026 16:44:53.702 * Server initialized
+        redis │ 1:M 02 Feb 2026 16:44:53.702 * Ready to accept connections tcp
+       ollama │ time=2026-02-02T16:44:53.703Z level=INFO source=routes.go:1631 msg="server config" env="map[CUDA_VISIBLE_DEVICES: GGML_VK_VISIBLE_DEVICES: GPU_DEVICE_ORDINAL: HIP_VISIBLE_DEVICES: HSA_OVERRIDE_GFX_VERSION: HTTPS_PROXY: HTTP_PROXY: NO_PROXY: OLLAMA_CONTEXT_LENGTH:4096 OLLAMA_DEBUG:INFO OLLAMA_FLASH_ATTENTION:false OLLAMA_GPU_OVERHEAD:0 OLLAMA_HOST:http://0.0.0.0:11434 OLLAMA_KEEP_ALIVE:5m0s OLLAMA_KV_CACHE_TYPE: OLLAMA_LLM_LIBRARY: OLLAMA_LOAD_TIMEOUT:5m0s OLLAMA_MAX_LOADED_MODELS:0 OLLAMA_MAX_QUEUE:512 OLLAMA_MODELS:/root/.ollama/models OLLAMA_MULTIUSER_CACHE:false OLLAMA_NEW_ENGINE:false OLLAMA_NOHISTORY:false OLLAMA_NOPRUNE:false OLLAMA_NUM_PARALLEL:1 OLLAMA_ORIGINS:[http://localhost https://localhost http://localhost:* https://localhost:* http://127.0.0.1 https://127.0.0.1 http://127.0.0.1:* https://127.0.0.1:* http://0.0.0.0 https://0.0.0.0 http://0.0.0.0:* https://0.0.0.0:* app://* file://* tauri://* vscode-webview://* vscode-file://*] OLLAMA_REMOTES:[ollama.com] OLLAMA_SCHED_SPREAD:false OLLAMA_VULKAN:false ROCR_VISIBLE_DEVICES: http_proxy: https_proxy: no_proxy:]"
+       ollama │ time=2026-02-02T16:44:53.704Z level=INFO source=images.go:473 msg="total blobs: 9"
+       ollama │ time=2026-02-02T16:44:53.704Z level=INFO source=images.go:480 msg="total unused blobs removed: 0"
+       ollama │ time=2026-02-02T16:44:53.705Z level=INFO source=routes.go:1684 msg="Listening on [::]:11434 (version 0.15.4)"
+       ollama │ time=2026-02-02T16:44:53.705Z level=INFO source=runner.go:67 msg="discovering available GPUs..."
+       ollama │ time=2026-02-02T16:44:53.706Z level=INFO source=server.go:429 msg="starting runner" cmd="/usr/bin/ollama runner --ollama-engine --port 41213"
+       ollama │ time=2026-02-02T16:44:53.738Z level=INFO source=runner.go:106 msg="experimental Vulkan support disabled.  To enable, set OLLAMA_VULKAN=1"
+       ollama │ time=2026-02-02T16:44:53.738Z level=INFO source=server.go:429 msg="starting runner" cmd="/usr/bin/ollama runner --ollama-engine --port 38941"
+       ollama │ time=2026-02-02T16:44:53.768Z level=INFO source=types.go:60 msg="inference compute" id=cpu library=cpu compute="" name=cpu description=cpu libdirs=ollama driver="" pci_id="" type="" total="30.6 GiB" available="30.6 GiB"
+       ollama │ time=2026-02-02T16:44:53.768Z level=INFO source=routes.go:1725 msg="entering low vram mode" "total vram"="0 B" threshold="20.0 GiB"
+     frontend │ 
+     frontend │ > frontend@0.1.0 dev
+     frontend │ > next dev
+     frontend │ 
+     frontend │ ▲ Next.js 16.1.6 (Turbopack)
+     frontend │ - Local:         http://localhost:3000
+     frontend │ - Network:       http://172.18.0.7:3000
+     frontend │ 
+     frontend │ ✓ Starting...
+     frontend │ Attention: Next.js now collects completely anonymous telemetry regarding usage.
+     frontend │ This information is used to shape Next.js' roadmap and prioritize features.
+     frontend │ You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+     frontend │ https://nextjs.org/telemetry
+     frontend │ 
+     frontend │ ✓ Ready in 712ms
+      backend │ Operations to perform:
+      backend │   Apply all migrations: admin, api, auth, contenttypes, sessions
+      backend │ Running migrations:
+      backend │   No migrations to apply.
+       celery │ /usr/local/lib/python3.11/site-packages/celery/platforms.py:841: SecurityWarning: You're running the worker with superuser privileges: this is
+       celery │ absolutely not recommended!
+       celery │ 
+       celery │ Please specify a different user using the --uid option.
+       celery │ 
+       celery │ User information: uid=0 euid=0 gid=0 egid=0
+       celery │ 
+       celery │   warnings.warn(SecurityWarning(ROOT_DISCOURAGED.format(
+       celery │  
+       celery │  -------------- celery@0b10d52c4918 v5.6.2 (recovery)
+       celery │ --- ***** ----- 
+       celery │ -- ******* ---- Linux-6.8.0-90-generic-x86_64-with-glibc2.41 2026-02-02 16:45:01
+       celery │ - *** --- * --- 
+       celery │ - ** ---------- [config]
+       celery │ - ** ---------- .> app:         knowbot:0x7a1dea0307d0
+       celery │ - ** ---------- .> transport:   redis://redis:6379/0
+       celery │ - ** ---------- .> results:     redis://redis:6379/0
+       celery │ - *** --- * --- .> concurrency: 16 (prefork)
+       celery │ -- ******* ---- .> task events: OFF (enable -E to monitor tasks in this worker)
+       celery │ --- ***** ----- 
+       celery │  -------------- [queues]
+       celery │                 .> celery           exchange=celery(direct) key=celery
+       celery │                 
+       celery │ 
+       celery │ [tasks]
+       celery │   . api.tasks.cleanup_orphaned_files_task
+       celery │   . api.tasks.index_document_task
+       celery │   . api.tasks.reindex_all_documents_task
+       celery │   . knowbot.celery.debug_task
+       celery │ 
+      backend │ Watching for file changes with StatReloader
+      backend │ Performing system checks...
+      backend │ 
+       celery │ [2026-02-02 16:45:02,583: INFO/MainProcess] Connected to redis://redis:6379/0
+       celery │ [2026-02-02 16:45:02,587: INFO/MainProcess] mingle: searching for neighbors
+      backend │ System check identified no issues (0 silenced).
+      backend │ February 02, 2026 - 16:45:03
+      backend │ Django version 5.2.10, using settings 'knowbot.settings'
+      backend │ Starting development server at http://0.0.0.0:8000/
+      backend │ Quit the server with CONTROL-C.
+      backend │ 
+      backend │ WARNING: This is a development server. Do not use it in a production setting. Use a production WSGI or ASGI server instead.
+      backend │ For more information on production servers see: https://docs.djangoproject.com/en/5.2/howto/deployment/
+       celery │ [2026-02-02 16:45:03,592: INFO/MainProcess] mingle: all alone
+       celery │ [2026-02-02 16:45:03,599: INFO/MainProcess] celery@0b10d52c4918 ready.
+     frontend │  GET /login 200 in 2.4s (compile: 2.1s, render: 354ms)
+     frontend │  GET / 200 in 2.4s (compile: 2.3s, render: 161ms)
+      backend │ [02/Feb/2026 16:45:17] "GET /api/auth/me/ HTTP/1.1" 200 45
+      backend │ [02/Feb/2026 16:45:17] "GET /api/auth/me/ HTTP/1.1" 200 45
+      backend │ [02/Feb/2026 16:45:17] "GET /api/prompts/active/ HTTP/1.1" 200 46
+      backend │ [02/Feb/2026 16:45:17] "GET /api/prompts/active/ HTTP/1.1" 200 46
+      backend │ [02/Feb/2026 16:45:17] "GET /api/documents/ HTTP/1.1" 200 341
+      backend │ [02/Feb/2026 16:45:17] "GET /api/documents/ HTTP/1.1" 200 341
+     frontend │  GET / 200 in 30ms (compile: 7ms, render: 23ms)
