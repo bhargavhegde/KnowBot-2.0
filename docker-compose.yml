@@ -64,6 +64,8 @@ services:
       - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY:-dev-secret-key}
       - DJANGO_DEBUG=${DJANGO_DEBUG:-True}
       - OLLAMA_HOST=http://ollama:11434
+      - CHROMA_HOST=chromadb
+      - CHROMA_PORT=8000
     volumes:
       - ./backend:/app
       - ./data:/app/data
@@ -76,6 +78,8 @@ services:
       redis:
         condition: service_healthy
       ollama:
+        condition: service_started
+      chromadb:
         condition: service_started
     command: >
       sh -c "python manage.py migrate &&
@@ -97,6 +101,8 @@ services:
       - CELERY_BROKER_URL=redis://redis:6379/0
       - CELERY_RESULT_BACKEND=redis://redis:6379/0
       - OLLAMA_HOST=http://ollama:11434
+      - CHROMA_HOST=chromadb
+      - CHROMA_PORT=8000
     volumes:
       - ./backend:/app
       - ./data:/app/data
@@ -108,7 +114,25 @@ services:
         condition: service_healthy
       ollama:
         condition: service_started
+      chromadb:
+        condition: service_started
     command: celery -A knowbot worker -l INFO
+
+  # ChromaDB Vector Database Service
+  chromadb:
+    image: chromadb/chroma:latest
+    container_name: knowbot-chroma
+    volumes:
+      - ./chroma_db:/chroma/chroma
+    ports:
+      - "8005:8000"
+    environment:
+      - IS_PERSISTENT=TRUE
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8000/api/v1/heartbeat" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
   # Next.js Frontend
   frontend:

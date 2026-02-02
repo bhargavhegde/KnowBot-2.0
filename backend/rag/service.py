@@ -37,10 +37,20 @@ OLLAMA_HOST = getattr(settings, 'OLLAMA_HOST', 'http://localhost:11434')
 # Global client singleton to prevent file locking/HNSW errors
 _CHROMA_CLIENT = None
 
-def get_chroma_client(persist_directory: str):
+def get_chroma_client(persist_directory: str = None):
     global _CHROMA_CLIENT
     if _CHROMA_CLIENT is None:
-        _CHROMA_CLIENT = chromadb.PersistentClient(path=persist_directory)
+        chroma_host = os.environ.get('CHROMA_HOST')
+        chroma_port = os.environ.get('CHROMA_PORT', '8000')
+        
+        if chroma_host:
+            print(f"Connecting to ChromaDB Server at {chroma_host}:{chroma_port}")
+            _CHROMA_CLIENT = chromadb.HttpClient(host=chroma_host, port=int(chroma_port))
+        else:
+            print(f"Using local PersistentClient at {persist_directory}")
+            path = persist_directory or CHROMA_DIR
+            _CHROMA_CLIENT = chromadb.PersistentClient(path=path)
+            
     return _CHROMA_CLIENT
 
 

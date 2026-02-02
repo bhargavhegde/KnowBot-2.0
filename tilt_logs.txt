@@ -14965,3 +14965,642 @@ Successfully loaded Tiltfile (64.903432ms)
       backend │ 
       backend │ WARNING: This is a development server. Do not use it in a production setting. Use a production WSGI or ASGI server instead.
       backend │ For more information on production servers see: https://docs.djangoproject.com/en/5.2/howto/deployment/
+       celery │ 
+       celery │ worker: Warm shutdown (MainProcess)
+       celery │ /usr/local/lib/python3.11/site-packages/celery/platforms.py:841: SecurityWarning: You're running the worker with superuser privileges: this is
+       celery │ absolutely not recommended!
+       celery │ 
+       celery │ Please specify a different user using the --uid option.
+       celery │ 
+       celery │ User information: uid=0 euid=0 gid=0 egid=0
+       celery │ 
+       celery │   warnings.warn(SecurityWarning(ROOT_DISCOURAGED.format(
+       celery │  
+       celery │  -------------- celery@fcea1236535e v5.6.2 (recovery)
+       celery │ --- ***** ----- 
+       celery │ -- ******* ---- Linux-6.8.0-90-generic-x86_64-with-glibc2.41 2026-02-02 17:11:19
+       celery │ - *** --- * --- 
+       celery │ - ** ---------- [config]
+       celery │ - ** ---------- .> app:         knowbot:0x7fb0152ccfd0
+       celery │ - ** ---------- .> transport:   redis://redis:6379/0
+       celery │ - ** ---------- .> results:     redis://redis:6379/0
+       celery │ - *** --- * --- .> concurrency: 16 (prefork)
+       celery │ -- ******* ---- .> task events: OFF (enable -E to monitor tasks in this worker)
+       celery │ --- ***** ----- 
+       celery │  -------------- [queues]
+       celery │                 .> celery           exchange=celery(direct) key=celery
+       celery │                 
+       celery │ 
+       celery │ [tasks]
+       celery │   . api.tasks.cleanup_orphaned_files_task
+       celery │   . api.tasks.index_document_task
+       celery │   . api.tasks.reindex_all_documents_task
+       celery │   . knowbot.celery.debug_task
+       celery │ 
+       celery │ [2026-02-02 17:11:20,935: INFO/MainProcess] Connected to redis://redis:6379/0
+       celery │ [2026-02-02 17:11:20,938: INFO/MainProcess] mingle: searching for neighbors
+       celery │ [2026-02-02 17:11:21,944: INFO/MainProcess] mingle: all alone
+       celery │ [2026-02-02 17:11:21,950: INFO/MainProcess] celery@fcea1236535e ready.
+      backend │ Operations to perform:
+      backend │   Apply all migrations: admin, api, auth, contenttypes, sessions
+      backend │ Running migrations:
+      backend │   No migrations to apply.
+      backend │ Watching for file changes with StatReloader
+      backend │ Performing system checks...
+      backend │ 
+      backend │ System check identified no issues (0 silenced).
+      backend │ February 02, 2026 - 17:11:28
+      backend │ Django version 5.2.10, using settings 'knowbot.settings'
+      backend │ Starting development server at http://0.0.0.0:8000/
+      backend │ Quit the server with CONTROL-C.
+      backend │ 
+      backend │ WARNING: This is a development server. Do not use it in a production setting. Use a production WSGI or ASGI server instead.
+      backend │ For more information on production servers see: https://docs.djangoproject.com/en/5.2/howto/deployment/
+      backend │ Loaded vector store for user 5
+       ollama │ time=2026-02-02T17:12:00.616Z level=WARN source=types.go:966 msg="invalid option provided" option=tfs_z
+       ollama │ time=2026-02-02T17:12:00.616Z level=WARN source=types.go:966 msg="invalid option provided" option=mirostat
+       ollama │ time=2026-02-02T17:12:00.616Z level=WARN source=types.go:966 msg="invalid option provided" option=mirostat_eta
+       ollama │ time=2026-02-02T17:12:00.616Z level=WARN source=types.go:966 msg="invalid option provided" option=mirostat_tau
+       ollama │ [GIN] 2026/02/02 - 17:12:00 | 200 |   23.463183ms |      172.18.0.6 | POST     "/api/embed"
+       ollama │ time=2026-02-02T17:12:00.655Z level=WARN source=types.go:966 msg="invalid option provided" option=mirostat_eta
+       ollama │ time=2026-02-02T17:12:00.655Z level=WARN source=types.go:966 msg="invalid option provided" option=tfs_z
+       ollama │ time=2026-02-02T17:12:00.655Z level=WARN source=types.go:966 msg="invalid option provided" option=mirostat
+       ollama │ time=2026-02-02T17:12:00.655Z level=WARN source=types.go:966 msg="invalid option provided" option=mirostat_tau
+       ollama │ [GIN] 2026/02/02 - 17:12:00 | 200 |   25.254341ms |      172.18.0.6 | POST     "/api/embed"
+       ollama │ [GIN] 2026/02/02 - 17:12:33 | 200 | 32.922119242s |      172.18.0.6 | POST     "/api/chat"
+      backend │ [02/Feb/2026 17:12:33] "POST /api/chat/ HTTP/1.1" 200 4271
+     frontend │  GET /login 200 in 37ms (compile: 5ms, render: 33ms)
+     frontend │  GET /login 200 in 18ms (compile: 2ms, render: 15ms)
+     frontend │  GET /register 200 in 21ms (compile: 4ms, render: 17ms)
+           db │ 2026-02-02 17:12:56.955 UTC [27] LOG:  checkpoint starting: time
+      backend │ [02/Feb/2026 17:12:58] "POST /api/auth/register/ HTTP/1.1" 201 46
+      backend │ [02/Feb/2026 17:12:58] "POST /api/token/ HTTP/1.1" 200 489
+      backend │ [02/Feb/2026 17:12:58] "GET /api/auth/me/ HTTP/1.1" 200 53
+     frontend │  GET / 200 in 41ms (compile: 5ms, render: 36ms)
+     frontend │  GET / 200 in 20ms (compile: 4ms, render: 17ms)
+           db │ 2026-02-02 17:12:58.894 UTC [27] LOG:  checkpoint complete: wrote 20 buffers (0.1%); 0 WAL file(s) added, 0 removed, 0 recycled; write=1.913 s, sync=0.009 s, total=1.939 s; sync files=20, longest=0.003 s, average=0.001 s; distance=26 kB, estimate=38 kB; lsn=0/1A73988, redo lsn=0/1A730C8
+      backend │ [02/Feb/2026 17:12:58] "GET /api/prompts/active/ HTTP/1.1" 200 46
+      backend │ [02/Feb/2026 17:12:58] "GET /api/documents/ HTTP/1.1" 200 2
+      backend │ [02/Feb/2026 17:12:58] "GET /api/prompts/active/ HTTP/1.1" 200 46
+      backend │ [02/Feb/2026 17:12:58] "GET /api/documents/ HTTP/1.1" 200 2
+       celery │ [2026-02-02 17:13:06,669: INFO/MainProcess] Task api.tasks.index_document_task[3e1e0811-1fc9-4ad0-adf3-2e4e669c183b] received
+      backend │ [02/Feb/2026 17:13:06] "POST /api/documents/upload/ HTTP/1.1" 201 324
+      backend │ [02/Feb/2026 17:13:06] "GET /api/documents/ HTTP/1.1" 200 326
+       celery │ [2026-02-02 17:13:07,024: INFO/ForkPoolWorker-16] Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+       ollama │ time=2026-02-02T17:13:07.104Z level=WARN source=types.go:966 msg="invalid option provided" option=tfs_z
+       ollama │ time=2026-02-02T17:13:07.104Z level=WARN source=types.go:966 msg="invalid option provided" option=mirostat_tau
+       ollama │ time=2026-02-02T17:13:07.104Z level=WARN source=types.go:966 msg="invalid option provided" option=mirostat
+       ollama │ time=2026-02-02T17:13:07.104Z level=WARN source=types.go:966 msg="invalid option provided" option=mirostat_eta
+      backend │ [02/Feb/2026 17:13:08] "OPTIONS /api/documents/17/status/ HTTP/1.1" 200 0
+      backend │ [02/Feb/2026 17:13:08] "GET /api/documents/17/status/ HTTP/1.1" 200 74
+      backend │ [02/Feb/2026 17:13:08] "GET /api/documents/ HTTP/1.1" 200 329
+      backend │ [02/Feb/2026 17:13:10] "GET /api/documents/17/status/ HTTP/1.1" 200 74
+      backend │ [02/Feb/2026 17:13:12] "GET /api/documents/17/status/ HTTP/1.1" 200 74
+      backend │ [02/Feb/2026 17:13:14] "POST /api/chat/ HTTP/1.1" 200 122
+      backend │ [02/Feb/2026 17:13:14] "GET /api/documents/17/status/ HTTP/1.1" 200 74
+       celery │ [2026-02-02 17:13:16,390: INFO/ForkPoolWorker-16] HTTP Request: POST http://ollama:11434/api/embed "HTTP/1.1 200 OK"
+       ollama │ [GIN] 2026/02/02 - 17:13:16 | 200 |  9.289978196s |      172.18.0.5 | POST     "/api/embed"
+       celery │ [2026-02-02 17:13:16,463: WARNING/ForkPoolWorker-16] Added 70 chunks to vector store for user 6
+       celery │ [2026-02-02 17:13:16,466: INFO/ForkPoolWorker-16] Task api.tasks.index_document_task[3e1e0811-1fc9-4ad0-adf3-2e4e669c183b] succeeded in 9.79646136700103s: {'success': True, 'document_id': 17, 'chunks': 70, 'user_id': 6}
+      backend │ [02/Feb/2026 17:13:16] "GET /api/documents/17/status/ HTTP/1.1" 200 72
+      backend │ [02/Feb/2026 17:13:16] "GET /api/documents/ HTTP/1.1" 200 352
+      backend │ Loaded vector store for user 6
+       ollama │ time=2026-02-02T17:13:24.489Z level=WARN source=types.go:966 msg="invalid option provided" option=tfs_z
+       ollama │ time=2026-02-02T17:13:24.489Z level=WARN source=types.go:966 msg="invalid option provided" option=mirostat
+       ollama │ time=2026-02-02T17:13:24.489Z level=WARN source=types.go:966 msg="invalid option provided" option=mirostat_eta
+       ollama │ time=2026-02-02T17:13:24.489Z level=WARN source=types.go:966 msg="invalid option provided" option=mirostat_tau
+       ollama │ [GIN] 2026/02/02 - 17:13:24 | 200 |   30.118556ms |      172.18.0.6 | POST     "/api/embed"
+      backend │ [02/Feb/2026 17:13:24] "POST /api/chat/ HTTP/1.1" 200 155
+
+1 File Changed: [docker-compose.yml]
+Loading Tiltfile at: /home/bhargav/Desktop/Knowbot2.0/Tiltfile
+Parsing KnowBot Tiltfile...
+Tiltfile parsed successfully!
+Successfully loaded Tiltfile (9.961015ms)
+     chromadb │ 
+     chromadb │ Initial Build
+     chromadb │ STEP 1/1 — Deploying
+     chromadb │  chromadb Pulling 
+     chromadb │  c908270cde7c Pulling fs layer 
+     chromadb │  4f4fb700ef54 Pulling fs layer 
+     chromadb │  9034b612fa2a Pulling fs layer 
+     chromadb │  a7d8f22c2aad Pulling fs layer 
+     chromadb │  3354ab5997af Pulling fs layer 
+     chromadb │  4f4fb700ef54 Already exists 
+     chromadb │  f11b44c5129e Download complete 
+     chromadb │  3354ab5997af Download complete 
+     chromadb │  a7d8f22c2aad Downloading [=>                                                 ]  1.049MB/29.77MB
+     chromadb │  c908270cde7c Downloading [>                                                  ]  1.049MB/134MB
+     chromadb │  9034b612fa2a Downloading [=========>                                         ]  1.049MB/5.293MB
+     chromadb │  9034b612fa2a Downloading [=======================================>           ]  4.194MB/5.293MB
+     chromadb │  a7d8f22c2aad Downloading [===>                                               ]  2.097MB/29.77MB
+     chromadb │  c908270cde7c Downloading [>                                                  ]  2.097MB/134MB
+     chromadb │  9034b612fa2a Download complete 
+     chromadb │  a7d8f22c2aad Downloading [=======>                                           ]  4.194MB/29.77MB
+     chromadb │  c908270cde7c Downloading [=>                                                 ]  5.243MB/134MB
+     chromadb │  a7d8f22c2aad Downloading [============>                                      ]   7.34MB/29.77MB
+     chromadb │  c908270cde7c Downloading [===>                                               ]  8.389MB/134MB
+     chromadb │  c908270cde7c Downloading [====>                                              ]  11.53MB/134MB
+     chromadb │  a7d8f22c2aad Downloading [=================>                                 ]  10.49MB/29.77MB
+     chromadb │  c908270cde7c Downloading [=====>                                             ]  14.68MB/134MB
+     chromadb │  a7d8f22c2aad Downloading [======================>                            ]  13.63MB/29.77MB
+     chromadb │  a7d8f22c2aad Downloading [============================>                      ]  16.78MB/29.77MB
+     chromadb │  c908270cde7c Downloading [======>                                            ]  17.83MB/134MB
+     chromadb │  a7d8f22c2aad Downloading [=================================>                 ]  19.92MB/29.77MB
+     chromadb │  c908270cde7c Downloading [=======>                                           ]  20.97MB/134MB
+     chromadb │  a7d8f22c2aad Downloading [====================================>              ]  22.02MB/29.77MB
+     chromadb │  c908270cde7c Downloading [=========>                                         ]  25.17MB/134MB
+     chromadb │  a7d8f22c2aad Downloading [==========================================>        ]  25.17MB/29.77MB
+     chromadb │  c908270cde7c Downloading [==========>                                        ]  28.31MB/134MB
+     chromadb │  a7d8f22c2aad Downloading [===============================================>   ]  28.31MB/29.77MB
+     chromadb │  c908270cde7c Downloading [============>                                      ]  32.51MB/134MB
+     chromadb │  a7d8f22c2aad Download complete 
+     chromadb │  c908270cde7c Downloading [=============>                                     ]   36.7MB/134MB
+     chromadb │  a7d8f22c2aad Extracting 1 s
+     chromadb │  c908270cde7c Downloading [===============>                                   ]  40.89MB/134MB
+     chromadb │  a7d8f22c2aad Extracting 1 s
+     chromadb │  c908270cde7c Downloading [=================>                                 ]  46.14MB/134MB
+     chromadb │  a7d8f22c2aad Extracting 1 s
+     chromadb │  c908270cde7c Downloading [==================>                                ]  50.33MB/134MB
+     chromadb │  a7d8f22c2aad Extracting 1 s
+     chromadb │  c908270cde7c Downloading [=====================>                             ]  56.62MB/134MB
+     chromadb │  a7d8f22c2aad Pull complete 
+     chromadb │  c908270cde7c Downloading [=======================>                           ]  61.87MB/134MB
+     chromadb │  4f4fb700ef54 Pull complete 
+     chromadb │  9034b612fa2a Pull complete 
+     chromadb │  c908270cde7c Downloading [=========================>                         ]  68.16MB/134MB
+     chromadb │  3354ab5997af Pull complete 
+     chromadb │  c908270cde7c Downloading [===========================>                       ]  74.45MB/134MB
+     chromadb │  c908270cde7c Downloading [==============================>                    ]  81.79MB/134MB
+     chromadb │  c908270cde7c Downloading [================================>                  ]  88.08MB/134MB
+     chromadb │  c908270cde7c Downloading [===================================>               ]  95.42MB/134MB
+     chromadb │  c908270cde7c Downloading [=====================================>             ]  101.7MB/134MB
+     chromadb │  c908270cde7c Downloading [========================================>          ]    108MB/134MB
+     chromadb │  c908270cde7c Downloading [==========================================>        ]  114.3MB/134MB
+     chromadb │  c908270cde7c Downloading [=============================================>     ]  121.2MB/134MB
+     chromadb │  c908270cde7c Downloading [===============================================>   ]  127.9MB/134MB
+     chromadb │  c908270cde7c Downloading [==================================================>]    134MB/134MB
+     chromadb │  c908270cde7c Download complete 
+     chromadb │  c908270cde7c Extracting 1 s
+     chromadb │  c908270cde7c Extracting 1 s
+     chromadb │  c908270cde7c Extracting 1 s
+     chromadb │  c908270cde7c Extracting 1 s
+     chromadb │  c908270cde7c Extracting 1 s
+     chromadb │  c908270cde7c Extracting 1 s
+     chromadb │  c908270cde7c Extracting 1 s
+     chromadb │  c908270cde7c Extracting 1 s
+     chromadb │  c908270cde7c Extracting 1 s
+     chromadb │  c908270cde7c Extracting 1 s
+     chromadb │  c908270cde7c Pull complete 
+     chromadb │  chromadb Pulled 
+     chromadb │  Container knowbot-chroma  Creating
+     chromadb │  Container knowbot-chroma  Created
+     chromadb │  Container knowbot-chroma  Starting
+     chromadb │  Container knowbot-chroma  Started
+     chromadb │ 
+     chromadb │ ==========
+     chromadb │ persist_path: "/data"
+     chromadb │ 
+     chromadb │ ==========
+     chromadb │ 
+     chromadb │ 
+     chromadb │                 [38;5;069m(((((((((    [38;5;203m((((([38;5;220m####
+     chromadb │              [38;5;069m((((((((((((([38;5;203m((((((((([38;5;220m#########
+     chromadb │            [38;5;069m((((((((((((([38;5;203m((((((((((([38;5;220m###########
+     chromadb │          [38;5;069m(((((((((((((([38;5;203m(((((((((((([38;5;220m############
+     chromadb │         [38;5;069m((((((((((((([38;5;203m(((((((((((((([38;5;220m#############
+     chromadb │         [38;5;069m((((((((((((([38;5;203m(((((((((((((([38;5;220m#############
+     chromadb │          [38;5;069m(((((((((((([38;5;203m((((((((((((([38;5;220m##############
+     chromadb │          [38;5;069m(((((((((((([38;5;203m(((((((((((([38;5;220m##############
+     chromadb │            [38;5;069m(((((((((([38;5;203m((((((((((([38;5;220m#############
+     chromadb │              [38;5;069m(((((((([38;5;203m(((((((([38;5;220m##############
+     chromadb │                 [38;5;069m((((([38;5;203m((((    [38;5;220m#########[0m
+     chromadb │ 
+     chromadb │ Saving data to: /data
+     chromadb │ Connect to Chroma at: http://localhost:8000
+     chromadb │ Getting started guide: https://docs.trychroma.com/docs/overview/getting-started
+     chromadb │ 
+     chromadb │ ☁️ To deploy your DB - try Chroma Cloud!
+     chromadb │ - Sign up: https://trychroma.com/signup
+     chromadb │ - Copy your data to Cloud: chroma copy --to-cloud --all
+     chromadb │ 
+     chromadb │ OpenTelemetry is not enabled because it is missing from the config.
+     chromadb │ 
+     chromadb │      Step 1 - 6.03s (Deploying)
+     chromadb │      DONE IN: 6.03s 
+     chromadb │ 
+      backend │ /app/rag/service.py changed, reloading.
+      backend │ Watching for file changes with StatReloader
+      backend │ Performing system checks...
+      backend │ 
+      backend │ System check identified no issues (0 silenced).
+      backend │ February 02, 2026 - 17:14:14
+      backend │ Django version 5.2.10, using settings 'knowbot.settings'
+      backend │ Starting development server at http://0.0.0.0:8000/
+      backend │ Quit the server with CONTROL-C.
+      backend │ 
+      backend │ WARNING: This is a development server. Do not use it in a production setting. Use a production WSGI or ASGI server instead.
+      backend │ For more information on production servers see: https://docs.djangoproject.com/en/5.2/howto/deployment/
+           db │ WARNING: healthcheck: OCI runtime exec failed: exec failed: unable to start container process: exec: "curl": executable file not found in $PATH
+
+1 File Changed: [docker-compose.yml]
+Loading Tiltfile at: /home/bhargav/Desktop/Knowbot2.0/Tiltfile
+Parsing KnowBot Tiltfile...
+Tiltfile parsed successfully!
+Successfully loaded Tiltfile (6.399501ms)
+      backend │ 
+      backend │ 1 File Changed: [docker-compose.yml]
+      backend │ STEP 1/1 — Building & deploying
+       celery │ 
+       celery │ 1 File Changed: [docker-compose.yml]
+       celery │ STEP 1/1 — Building & deploying
+       celery │ #1 [internal] load local bake definitions
+      backend │ #1 [internal] load local bake definitions
+       celery │ #1 reading from stdin 537B done
+       celery │ #1 DONE 0.0s
+       celery │ 
+       celery │ #2 [internal] load build definition from Dockerfile
+       celery │ #2 transferring dockerfile: 547B done
+       celery │ #2 DONE 0.0s
+       celery │ 
+       celery │ #3 [internal] load metadata for docker.io/library/python:3.11-slim
+      backend │ #1 reading from stdin 541B done
+      backend │ #1 DONE 0.0s
+      backend │ 
+      backend │ #2 [internal] load build definition from Dockerfile
+      backend │ #2 transferring dockerfile: 547B done
+      backend │ #2 DONE 0.0s
+      backend │ 
+      backend │ #3 [internal] load metadata for docker.io/library/python:3.11-slim
+      backend │ #3 DONE 0.5s
+       celery │ #3 DONE 0.5s
+       celery │ 
+       celery │ #4 [internal] load .dockerignore
+       celery │ #4 transferring context: 2B done
+       celery │ #4 DONE 0.0s
+       celery │ 
+       celery │ #5 [internal] load build context
+       celery │ #5 transferring context: 43.89kB done
+       celery │ #5 DONE 0.0s
+       celery │ 
+       celery │ #6 [1/6] FROM docker.io/library/python:3.11-slim@sha256:5be45dbade29bebd6886af6b438fd7e0b4eb7b611f39ba62b430263f82de36d2
+       celery │ #6 resolve docker.io/library/python:3.11-slim@sha256:5be45dbade29bebd6886af6b438fd7e0b4eb7b611f39ba62b430263f82de36d2 done
+       celery │ #6 DONE 0.0s
+       celery │ 
+       celery │ #7 [2/6] WORKDIR /app
+       celery │ #7 CACHED
+       celery │ 
+       celery │ #8 [3/6] RUN apt-get update && apt-get install -y     gcc     libpq-dev     && rm -rf /var/lib/apt/lists/*
+       celery │ #8 CACHED
+       celery │ 
+       celery │ #9 [4/6] COPY requirements.txt .
+       celery │ #9 CACHED
+       celery │ 
+       celery │ #10 [5/6] RUN pip install --no-cache-dir -r requirements.txt
+       celery │ #10 CACHED
+       celery │ 
+       celery │ #11 [6/6] COPY . .
+       celery │ #11 DONE 0.0s
+       celery │ 
+       celery │ #12 exporting to image
+       celery │ #12 exporting layers 0.0s done
+       celery │ #12 exporting manifest sha256:32268a942b5c676c16f4a6d02fe4e3636f549675d4be42ea60487d591c289bc8 done
+       celery │ #12 exporting config sha256:51db788c6ec70a06e0724752f29453d7a54d2c7e75d2682cccdbcf810841764a done
+       celery │ #12 exporting attestation manifest sha256:e88fe02acf7c0f679056034576404d268da0f357b6714a0402c58c0c31e1a550
+      backend │ 
+      backend │ #4 [internal] load .dockerignore
+      backend │ #4 transferring context: 2B done
+      backend │ #4 DONE 0.0s
+      backend │ 
+      backend │ #5 [internal] load build context
+      backend │ #5 transferring context: 28.73kB done
+      backend │ #5 DONE 0.0s
+      backend │ 
+      backend │ #6 [1/6] FROM docker.io/library/python:3.11-slim@sha256:5be45dbade29bebd6886af6b438fd7e0b4eb7b611f39ba62b430263f82de36d2
+      backend │ #6 resolve docker.io/library/python:3.11-slim@sha256:5be45dbade29bebd6886af6b438fd7e0b4eb7b611f39ba62b430263f82de36d2 done
+      backend │ #6 DONE 0.0s
+      backend │ 
+      backend │ #7 [5/6] RUN pip install --no-cache-dir -r requirements.txt
+      backend │ #7 CACHED
+      backend │ 
+      backend │ #8 [6/6] COPY . .
+      backend │ #8 DONE 0.0s
+      backend │ 
+      backend │ #9 exporting to image
+      backend │ #9 exporting layers 0.0s done
+      backend │ #9 exporting manifest sha256:28fe43f97af12402535695b9c631152f1983c9e7bb79d363ed7d543a07ec2c82 0.0s done
+      backend │ #9 exporting config sha256:7cce834d4c1300d8645460599de699c78383e3ca52b69d2f905fc87fc54b1782 done
+      backend │ #9 exporting attestation manifest sha256:81e5e3c8e7727e7c77b57da307cae6770c0a531d668d7549f4c36d8e2685539f
+      backend │ #9 exporting attestation manifest sha256:81e5e3c8e7727e7c77b57da307cae6770c0a531d668d7549f4c36d8e2685539f 0.0s done
+      backend │ #9 exporting manifest list sha256:a04c0ef69d68601af6efcdfe756b9e2b4cd697357af873c1cae3af5c1968f1bb done
+      backend │ #9 naming to docker.io/library/knowbot20-backend:latest done
+      backend │ #9 unpacking to docker.io/library/knowbot20-backend:latest 0.0s done
+      backend │ #9 DONE 0.1s
+      backend │ 
+      backend │ #10 resolving provenance for metadata file
+       celery │ #12 exporting attestation manifest sha256:e88fe02acf7c0f679056034576404d268da0f357b6714a0402c58c0c31e1a550 0.0s done
+       celery │ #12 exporting manifest list sha256:03f374bc16f1a30440818f1c191521afe0fa43573db21b9ce3371b23abf07845 done
+       celery │ #12 naming to docker.io/library/knowbot20-celery:latest done
+       celery │ #12 unpacking to docker.io/library/knowbot20-celery:latest 0.0s done
+       celery │ #12 DONE 0.1s
+       celery │ 
+       celery │ #13 resolving provenance for metadata file
+      backend │ #10 DONE 0.0s
+      backend │  knowbot20-backend  Built
+       celery │ #13 DONE 0.0s
+       celery │  knowbot20-celery  Built
+      backend │  Container knowbot-backend  Recreate
+      backend │  Container knowbot-backend  Recreated
+       celery │ 
+       celery │ worker: Warm shutdown (MainProcess)
+      backend │  Container knowbot-backend  Starting
+      backend │  Container knowbot-backend  Started
+      backend │ 
+      backend │      Step 1 - 11.55s (Building & deploying)
+      backend │      DONE IN: 11.55s 
+      backend │ 
+       celery │  Container knowbot-celery  Recreate
+       celery │ 
+       celery │ worker: Warm shutdown (MainProcess)
+     frontend │ [?25h
+      backend │ Operations to perform:
+      backend │   Apply all migrations: admin, api, auth, contenttypes, sessions
+      backend │ Running migrations:
+      backend │   No migrations to apply.
+       celery │  Container knowbot-celery  Recreated
+       celery │  Container knowbot-celery  Starting
+       celery │  Container knowbot-celery  Started
+       celery │ 
+       celery │      Step 1 - 14.28s (Building & deploying)
+       celery │      DONE IN: 14.28s 
+       celery │ 
+      backend │ Watching for file changes with StatReloader
+      backend │ Performing system checks...
+      backend │ 
+      backend │ System check identified no issues (0 silenced).
+      backend │ February 02, 2026 - 17:14:44
+      backend │ Django version 5.2.10, using settings 'knowbot.settings'
+      backend │ Starting development server at http://0.0.0.0:8000/
+      backend │ Quit the server with CONTROL-C.
+      backend │ 
+      backend │ WARNING: This is a development server. Do not use it in a production setting. Use a production WSGI or ASGI server instead.
+      backend │ For more information on production servers see: https://docs.djangoproject.com/en/5.2/howto/deployment/
+       celery │ /usr/local/lib/python3.11/site-packages/celery/platforms.py:841: SecurityWarning: You're running the worker with superuser privileges: this is
+       celery │ absolutely not recommended!
+       celery │ 
+       celery │ Please specify a different user using the --uid option.
+       celery │ 
+       celery │ User information: uid=0 euid=0 gid=0 egid=0
+       celery │ 
+       celery │   warnings.warn(SecurityWarning(ROOT_DISCOURAGED.format(
+       celery │  
+       celery │  -------------- celery@b48a873603ef v5.6.2 (recovery)
+       celery │ --- ***** ----- 
+       celery │ -- ******* ---- Linux-6.8.0-90-generic-x86_64-with-glibc2.41 2026-02-02 17:14:44
+       celery │ - *** --- * --- 
+       celery │ - ** ---------- [config]
+       celery │ - ** ---------- .> app:         knowbot:0x7e7022dcc190
+       celery │ - ** ---------- .> transport:   redis://redis:6379/0
+       celery │ - ** ---------- .> results:     redis://redis:6379/0
+       celery │ - *** --- * --- .> concurrency: 16 (prefork)
+       celery │ -- ******* ---- .> task events: OFF (enable -E to monitor tasks in this worker)
+       celery │ --- ***** ----- 
+       celery │  -------------- [queues]
+       celery │                 .> celery           exchange=celery(direct) key=celery
+       celery │                 
+       celery │ 
+       celery │ [tasks]
+       celery │   . api.tasks.cleanup_orphaned_files_task
+       celery │   . api.tasks.index_document_task
+       celery │   . api.tasks.reindex_all_documents_task
+       celery │   . knowbot.celery.debug_task
+       celery │ 
+       celery │ [2026-02-02 17:14:46,016: INFO/MainProcess] Connected to redis://redis:6379/0
+       celery │ [2026-02-02 17:14:46,020: INFO/MainProcess] mingle: searching for neighbors
+       celery │ [2026-02-02 17:14:47,026: INFO/MainProcess] mingle: all alone
+       celery │ [2026-02-02 17:14:47,044: INFO/MainProcess] celery@b48a873603ef ready.
+        redis │ 1:signal-handler (1770052490) Received SIGTERM scheduling shutdown...
+           db │ 2026-02-02 17:14:50.875 UTC [1] LOG:  received fast shutdown request
+           db │ 2026-02-02 17:14:50.876 UTC [1] LOG:  aborting any active transactions
+     chromadb │ 
+           db │ 2026-02-02 17:14:50.878 UTC [1] LOG:  background worker "logical replication launcher" (PID 32) exited with exit code 1
+           db │ 2026-02-02 17:14:50.878 UTC [27] LOG:  shutting down
+           db │ 2026-02-02 17:14:50.879 UTC [27] LOG:  checkpoint starting: shutdown immediate
+           db │ 2026-02-02 17:14:50.885 UTC [27] LOG:  checkpoint complete: wrote 18 buffers (0.1%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.001 s, sync=0.003 s, total=0.007 s; sync files=18, longest=0.001 s, average=0.001 s; distance=19 kB, estimate=37 kB; lsn=0/1A77EF0, redo lsn=0/1A77EF0
+           db │ 2026-02-02 17:14:50.890 UTC [1] LOG:  database system is shut down
+        redis │ 1:M 02 Feb 2026 17:14:50.925 * User requested shutdown...
+        redis │ 1:M 02 Feb 2026 17:14:50.925 * Saving the final RDB snapshot before exiting.
+        redis │ 1:M 02 Feb 2026 17:14:50.927 * DB saved on disk
+        redis │ 1:M 02 Feb 2026 17:14:50.927 # Redis is now ready to exit, bye bye...
+       celery │ [2026-02-02 17:14:50,930: WARNING/MainProcess] consumer: Connection to broker lost. Trying to re-establish the connection...
+       celery │ Traceback (most recent call last):
+       celery │   File "/usr/local/lib/python3.11/site-packages/redis/retry.py", line 116, in call_with_retry
+       celery │     return do()
+       celery │            ^^^^
+       celery │   File "/usr/local/lib/python3.11/site-packages/redis/client.py", line 973, in <lambda>
+       celery │     lambda: command(*args, **kwargs),
+       celery │             ^^^^^^^^^^^^^^^^^^^^^^^^
+       celery │   File "/usr/local/lib/python3.11/site-packages/redis/client.py", line 996, in try_read
+       celery │     return conn.read_response(disconnect_on_error=False, push_request=True)
+       celery │            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+       celery │   File "/usr/local/lib/python3.11/site-packages/redis/connection.py", line 1133, in read_response
+       celery │     response = self._parser.read_response(disable_decoding=disable_decoding)
+       celery │                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+       celery │   File "/usr/local/lib/python3.11/site-packages/redis/_parsers/resp2.py", line 15, in read_response
+       celery │     result = self._read_response(disable_decoding=disable_decoding)
+       celery │              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+       celery │   File "/usr/local/lib/python3.11/site-packages/redis/_parsers/resp2.py", line 25, in _read_response
+       celery │     raw = self._buffer.readline()
+       celery │           ^^^^^^^^^^^^^^^^^^^^^^^
+       celery │   File "/usr/local/lib/python3.11/site-packages/redis/_parsers/socket.py", line 115, in readline
+       celery │     self._read_from_socket()
+       celery │   File "/usr/local/lib/python3.11/site-packages/redis/_parsers/socket.py", line 68, in _read_from_socket
+       celery │     raise ConnectionError(SERVER_CLOSED_CONNECTION_ERROR)
+       celery │ redis.exceptions.ConnectionError: Connection closed by server.
+       celery │ 
+       celery │ During handling of the above exception, another exception occurred:
+       celery │ 
+       celery │ Traceback (most recent call last):
+       celery │   File "/usr/local/lib/python3.11/site-packages/redis/connection.py", line 855, in connect_check_health
+       celery │     sock = self.retry.call_with_retry(
+       celery │            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+       celery │   File "/usr/local/lib/python3.11/site-packages/redis/retry.py", line 116, in call_with_retry
+       celery │     return do()
+       celery │            ^^^^
+       celery │   File "/usr/local/lib/python3.11/site-packages/redis/connection.py", line 856, in <lambda>
+       celery │     lambda: self._connect(), lambda error: self.disconnect(error)
+       celery │             ^^^^^^^^^^^^^^^
+       celery │   File "/usr/local/lib/python3.11/site-packages/redis/connection.py", line 1306, in _connect
+       celery │     raise err
+       celery │   File "/usr/local/lib/python3.11/site-packages/redis/connection.py", line 1290, in _connect
+       celery │     sock.connect(socket_address)
+       celery │ ConnectionRefusedError: [Errno 111] Connection refused
+       celery │ 
+       celery │ During handling of the above exception, another exception occurred:
+       celery │ 
+       celery │ Traceback (most recent call last):
+       celery │   File "/usr/local/lib/python3.11/site-packages/celery/worker/consumer/consumer.py", line 346, in start
+       celery │     blueprint.start(self)
+       celery │   File "/usr/local/lib/python3.11/site-packages/celery/bootsteps.py", line 116, in start
+       celery │     step.start(parent)
+       celery │   File "/usr/local/lib/python3.11/site-packages/celery/worker/consumer/consumer.py", line 788, in start
+       celery │     c.loop(*c.loop_args())
+       celery │   File "/usr/local/lib/python3.11/site-packages/celery/worker/loops.py", line 96, in asynloop
+       celery │     next(loop)
+       celery │   File "/usr/local/lib/python3.11/site-packages/kombu/asynchronous/hub.py", line 377, in create_loop
+       celery │     cb(*cbargs)
+       celery │   File "/usr/local/lib/python3.11/site-packages/kombu/transport/redis.py", line 1394, in on_readable
+       celery │     self.cycle.on_readable(fileno)
+       celery │   File "/usr/local/lib/python3.11/site-packages/kombu/transport/redis.py", line 579, in on_readable
+       celery │     chan.handlers[type]()
+       celery │   File "/usr/local/lib/python3.11/site-packages/kombu/transport/redis.py", line 931, in _receive
+       celery │     ret.append(self._receive_one(c))
+       celery │                ^^^^^^^^^^^^^^^^^^^^
+       celery │   File "/usr/local/lib/python3.11/site-packages/kombu/transport/redis.py", line 941, in _receive_one
+       celery │     response = c.parse_response()
+       celery │                ^^^^^^^^^^^^^^^^^^
+       celery │   File "/usr/local/lib/python3.11/site-packages/redis/client.py", line 998, in parse_response
+       celery │     response = self._execute(conn, try_read)
+       celery │                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+       celery │   File "/usr/local/lib/python3.11/site-packages/redis/client.py", line 972, in _execute
+       celery │     response = conn.retry.call_with_retry(
+       celery │                ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+       celery │   File "/usr/local/lib/python3.11/site-packages/redis/retry.py", line 121, in call_with_retry
+       celery │     fail(error)
+       celery │   File "/usr/local/lib/python3.11/site-packages/redis/client.py", line 974, in <lambda>
+       celery │     lambda _: self._reconnect(conn),
+       celery │               ^^^^^^^^^^^^^^^^^^^^^
+       celery │   File "/usr/local/lib/python3.11/site-packages/redis/client.py", line 958, in _reconnect
+       celery │     conn.connect()
+       celery │   File "/usr/local/lib/python3.11/site-packages/redis/connection.py", line 846, in connect
+       celery │     self.connect_check_health(check_health=True)
+       celery │   File "/usr/local/lib/python3.11/site-packages/redis/connection.py", line 863, in connect_check_health
+       celery │     raise ConnectionError(self._error_message(e))
+       celery │ redis.exceptions.ConnectionError: Error 111 connecting to redis:6379. Connection refused.
+       celery │ [2026-02-02 17:14:50,936: WARNING/MainProcess] /usr/local/lib/python3.11/site-packages/celery/worker/consumer/consumer.py:397: CPendingDeprecationWarning: 
+       celery │ In Celery 5.1 we introduced an optional breaking change which
+       celery │ on connection loss cancels all currently executed tasks with late acknowledgement enabled.
+       celery │ These tasks cannot be acknowledged as the connection is gone, and the tasks are automatically redelivered
+       celery │ back to the queue. You can enable this behavior using the worker_cancel_long_running_tasks_on_connection_loss
+       celery │ setting. In Celery 5.1 it is set to False by default. The setting will be set to True by default in Celery 6.0.
+       celery │ 
+       celery │   warnings.warn(CANCEL_TASKS_BY_DEFAULT, CPendingDeprecationWarning)
+       celery │ 
+       celery │ [2026-02-02 17:14:50,939: ERROR/MainProcess] consumer: Cannot connect to redis://redis:6379/0: Error 111 connecting to redis:6379. Connection refused..
+       celery │ Trying again in 2.00 seconds... (1/100)
+       celery │ 
+           db │ WARNING: healthcheck: /var/run/postgresql:5432 - accepting connections
+           db │ 
+           db │ WARNING: healthcheck: PONG
+           db │ 
+       celery │ [2026-02-02 17:14:52,967: ERROR/MainProcess] consumer: Cannot connect to redis://redis:6379/0: Error -3 connecting to redis:6379. Temporary failure in name resolution..
+       celery │ Trying again in 4.00 seconds... (2/100)
+       celery │ 
+     chromadb │ 
+     chromadb │ ==========
+     chromadb │ 
+     chromadb │ persist_path: "/data"
+     chromadb │                 [38;5;069m(((((((((    [38;5;203m((((([38;5;220m####
+     chromadb │ 
+     chromadb │              [38;5;069m((((((((((((([38;5;203m((((((((([38;5;220m#########
+     chromadb │ ==========
+     chromadb │            [38;5;069m((((((((((((([38;5;203m((((((((((([38;5;220m###########
+     chromadb │ 
+     chromadb │          [38;5;069m(((((((((((((([38;5;203m(((((((((((([38;5;220m############
+     chromadb │         [38;5;069m((((((((((((([38;5;203m(((((((((((((([38;5;220m#############
+     chromadb │         [38;5;069m((((((((((((([38;5;203m(((((((((((((([38;5;220m#############
+     chromadb │          [38;5;069m(((((((((((([38;5;203m((((((((((((([38;5;220m##############
+     chromadb │          [38;5;069m(((((((((((([38;5;203m(((((((((((([38;5;220m##############
+     chromadb │            [38;5;069m(((((((((([38;5;203m((((((((((([38;5;220m#############
+     chromadb │              [38;5;069m(((((((([38;5;203m(((((((([38;5;220m##############
+     chromadb │                 [38;5;069m((((([38;5;203m((((    [38;5;220m#########[0m
+     chromadb │ 
+     chromadb │ Saving data to: /data
+     chromadb │ Connect to Chroma at: http://localhost:8000
+     chromadb │ Getting started guide: https://docs.trychroma.com/docs/overview/getting-started
+     chromadb │ 
+     chromadb │ ☁️ To deploy your DB - try Chroma Cloud!
+     chromadb │ - Sign up: https://trychroma.com/signup
+     chromadb │ - Copy your data to Cloud: chroma copy --to-cloud --all
+     chromadb │ 
+     chromadb │ OpenTelemetry is not enabled because it is missing from the config.
+           db │ 
+           db │ PostgreSQL Database directory appears to contain a database; Skipping initialization
+           db │ 
+           db │ 2026-02-02 17:14:54.838 UTC [1] LOG:  starting PostgreSQL 16.11 on x86_64-pc-linux-musl, compiled by gcc (Alpine 15.2.0) 15.2.0, 64-bit
+           db │ 2026-02-02 17:14:54.838 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+           db │ 2026-02-02 17:14:54.838 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+           db │ 2026-02-02 17:14:54.840 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+           db │ 2026-02-02 17:14:54.843 UTC [29] LOG:  database system was shut down at 2026-02-02 17:14:50 UTC
+           db │ 2026-02-02 17:14:54.848 UTC [1] LOG:  database system is ready to accept connections
+        redis │ 1:C 02 Feb 2026 17:14:54.821 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+        redis │ 1:C 02 Feb 2026 17:14:54.821 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+        redis │ 1:C 02 Feb 2026 17:14:54.821 * Redis version=7.4.7, bits=64, commit=00000000, modified=0, pid=1, just started
+        redis │ 1:C 02 Feb 2026 17:14:54.821 # Warning: no config file specified, using the default config. In order to specify a config file use redis-server /path/to/redis.conf
+        redis │ 1:M 02 Feb 2026 17:14:54.821 * Increased maximum number of open files to 10032 (it was originally set to 1024).
+        redis │ 1:M 02 Feb 2026 17:14:54.821 * monotonic clock: POSIX clock_gettime
+        redis │ 1:M 02 Feb 2026 17:14:54.822 * Running mode=standalone, port=6379.
+        redis │ 1:M 02 Feb 2026 17:14:54.822 * Server initialized
+        redis │ 1:M 02 Feb 2026 17:14:54.822 * Ready to accept connections tcp
+       ollama │ time=2026-02-02T17:14:54.839Z level=INFO source=routes.go:1631 msg="server config" env="map[CUDA_VISIBLE_DEVICES: GGML_VK_VISIBLE_DEVICES: GPU_DEVICE_ORDINAL: HIP_VISIBLE_DEVICES: HSA_OVERRIDE_GFX_VERSION: HTTPS_PROXY: HTTP_PROXY: NO_PROXY: OLLAMA_CONTEXT_LENGTH:4096 OLLAMA_DEBUG:INFO OLLAMA_FLASH_ATTENTION:false OLLAMA_GPU_OVERHEAD:0 OLLAMA_HOST:http://0.0.0.0:11434 OLLAMA_KEEP_ALIVE:5m0s OLLAMA_KV_CACHE_TYPE: OLLAMA_LLM_LIBRARY: OLLAMA_LOAD_TIMEOUT:5m0s OLLAMA_MAX_LOADED_MODELS:0 OLLAMA_MAX_QUEUE:512 OLLAMA_MODELS:/root/.ollama/models OLLAMA_MULTIUSER_CACHE:false OLLAMA_NEW_ENGINE:false OLLAMA_NOHISTORY:false OLLAMA_NOPRUNE:false OLLAMA_NUM_PARALLEL:1 OLLAMA_ORIGINS:[http://localhost https://localhost http://localhost:* https://localhost:* http://127.0.0.1 https://127.0.0.1 http://127.0.0.1:* https://127.0.0.1:* http://0.0.0.0 https://0.0.0.0 http://0.0.0.0:* https://0.0.0.0:* app://* file://* tauri://* vscode-webview://* vscode-file://*] OLLAMA_REMOTES:[ollama.com] OLLAMA_SCHED_SPREAD:false OLLAMA_VULKAN:false ROCR_VISIBLE_DEVICES: http_proxy: https_proxy: no_proxy:]"
+       ollama │ time=2026-02-02T17:14:54.840Z level=INFO source=images.go:473 msg="total blobs: 9"
+       ollama │ time=2026-02-02T17:14:54.840Z level=INFO source=images.go:480 msg="total unused blobs removed: 0"
+       ollama │ time=2026-02-02T17:14:54.840Z level=INFO source=routes.go:1684 msg="Listening on [::]:11434 (version 0.15.4)"
+       ollama │ time=2026-02-02T17:14:54.841Z level=INFO source=runner.go:67 msg="discovering available GPUs..."
+       ollama │ time=2026-02-02T17:14:54.841Z level=INFO source=server.go:429 msg="starting runner" cmd="/usr/bin/ollama runner --ollama-engine --port 39033"
+       ollama │ time=2026-02-02T17:14:54.876Z level=INFO source=server.go:429 msg="starting runner" cmd="/usr/bin/ollama runner --ollama-engine --port 39057"
+       ollama │ time=2026-02-02T17:14:54.904Z level=INFO source=runner.go:106 msg="experimental Vulkan support disabled.  To enable, set OLLAMA_VULKAN=1"
+       ollama │ time=2026-02-02T17:14:54.904Z level=INFO source=types.go:60 msg="inference compute" id=cpu library=cpu compute="" name=cpu description=cpu libdirs=ollama driver="" pci_id="" type="" total="30.6 GiB" available="30.6 GiB"
+       ollama │ time=2026-02-02T17:14:54.904Z level=INFO source=routes.go:1725 msg="entering low vram mode" "total vram"="0 B" threshold="20.0 GiB"
+       celery │ [2026-02-02 17:14:56,971: INFO/MainProcess] Connected to redis://redis:6379/0
+       celery │ [2026-02-02 17:14:56,974: INFO/MainProcess] mingle: searching for neighbors
+       celery │ [2026-02-02 17:14:57,978: INFO/MainProcess] mingle: all alone
+     frontend │ 
+     frontend │ > frontend@0.1.0 dev
+     frontend │ > next dev
+     frontend │ 
+     frontend │ ▲ Next.js 16.1.6 (Turbopack)
+     frontend │ - Local:         http://localhost:3000
+     frontend │ - Network:       http://172.18.0.8:3000
+     frontend │ 
+     frontend │ ✓ Starting...
+     frontend │ Attention: Next.js now collects completely anonymous telemetry regarding usage.
+     frontend │ This information is used to shape Next.js' roadmap and prioritize features.
+     frontend │ You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+     frontend │ https://nextjs.org/telemetry
+     frontend │ 
+     frontend │ ✓ Ready in 660ms
+      backend │ Operations to perform:
+      backend │   Apply all migrations: admin, api, auth, contenttypes, sessions
+      backend │ Running migrations:
+      backend │   No migrations to apply.
+      backend │ Watching for file changes with StatReloader
+      backend │ Performing system checks...
+      backend │ 
+      backend │ System check identified no issues (0 silenced).
+      backend │ February 02, 2026 - 17:15:04
+      backend │ Django version 5.2.10, using settings 'knowbot.settings'
+      backend │ Starting development server at http://0.0.0.0:8000/
+      backend │ Quit the server with CONTROL-C.
+      backend │ 
+      backend │ WARNING: This is a development server. Do not use it in a production setting. Use a production WSGI or ASGI server instead.
+      backend │ For more information on production servers see: https://docs.djangoproject.com/en/5.2/howto/deployment/
+     frontend │  GET / 200 in 2.5s (compile: 2.2s, render: 328ms)
+     frontend │  GET / 200 in 85ms (compile: 7ms, render: 78ms)
+     frontend │  GET / 200 in 85ms (compile: 27ms, render: 57ms)
+      backend │ [02/Feb/2026 17:15:12] "GET /api/auth/me/ HTTP/1.1" 200 53
+      backend │ [02/Feb/2026 17:15:12] "GET /api/auth/me/ HTTP/1.1" 200 53
+      backend │ [02/Feb/2026 17:15:12] "GET /api/auth/me/ HTTP/1.1" 200 53
+      backend │ [02/Feb/2026 17:15:12] "GET /api/prompts/active/ HTTP/1.1" 200 46
+      backend │ [02/Feb/2026 17:15:12] "GET /api/documents/ HTTP/1.1" 200 352
+      backend │ [02/Feb/2026 17:15:12] "GET /api/documents/ HTTP/1.1" 200 352
+      backend │ [02/Feb/2026 17:15:12] "GET /api/prompts/active/ HTTP/1.1" 200 46
+      backend │ [02/Feb/2026 17:15:12] "GET /api/documents/ HTTP/1.1" 200 352
+      backend │ [02/Feb/2026 17:15:12] "GET /api/prompts/active/ HTTP/1.1" 200 46
+      backend │ [02/Feb/2026 17:15:12] "GET /api/prompts/active/ HTTP/1.1" 200 46
+      backend │ [02/Feb/2026 17:15:12] "GET /api/documents/ HTTP/1.1" 200 352
+      backend │ [02/Feb/2026 17:15:12] "GET /api/prompts/active/ HTTP/1.1" 200 46
+      backend │ [02/Feb/2026 17:15:12] "GET /api/documents/ HTTP/1.1" 200 352
+      backend │ [02/Feb/2026 17:15:12] "GET /api/documents/ HTTP/1.1" 200 352
+      backend │ [02/Feb/2026 17:15:12] "GET /api/prompts/active/ HTTP/1.1" 200 46
+           db │ WARNING: healthcheck: OCI runtime exec failed: exec failed: unable to start container process: exec: "curl": executable file not found in $PATH
