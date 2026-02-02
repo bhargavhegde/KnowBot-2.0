@@ -123,6 +123,7 @@ export const apiService = {
     },
     deleteDocument: (id: number) => api.delete(`/documents/${id}/`),
     getDocumentStatus: (id: number) => api.get(`/documents/${id}/status/`),
+    previewDocument: (id: number) => api.get(`/documents/${id}/preview/`, { responseType: 'blob' }),
 
     // Chat
     getSessions: () => api.get<ChatSession[]>('/sessions/'),

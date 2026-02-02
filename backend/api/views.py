@@ -1,7 +1,9 @@
 import uuid
+import os
 from pathlib import Path
 from django.conf import settings
 from django.utils import timezone
+from django.http import FileResponse
 from django.contrib.auth.models import User
 from rest_framework import status, viewsets, generics, permissions
 from rest_framework.decorators import api_view, action, permission_classes
@@ -170,30 +172,58 @@ def chat(request):
     except SystemPrompt.DoesNotExist:
         pass
     
+    # Check if user has any indexed documents
+    has_docs = Document.objects.filter(
+        user=request.user, 
+        index_status=Document.IndexStatus.INDEXED
+    ).exists()
+
+    if not has_docs:
+        response_text = "I don't have any documents to answer from yet. Please upload some documents."
+        citations = []
+    else:
+        try:
+            engine = RAGEngine(custom_prompt=custom_prompt, user_id=request.user.id)
+            result = engine.query(message)
+            response_text = result['response']
+            citations = result['citations']
+        except Exception as e:
+            # Fallback for RAG errors
+            response_text = f"I encountered an error while searching your documents: {str(e)}"
+            citations = []
+
+    ChatMessage.objects.create(
+        session=session,
+        role=ChatMessage.Role.ASSISTANT,
+        content=response_text,
+        citations=citations
+    )
+    
+    return Response({
+        'response': response_text,
+        'citations': citations,
+        'session_id': session.id
+    })
+
+
+@api_view(['GET'])
+@permission_classes([permissions.IsAuthenticated])
+def preview_document(request, pk):
+    """Securely preview a document."""
     try:
-        engine = RAGEngine(custom_prompt=custom_prompt, user_id=request.user.id)
-        result = engine.query(message)
-        response_text = result['response']
-        citations = result['citations']
-        
-        ChatMessage.objects.create(
-            session=session,
-            role=ChatMessage.Role.ASSISTANT,
-            content=response_text,
-            citations=citations
-        )
-        
-        if session.messages.count() <= 2:
-            title = message[:50] + "..." if len(message) > 50 else message
-            session.title = title
-            session.save()
-        
-        return Response({
-            'response': response_text,
-            'session_id': session.id,
-            'citations': citations
-        })
-    except Exception as e:
+        document = Document.objects.get(pk=pk, user=request.user)
+        if not os.path.exists(document.file_path):
+            return Response({'error': 'File not found'}, status=status.HTTP_404_NOT_FOUND)
+            
+        file_handle = open(document.file_path, 'rb')
+        response = FileResponse(file_handle, content_type='application/pdf') # Default to PDF
+        if document.file_type in ['txt', 'md']:
+             response = FileResponse(file_handle, content_type='text/plain')
+             
+        response['Content-Disposition'] = f'inline; filename="{document.original_filename}"'
+        return response
+    except Document.DoesNotExist:
+        return Response({'error': 'Document not found'}, status=status.HTTP_404_NOT_FOUND)
         return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 

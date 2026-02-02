@@ -2,12 +2,23 @@ from django.contrib import admin
 from .models import Document, ChatSession, ChatMessage, SystemPrompt
 
 
+from django.utils.html import format_html
+from django.urls import reverse
+
 @admin.register(Document)
 class DocumentAdmin(admin.ModelAdmin):
-    list_display = ['original_filename', 'user', 'file_type', 'index_status', 'chunk_count', 'uploaded_at']
-    list_filter = ['index_status', 'file_type', 'user']
-    search_fields = ['original_filename', 'filename', 'user__username']
+    list_display = ['original_filename', 'user', 'file_type', 'index_status', 'preview_link', 'delete_link']
     readonly_fields = ['filename', 'file_path', 'indexed_at']
+
+    def preview_link(self, obj):
+        url = reverse('preview_document', args=[obj.id])
+        return format_html('<a href="{}" target="_blank" class="button">Preview</a>', url)
+    preview_link.short_description = 'Preview'
+
+    def delete_link(self, obj):
+        url = reverse('admin:api_document_delete', args=[obj.id])
+        return format_html('<a href="{}" class="button" style="color:red;">Delete</a>', url)
+    delete_link.short_description = 'Delete'
 
 
 @admin.register(ChatSession)

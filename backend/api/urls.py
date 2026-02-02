@@ -7,7 +7,7 @@ from rest_framework_simplejwt.views import (
 
 from .views import (
     DocumentViewSet, ChatSessionViewSet, SystemPromptViewSet,
-    chat, health_check, RegisterView, get_user_profile
+    chat, health_check, RegisterView, get_user_profile, preview_document
 )
 
 router = DefaultRouter()
@@ -18,6 +18,7 @@ router.register(r'prompts', SystemPromptViewSet, basename='prompt')
 urlpatterns = [
     path('', include(router.urls)),
     path('chat/', chat, name='chat'),
+    path('documents/<int:pk>/preview/', preview_document, name='preview_document'),
     path('health/', health_check, name='health'),
     # Auth
     path('auth/register/', RegisterView.as_view(), name='auth_register'),

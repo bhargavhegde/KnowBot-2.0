@@ -6,7 +6,7 @@ This module provides the core RAG functionality:
 - Vector store management (ChromaDB)
 - RAG chain building and execution
 
-Now supports multi-user isolation via metadata filtering.
+Refactored to use chromadb.PersistentClient to fix HNSW index errors.
 """
 
 import os
@@ -15,6 +15,7 @@ from typing import Optional, List, Dict, Any
 
 from django.conf import settings
 
+import chromadb
 from langchain_ollama import OllamaEmbeddings, ChatOllama
 from langchain_chroma import Chroma
 from langchain_text_splitters import RecursiveCharacterTextSplitter
@@ -112,16 +113,18 @@ class DocumentProcessor:
 
 
 class VectorStoreManager:
-    """Manages ChromaDB vector store operations with multi-user support via metadata filtering."""
+    """Manages ChromaDB vector store operations using PersistentClient."""
     
     def __init__(self, persist_directory: str = CHROMA_DIR, user_id: int = None):
         self.persist_directory = persist_directory
         self.user_id = user_id
-        self.collection_name = "knowbot_docs"  # Single shared collection
+        self.collection_name = "knowbot_docs"
         self.embeddings = OllamaEmbeddings(
             model=EMBEDDING_MODEL,
             base_url=OLLAMA_HOST
         )
+        # Initialize client explicitly
+        self.client = chromadb.PersistentClient(path=persist_directory)
     
     def create_vector_store(self, chunks: List) -> Chroma:
         """Create or add to vector store from document chunks."""
@@ -134,33 +137,22 @@ class VectorStoreManager:
                 if 'user_id' not in chunk.metadata:
                     chunk.metadata['user_id'] = str(self.user_id)
         
-        # Try to load existing store first, then add documents
-        try:
-            vector_store = Chroma(
-                persist_directory=self.persist_directory,
-                embedding_function=self.embeddings,
-                collection_name=self.collection_name
-            )
-            vector_store.add_documents(chunks)
-            print(f"Added {len(chunks)} chunks to vector store for user {self.user_id}")
-        except Exception as e:
-            # If collection doesn't exist, create new one
-            vector_store = Chroma.from_documents(
-                documents=chunks,
-                embedding=self.embeddings,
-                persist_directory=self.persist_directory,
-                collection_name=self.collection_name
-            )
-            print(f"Created vector store with {len(chunks)} chunks for user {self.user_id}")
+        vector_store = Chroma(
+            client=self.client,
+            collection_name=self.collection_name,
+            embedding_function=self.embeddings,
+        )
         
+        vector_store.add_documents(chunks)
+        print(f"Added {len(chunks)} chunks to vector store for user {self.user_id}")
         return vector_store
     
     def load_vector_store(self) -> Chroma:
         """Load existing vector store."""
         vector_store = Chroma(
-            persist_directory=self.persist_directory,
+            client=self.client,
+            collection_name=self.collection_name,
             embedding_function=self.embeddings,
-            collection_name=self.collection_name
         )
         print(f"Loaded vector store for user {self.user_id}")
         return vector_store
