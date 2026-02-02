@@ -40,12 +40,12 @@ export function ChatContainer() {
     return (
         <div className="flex flex-col h-full bg-transparent relative z-10">
             {/* Header */}
-            <div className="flex items-center justify-between px-8 py-5 border-b border-white/5 bg-white/[0.02]">
+            <div className="flex items-center justify-between px-8 py-5 border-b border-gray-800/50 bg-gray-900/20 backdrop-blur-sm z-50">
                 <div>
                     <h1 className="text-xl font-bold text-white flex items-center gap-2 drop-shadow-lg">
-                        <span className="text-2xl filter drop-shadow">🧠</span> KnowBot
+                        <span className="text-2xl filter drop-shadow">🧠</span> KnowBot 2.0
                     </h1>
-                    <p className="text-[10px] uppercase tracking-widest font-semibold text-blue-300/70">Your private knowledge assistant</p>
+                    <p className="text-[10px] uppercase tracking-widest font-semibold text-cyan-400/70">Neural Knowledge Engine</p>
                 </div>
                 <div className="flex gap-2">
                     <button
@@ -62,24 +62,19 @@ export function ChatContainer() {
                 </div>
             </div>
 
+            {/* Persistent Hologram Background */}
+            <div className="absolute inset-0 z-0 flex items-center justify-center opacity-40 pointer-events-none overflow-hidden">
+                <div className="scale-100 transform transition-transform duration-1000 mt-20">
+                    <BrainHologram />
+                </div>
+            </div>
+
             {/* Messages Area */}
-            <div className="flex-1 overflow-y-auto px-8 py-8 space-y-6 custom-scrollbar">
+            <div className="flex-1 overflow-y-auto px-8 py-8 space-y-6 custom-scrollbar relative z-10">
                 {messages.length === 0 ? (
                     <div className="flex flex-col items-center justify-center h-full text-center space-y-8">
-                        {/* Holographic Brain Animation */}
-                        <div className="scale-125 transform transition-transform duration-1000">
-                            <BrainHologram />
-                        </div>
-
-                        <div className="space-y-3 relative z-10 -mt-10">
-                            <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-200 via-blue-100 to-white drop-shadow-xl">
-                                How can I help you today?
-                            </h2>
-                            <p className="text-blue-200/60 max-w-sm mx-auto text-sm font-light leading-relaxed">
-                                Ask me anything about your documents. <br />
-                                <span className="opacity-50 text-xs">Ready to process complex queries.</span>
-                            </p>
-                        </div>
+                        {/* Empty Spacer to let Background Hologram Shine */}
+                        <div className="h-96"></div>
                     </div>
                 ) : (
                     <>
@@ -114,7 +109,7 @@ export function ChatContainer() {
             </div>
 
             {/* Input Area */}
-            <div className="px-8 py-8">
+            <div className="px-8 py-8 relative z-20">
                 <div className="max-w-4xl mx-auto">
                     <form onSubmit={handleSubmit} className="relative group">
                         <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-2xl opacity-20 group-hover:opacity-40 transition duration-500 blur"></div>

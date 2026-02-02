@@ -3,12 +3,15 @@
 import { motion } from 'framer-motion';
 
 export function BrainAvatar() {
-    // Mini wings for avatar
-    const leftWing = "M 30,50 L 10,20 L 40,40 Z";
-    const rightWing = "M 70,50 L 90,20 L 60,40 Z";
-
     return (
         <div className="relative w-12 h-12 flex items-center justify-center group cursor-pointer overflow-visible">
+            {/* Glow */}
+            <motion.div
+                className="absolute inset-0 bg-blue-500/30 rounded-full blur-md"
+                animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.8, 0.5] }}
+                transition={{ duration: 3, repeat: Infinity }}
+            />
+
             <svg viewBox="0 0 100 100" className="w-16 h-16 drop-shadow-2xl overflow-visible" style={{ marginLeft: '-8px', marginTop: '-8px' }}>
                 <defs>
                     <linearGradient id="avatarGrad" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -16,12 +19,8 @@ export function BrainAvatar() {
                         <stop offset="50%" stopColor="#3b82f6" />
                         <stop offset="100%" stopColor="#1e40af" />
                     </linearGradient>
-                    <linearGradient id="wingGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="#93c5fd" stopOpacity="0.9" />
-                        <stop offset="100%" stopColor="#3b82f6" stopOpacity="0.4" />
-                    </linearGradient>
                     <filter id="glow">
-                        <feGaussianBlur stdDeviation="2.5" result="coloredBlur" />
+                        <feGaussianBlur stdDeviation="2" result="coloredBlur" />
                         <feMerge>
                             <feMergeNode in="coloredBlur" />
                             <feMergeNode in="SourceGraphic" />
@@ -29,64 +28,45 @@ export function BrainAvatar() {
                     </filter>
                 </defs>
 
-                {/* Left Wing - Multi-faceted */}
-                <g>
-                    <motion.path
-                        d={leftWing}
-                        fill="url(#wingGrad)"
-                        stroke="rgba(255,255,255,0.6)"
-                        strokeWidth="0.5"
-                        initial={{ rotate: 10, transformOrigin: "42px 50px" }}
-                        animate={{ rotate: 0 }}
-                        whileHover={{ rotate: -20, scale: 1.15 }}
-                        transition={{ duration: 0.4, type: "spring", stiffness: 200 }}
-                    />
-                    <motion.path
-                        d="M 30,50 L 15,25 L 35,40 Z" // Inner wing shard
-                        fill="white"
-                        fillOpacity="0.2"
-                        initial={{ rotate: 10, transformOrigin: "42px 50px" }}
-                        animate={{ rotate: 0 }}
-                        whileHover={{ rotate: -20, scale: 1.15 }}
-                        transition={{ duration: 0.4 }}
-                    />
-                </g>
-
-                {/* Right Wing - Multi-faceted */}
-                <g>
-                    <motion.path
-                        d={rightWing}
-                        fill="url(#wingGrad)"
-                        stroke="rgba(255,255,255,0.6)"
-                        strokeWidth="0.5"
-                        initial={{ rotate: -10, transformOrigin: "58px 50px" }}
-                        animate={{ rotate: 0 }}
-                        whileHover={{ rotate: 20, scale: 1.15 }}
-                        transition={{ duration: 0.4, type: "spring", stiffness: 200 }}
-                    />
-                    <motion.path
-                        d="M 70,50 L 85,25 L 65,40 Z" // Inner wing shard
-                        fill="white"
-                        fillOpacity="0.2"
-                        initial={{ rotate: -10, transformOrigin: "58px 50px" }}
-                        animate={{ rotate: 0 }}
-                        whileHover={{ rotate: 20, scale: 1.15 }}
-                        transition={{ duration: 0.4 }}
-                    />
-                </g>
-
-                {/* Brain Core - Complex */}
+                {/* Brain Body with Eyes - Cute Version */}
                 <g filter="url(#glow)">
                     <motion.path
-                        d="M35,50 Q35,25 50,25 Q65,25 65,50 Q65,75 50,75 Q35,75 35,50"
+                        d="M30,50 Q30,20 50,20 Q70,20 70,50 Q70,80 50,80 Q30,80 30,50"
                         fill="url(#avatarGrad)"
-                        stroke="rgba(147, 197, 253, 0.5)"
-                        strokeWidth="1"
+                        stroke="rgba(255,255,255,0.4)"
+                        strokeWidth="1.5"
+                        whileHover={{ scale: 1.1 }}
                     />
-                    {/* Synaptic Network Lines */}
-                    <path d="M42,40 L50,32 M50,32 L58,40 M42,60 L50,68 M50,68 L58,60 M35,50 L65,50"
-                        stroke="rgba(255,255,255,0.3)" strokeWidth="0.5" fill="none" />
-                    <circle cx="50" cy="50" r="2" fill="white" fillOpacity="0.8" />
+
+                    {/* Eyes Container */}
+                    <g transform="translate(0, 5)">
+                        {/* Left Eye */}
+                        <motion.ellipse
+                            cx="42" cy="45" rx="4" ry="5" fill="white"
+                            animate={{ ry: [5, 5, 0.5, 5] }} // Blink
+                            transition={{ duration: 4, repeat: Infinity, times: [0, 0.9, 0.95, 1] }}
+                        />
+                        <motion.circle
+                            cx="42" cy="45" r="2" fill="#0f172a"
+                            animate={{ x: [-1, 1, -1] }} // Look around
+                            transition={{ duration: 5, repeat: Infinity }}
+                        />
+
+                        {/* Right Eye */}
+                        <motion.ellipse
+                            cx="58" cy="45" rx="4" ry="5" fill="white"
+                            animate={{ ry: [5, 5, 0.5, 5] }} // Blink
+                            transition={{ duration: 4, repeat: Infinity, times: [0, 0.9, 0.95, 1] }}
+                        />
+                        <motion.circle
+                            cx="58" cy="45" r="2" fill="#0f172a"
+                            animate={{ x: [-1, 1, -1] }} // Look around
+                            transition={{ duration: 5, repeat: Infinity }}
+                        />
+                    </g>
+                    {/* Blush */}
+                    <motion.circle cx="35" cy="62" r="3" fill="#ec4899" opacity="0.3" animate={{ opacity: [0.2, 0.4, 0.2] }} transition={{ duration: 2, repeat: Infinity }} />
+                    <motion.circle cx="65" cy="62" r="3" fill="#ec4899" opacity="0.3" animate={{ opacity: [0.2, 0.4, 0.2] }} transition={{ duration: 2, repeat: Infinity }} />
                 </g>
             </svg>
         </div>

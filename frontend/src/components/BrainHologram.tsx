@@ -3,127 +3,123 @@
 import { motion } from 'framer-motion';
 
 export function BrainHologram() {
-    // Wing shapes composed of crystal shards
+    // Majestic Wing shapes
     const leftWing = [
-        "M 150,200 L 100,100 L 140,140 Z",
-        "M 100,100 L 50,80 L 90,120 Z",
-        "M 50,80 L 20,50 L 60,90 Z",
-        "M 140,140 L 80,180 L 130,220 Z",
-        "M 80,180 L 40,220 L 90,240 Z"
+        "M 150,200 L 80,80 L 160,140 Z", // Top shard
+        "M 80,80 L 20,40 L 90,120 Z",   // Tip shard
+        "M 160,140 L 70,240 L 140,260 Z" // Bottom shard
     ];
 
     const rightWing = [
-        "M 250,200 L 300,100 L 260,140 Z",
-        "M 300,100 L 350,80 L 310,120 Z",
-        "M 350,80 L 380,50 L 340,90 Z",
-        "M 260,140 L 320,180 L 270,220 Z",
-        "M 320,180 L 360,220 L 310,240 Z"
+        "M 250,200 L 320,80 L 240,140 Z",
+        "M 320,80 L 380,40 L 310,120 Z",
+        "M 240,140 L 330,240 L 260,260 Z"
     ];
 
     return (
-        <div className="relative w-96 h-96 flex items-center justify-center">
-            {/* Ambient Nebula */}
+        <div className="relative w-[500px] h-[500px] flex items-center justify-center pointer-events-none select-none">
+            {/* Ambient Nebula - subtle */}
             <motion.div
-                className="absolute inset-0 bg-blue-500/10 rounded-full blur-[80px]"
+                className="absolute inset-0 bg-blue-500/5 rounded-full blur-[100px]"
                 animate={{
-                    scale: [1, 1.2, 1],
-                    opacity: [0.3, 0.6, 0.3]
+                    scale: [1, 1.1, 1],
+                    opacity: [0.2, 0.4, 0.2]
                 }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
             />
 
-            <svg viewBox="0 0 400 400" className="w-full h-full drop-shadow-[0_0_20px_rgba(59,130,246,0.6)]">
+            <svg viewBox="0 0 400 400" className="w-full h-full drop-shadow-[0_0_30px_rgba(59,130,246,0.3)] overflow-visible">
                 <defs>
                     <linearGradient id="holoWing" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="#60a5fa" stopOpacity="0.8" />
-                        <stop offset="100%" stopColor="#3b82f6" stopOpacity="0.4" />
+                        <stop offset="0%" stopColor="#60a5fa" stopOpacity="0.6" />
+                        <stop offset="100%" stopColor="#3b82f6" stopOpacity="0.2" />
                     </linearGradient>
                     <linearGradient id="brainGrad" x1="0%" y1="0%" x2="0%" y2="100%">
                         <stop offset="0%" stopColor="#93c5fd" />
                         <stop offset="100%" stopColor="#3b82f6" />
                     </linearGradient>
+                    <filter id="glow-strong">
+                        <feGaussianBlur stdDeviation="4" result="coloredBlur" />
+                        <feMerge>
+                            <feMergeNode in="coloredBlur" />
+                            <feMergeNode in="SourceGraphic" />
+                        </feMerge>
+                    </filter>
                 </defs>
 
-                {/* Left Wing Animation */}
-                <g>
-                    {leftWing.map((path, i) => (
+                <g transform="translate(0, -20)">
+                    {/* Left Wing Animation */}
+                    <g>
+                        {leftWing.map((path, i) => (
+                            <motion.path
+                                key={`l-${i}`}
+                                d={path}
+                                fill="url(#holoWing)"
+                                stroke="rgba(147, 197, 253, 0.3)"
+                                strokeWidth="1"
+                                initial={{ opacity: 0, x: 20, rotate: 10 }}
+                                animate={{ opacity: 1, x: 0, rotate: 0 }}
+                                transition={{
+                                    duration: 2,
+                                    delay: i * 0.2,
+                                    type: "spring",
+                                    stiffness: 40
+                                }}
+                            />
+                        ))}
+                    </g>
+
+                    {/* Right Wing Animation */}
+                    <g>
+                        {rightWing.map((path, i) => (
+                            <motion.path
+                                key={`r-${i}`}
+                                d={path}
+                                fill="url(#holoWing)"
+                                stroke="rgba(147, 197, 253, 0.3)"
+                                strokeWidth="1"
+                                initial={{ opacity: 0, x: -20, rotate: -10 }}
+                                animate={{ opacity: 1, x: 0, rotate: 0 }}
+                                transition={{
+                                    duration: 2,
+                                    delay: i * 0.2,
+                                    type: "spring",
+                                    stiffness: 40
+                                }}
+                            />
+                        ))}
+                    </g>
+
+                    {/* Central Brain - Larger */}
+                    <g transform="translate(140, 140) scale(1.2)" filter="url(#glow-strong)">
                         <motion.path
-                            key={`l-${i}`}
-                            d={path}
-                            fill="url(#holoWing)"
-                            stroke="rgba(255,255,255,0.4)"
-                            strokeWidth="1"
-                            initial={{ opacity: 0, x: 20, rotate: 10 }}
-                            animate={{ opacity: 1, x: 0, rotate: 0 }}
-                            transition={{
-                                duration: 1.5,
-                                delay: i * 0.1,
-                                type: "spring",
-                                stiffness: 50
-                            }}
+                            d="M30,50 Q30,20 50,20 Q70,20 70,50 Q70,80 50,80 Q30,80 30,50"
+                            fill="url(#brainGrad)"
+                            stroke="#bfdbfe"
+                            strokeWidth="1.5"
+                            initial={{ scale: 0 }}
+                            animate={{ scale: 1 }}
+                            transition={{ duration: 1, ease: "backOut" }}
                         />
-                    ))}
-                </g>
-
-                {/* Right Wing Animation */}
-                <g>
-                    {rightWing.map((path, i) => (
-                        <motion.path
-                            key={`r-${i}`}
-                            d={path}
-                            fill="url(#holoWing)"
-                            stroke="rgba(255,255,255,0.4)"
-                            strokeWidth="1"
-                            initial={{ opacity: 0, x: -20, rotate: -10 }}
-                            animate={{ opacity: 1, x: 0, rotate: 0 }}
-                            transition={{
-                                duration: 1.5,
-                                delay: i * 0.1,
-                                type: "spring",
-                                stiffness: 50
-                            }}
+                        {/* Synapses / Interaction */}
+                        <motion.circle cx="50" cy="50" r="28" fill="none" stroke="white" strokeOpacity="0.1"
+                            animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0, 0.1] }}
+                            transition={{ duration: 3, repeat: Infinity }}
                         />
-                    ))}
+                    </g>
                 </g>
 
-                {/* Central Brain */}
-                <g transform="translate(150, 150) scale(1)">
-                    <motion.path
-                        d="M30,50 Q30,20 50,20 Q70,20 70,50 Q70,80 50,80 Q30,80 30,50"
-                        fill="url(#brainGrad)"
-                        stroke="#bfdbfe"
-                        strokeWidth="1"
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        transition={{ duration: 0.8, ease: "backOut" }}
-                    />
-                    {/* Brain folds */}
-                    <motion.path
-                        d="M40,35 Q50,30 60,35 M35,50 Q50,45 65,50 M40,65 Q50,70 60,65"
-                        stroke="rgba(255,255,255,0.3)"
-                        strokeWidth="1"
-                        fill="none"
-                        animate={{ pathLength: [0, 1] }}
-                        transition={{ duration: 2, delay: 0.5 }}
-                    />
-                </g>
-
-                {/* Text: KnowBot 2.0 */}
-                <foreignObject x="0" y="320" width="400" height="80">
-                    <div className="flex justify-center items-center h-full">
-                        <div className="text-4xl font-black italic tracking-widest text-transparent bg-clip-text bg-gradient-to-b from-white to-blue-400 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]" style={{ fontFamily: 'system-ui' }}>
-                            <span className="inline-block relative">
-                                KNOWBOT
-                                <span className="absolute inset-0 text-transparent bg-clip-text bg-gradient-to-t from-blue-500/20 to-transparent blur-sm transform translate-y-1">KNOWBOT</span>
-                            </span>
-                            <span className="ml-3 text-cyan-400">2.0</span>
-                        </div>
-                    </div>
-                </foreignObject>
+                {/* Integrated SVG Text - No layout shifts */}
+                <text x="200" y="350" textAnchor="middle" fill="url(#brainGrad)"
+                    style={{ fontSize: '40px', fontWeight: '900', letterSpacing: '0.1em', fontFamily: 'system-ui' }}
+                    filter="url(#glow-strong)">
+                    KNOWBOT
+                </text>
+                <text x="200" y="390" textAnchor="middle" fill="#22d3ee"
+                    style={{ fontSize: '32px', fontWeight: '300', letterSpacing: '0.2em', fontFamily: 'system-ui' }}>
+                    2.0
+                </text>
             </svg>
-
-            {/* Holographic Base Ring */}
-            <div className="absolute top-[75%] w-48 h-12 border-2 border-blue-400/20 rounded-[100%] animate-spin-slow blur-[1px]"></div>
         </div>
     );
 }
