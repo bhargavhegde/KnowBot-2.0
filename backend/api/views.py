@@ -7,12 +7,15 @@ from rest_framework import status, viewsets, generics, permissions
 from rest_framework.decorators import api_view, action, permission_classes
 from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser, FormParser
+from .models import Document, ChatSession, ChatMessage, SystemPrompt
+from rag.service import RAGEngine, DocumentProcessor, VectorStoreManager
 from .serializers import (
     DocumentSerializer, DocumentUploadSerializer,
     ChatSessionSerializer, ChatSessionListSerializer,
     ChatMessageSerializer, ChatRequestSerializer, ChatResponseSerializer,
     SystemPromptSerializer, RegisterSerializer, UserSerializer
 )
+
 
 class RegisterView(generics.CreateAPIView):
     """View for user registration."""

@@ -42,9 +42,9 @@ export function ChatContainer() {
             <div className="flex items-center justify-between px-8 py-5 border-b border-white/5">
                 <div>
                     <h1 className="text-xl font-bold text-white flex items-center gap-2">
-                        Private Chat
+                        🧠 KnowBot
                     </h1>
-                    <p className="text-[10px] uppercase tracking-widest font-semibold text-gray-500">Secure AI Knowledge Assistant</p>
+                    <p className="text-[10px] uppercase tracking-widest font-semibold text-gray-500">Your private knowledge assistant</p>
                 </div>
                 <div className="flex gap-2">
                     <button
@@ -64,8 +64,8 @@ export function ChatContainer() {
             <div className="flex-1 overflow-y-auto px-8 py-8 space-y-6">
                 {messages.length === 0 ? (
                     <div className="flex flex-col items-center justify-center h-full text-center space-y-6">
-                        <div className="w-20 h-20 rounded-3xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-3xl">
-                            🤖
+                        <div className="w-20 h-20 rounded-3xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-4xl">
+                            🧠
                         </div>
                         <div className="space-y-2">
                             <h2 className="text-2xl font-bold text-white tracking-tight">How can I help you today?</h2>

@@ -11415,3 +11415,841 @@ Successfully loaded Tiltfile (64.903432ms)
            db │ 2026-02-02 16:25:37.708 UTC [55] LOG:  checkpoint starting: time
            db │ 2026-02-02 16:25:42.648 UTC [55] LOG:  checkpoint complete: wrote 50 buffers (0.3%); 0 WAL file(s) added, 0 removed, 0 recycled; write=4.919 s, sync=0.005 s, total=4.940 s; sync files=42, longest=0.001 s, average=0.001 s; distance=185 kB, estimate=484 kB; lsn=0/1A447E8, redo lsn=0/1A447B0
      frontend │ ✓ Compiled in 40ms
+       celery │ 
+       celery │ Web Trigger
+       celery │ STEP 1/2 — Force update
+       celery │       Container knowbot-celery  Stopping
+       celery │       Container knowbot-celery  Stopped
+       celery │       Container knowbot-celery  Removing
+       celery │       Container knowbot-celery  Removed
+       celery │ 
+       celery │ STEP 2/2 — Building & deploying
+       celery │ #1 [internal] load local bake definitions
+       celery │ #1 reading from stdin 537B done
+       celery │ #1 DONE 0.0s
+       celery │ 
+       celery │ #2 [internal] load build definition from Dockerfile
+       celery │ #2 transferring dockerfile: 547B done
+       celery │ #2 DONE 0.0s
+       celery │ 
+       celery │ #3 [internal] load metadata for docker.io/library/python:3.11-slim
+       celery │ #3 DONE 0.6s
+       celery │ 
+       celery │ #4 [internal] load .dockerignore
+       celery │ #4 transferring context: 2B done
+       celery │ #4 DONE 0.0s
+       celery │ 
+       celery │ #5 [internal] load build context
+       celery │ #5 transferring context: 10.64kB done
+       celery │ #5 DONE 0.0s
+       celery │ 
+       celery │ #6 [1/6] FROM docker.io/library/python:3.11-slim@sha256:5be45dbade29bebd6886af6b438fd7e0b4eb7b611f39ba62b430263f82de36d2
+       celery │ #6 resolve docker.io/library/python:3.11-slim@sha256:5be45dbade29bebd6886af6b438fd7e0b4eb7b611f39ba62b430263f82de36d2 0.0s done
+       celery │ #6 DONE 0.0s
+       celery │ 
+       celery │ #7 [3/6] RUN apt-get update && apt-get install -y     gcc     libpq-dev     && rm -rf /var/lib/apt/lists/*
+       celery │ #7 CACHED
+       celery │ 
+       celery │ #8 [2/6] WORKDIR /app
+       celery │ #8 CACHED
+       celery │ 
+       celery │ #9 [4/6] COPY requirements.txt .
+       celery │ #9 CACHED
+       celery │ 
+       celery │ #10 [5/6] RUN pip install --no-cache-dir -r requirements.txt
+       celery │ #10 CACHED
+       celery │ 
+       celery │ #11 [6/6] COPY . .
+       celery │ #11 DONE 0.0s
+       celery │ 
+       celery │ #12 exporting to image
+       celery │ #12 exporting layers 0.0s done
+       celery │ #12 exporting manifest sha256:9323147c515bebaa67142ef1a41b937edd817ea04aa3eb4adc8ad5c960d92e40 done
+       celery │ #12 exporting config sha256:989920d5dcb4a1ac64caa1e89aba79e1849f84ea803db43c93b5d256e6303805 done
+       celery │ #12 exporting attestation manifest sha256:f339236602c75f319b954085bc18f823513d2c36e41c7b73a172d3d7e13778d7 done
+       celery │ #12 exporting manifest list sha256:e5ebf42993495a21b0ee90860891ad275631f7d7f907f9c660d8055db2e76394 done
+       celery │ #12 naming to docker.io/library/knowbot20-celery:latest
+       celery │ #12 naming to docker.io/library/knowbot20-celery:latest done
+       celery │ #12 unpacking to docker.io/library/knowbot20-celery:latest 0.0s done
+       celery │ #12 DONE 0.1s
+       celery │ 
+       celery │ #13 resolving provenance for metadata file
+       celery │ #13 DONE 0.0s
+       celery │  knowbot20-celery  Built
+       celery │  Container knowbot-celery  Creating
+       celery │  Container knowbot-celery  Created
+       celery │  Container knowbot-celery  Starting
+       celery │  Container knowbot-celery  Started
+       celery │ 
+       celery │      Step 1 - 0.11s (Force update)
+       celery │      Step 2 - 1.27s (Building & deploying)
+       celery │      DONE IN: 1.38s 
+       celery │ 
+       celery │ /usr/local/lib/python3.11/site-packages/celery/platforms.py:841: SecurityWarning: You're running the worker with superuser privileges: this is
+       celery │ absolutely not recommended!
+       celery │ 
+       celery │ Please specify a different user using the --uid option.
+       celery │ 
+       celery │ User information: uid=0 euid=0 gid=0 egid=0
+       celery │ 
+       celery │   warnings.warn(SecurityWarning(ROOT_DISCOURAGED.format(
+       celery │  
+       celery │  -------------- celery@a3bed5da9520 v5.6.2 (recovery)
+       celery │ --- ***** ----- 
+       celery │ -- ******* ---- Linux-6.8.0-90-generic-x86_64-with-glibc2.41 2026-02-02 16:26:41
+       celery │ - *** --- * --- 
+       celery │ - ** ---------- [config]
+       celery │ - ** ---------- .> app:         knowbot:0x7741e05b47d0
+       celery │ - ** ---------- .> transport:   redis://redis:6379/0
+       celery │ - ** ---------- .> results:     redis://redis:6379/0
+       celery │ - *** --- * --- .> concurrency: 16 (prefork)
+       celery │ -- ******* ---- .> task events: OFF (enable -E to monitor tasks in this worker)
+       celery │ --- ***** ----- 
+       celery │  -------------- [queues]
+       celery │                 .> celery           exchange=celery(direct) key=celery
+       celery │                 
+       celery │ 
+       celery │ [tasks]
+       celery │   . api.tasks.cleanup_orphaned_files_task
+       celery │   . api.tasks.index_document_task
+       celery │   . api.tasks.reindex_all_documents_task
+       celery │   . knowbot.celery.debug_task
+       celery │ 
+       celery │ [2026-02-02 16:26:43,168: INFO/MainProcess] Connected to redis://redis:6379/0
+       celery │ [2026-02-02 16:26:43,170: INFO/MainProcess] mingle: searching for neighbors
+       celery │ [2026-02-02 16:26:44,176: INFO/MainProcess] mingle: all alone
+       celery │ [2026-02-02 16:26:44,186: INFO/MainProcess] celery@a3bed5da9520 ready.
+     frontend │  GET /login 200 in 78ms (compile: 4ms, render: 73ms)
+     frontend │  GET /register 200 in 396ms (compile: 376ms, render: 20ms)
+      backend │ [02/Feb/2026 16:27:05] "POST /api/auth/register/ HTTP/1.1" 201 50
+      backend │ [02/Feb/2026 16:27:05] "OPTIONS /api/token/ HTTP/1.1" 200 0
+      backend │ [02/Feb/2026 16:27:06] "POST /api/token/ HTTP/1.1" 200 489
+      backend │ [02/Feb/2026 16:27:06] "OPTIONS /api/auth/me/ HTTP/1.1" 200 0
+      backend │ [02/Feb/2026 16:27:06] "GET /api/auth/me/ HTTP/1.1" 200 57
+     frontend │  GET / 200 in 101ms (compile: 74ms, render: 27ms)
+     frontend │  GET / 200 in 34ms (compile: 6ms, render: 28ms)
+      backend │ [02/Feb/2026 16:27:06] "OPTIONS /api/documents/ HTTP/1.1" 200 0
+      backend │ [02/Feb/2026 16:27:06] "OPTIONS /api/documents/ HTTP/1.1" 200 0
+      backend │ [02/Feb/2026 16:27:06] "OPTIONS /api/prompts/active/ HTTP/1.1" 200 0
+      backend │ Internal Server Error: /api/documents/
+      backend │ Traceback (most recent call last):
+      backend │   File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+      backend │     response = get_response(request)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+      backend │     response = wrapped_callback(request, *callback_args, **callback_kwargs)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+      backend │     return view_func(request, *args, **kwargs)
+      backend │            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/viewsets.py", line 125, in view
+      backend │     return self.dispatch(request, *args, **kwargs)
+      backend │            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 515, in dispatch
+      backend │     response = self.handle_exception(exc)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 475, in handle_exception
+      backend │     self.raise_uncaught_exception(exc)
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+      backend │     raise exc
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 512, in dispatch
+      backend │     response = handler(request, *args, **kwargs)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/mixins.py", line 38, in list
+      backend │     queryset = self.filter_queryset(self.get_queryset())
+      backend │                                     ^^^^^^^^^^^^^^^^^^^
+      backend │   File "/app/api/views.py", line 36, in get_queryset
+      backend │     return Document.objects.filter(user=self.request.user)
+      backend │            ^^^^^^^^
+      backend │ NameError: name 'Document' is not defined
+      backend │ [02/Feb/2026 16:27:06] "GET /api/documents/ HTTP/1.1" 500 92705
+      backend │ Internal Server Error: /api/documents/
+      backend │ Traceback (most recent call last):
+      backend │   File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+      backend │     response = get_response(request)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+      backend │     response = wrapped_callback(request, *callback_args, **callback_kwargs)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+      backend │     return view_func(request, *args, **kwargs)
+      backend │            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/viewsets.py", line 125, in view
+      backend │     return self.dispatch(request, *args, **kwargs)
+      backend │            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 515, in dispatch
+      backend │     response = self.handle_exception(exc)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 475, in handle_exception
+      backend │     self.raise_uncaught_exception(exc)
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+      backend │     raise exc
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 512, in dispatch
+      backend │     response = handler(request, *args, **kwargs)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/mixins.py", line 38, in list
+      backend │     queryset = self.filter_queryset(self.get_queryset())
+      backend │                                     ^^^^^^^^^^^^^^^^^^^
+      backend │   File "/app/api/views.py", line 36, in get_queryset
+      backend │     return Document.objects.filter(user=self.request.user)
+      backend │            ^^^^^^^^
+      backend │ NameError: name 'Document' is not defined
+      backend │ Internal Server Error: /api/prompts/active/
+      backend │ Traceback (most recent call last):
+      backend │   File "/app/api/views.py", line 210, in get_active
+      backend │     prompt = SystemPrompt.objects.get(is_active=True, user=request.user)
+      backend │              ^^^^^^^^^^^^
+      backend │ NameError: name 'SystemPrompt' is not defined
+      backend │ 
+      backend │ During handling of the above exception, another exception occurred:
+      backend │ 
+      backend │ Traceback (most recent call last):
+      backend │   File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+      backend │     response = get_response(request)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+      backend │     response = wrapped_callback(request, *callback_args, **callback_kwargs)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+      backend │     return view_func(request, *args, **kwargs)
+      backend │            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/viewsets.py", line 125, in view
+      backend │     return self.dispatch(request, *args, **kwargs)
+      backend │            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 515, in dispatch
+      backend │     response = self.handle_exception(exc)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 475, in handle_exception
+      backend │     self.raise_uncaught_exception(exc)
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+      backend │     raise exc
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 512, in dispatch
+      backend │     response = handler(request, *args, **kwargs)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/app/api/views.py", line 212, in get_active
+      backend │     except SystemPrompt.DoesNotExist:
+      backend │            ^^^^^^^^^^^^
+      backend │ NameError: name 'SystemPrompt' is not defined
+      backend │ [02/Feb/2026 16:27:06] "GET /api/documents/ HTTP/1.1" 500 92705
+      backend │ [02/Feb/2026 16:27:06] "GET /api/prompts/active/ HTTP/1.1" 500 93386
+      backend │ Internal Server Error: /api/prompts/active/
+      backend │ Traceback (most recent call last):
+      backend │   File "/app/api/views.py", line 210, in get_active
+      backend │     prompt = SystemPrompt.objects.get(is_active=True, user=request.user)
+      backend │              ^^^^^^^^^^^^
+      backend │ NameError: name 'SystemPrompt' is not defined
+      backend │ 
+      backend │ During handling of the above exception, another exception occurred:
+      backend │ 
+      backend │ Traceback (most recent call last):
+      backend │   File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+      backend │     response = get_response(request)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+      backend │     response = wrapped_callback(request, *callback_args, **callback_kwargs)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+      backend │     return view_func(request, *args, **kwargs)
+      backend │            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/viewsets.py", line 125, in view
+      backend │     return self.dispatch(request, *args, **kwargs)
+      backend │            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 515, in dispatch
+      backend │     response = self.handle_exception(exc)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 475, in handle_exception
+      backend │     self.raise_uncaught_exception(exc)
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+      backend │     raise exc
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 512, in dispatch
+      backend │     response = handler(request, *args, **kwargs)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/app/api/views.py", line 212, in get_active
+      backend │     except SystemPrompt.DoesNotExist:
+      backend │            ^^^^^^^^^^^^
+      backend │ NameError: name 'SystemPrompt' is not defined
+      backend │ [02/Feb/2026 16:27:06] "GET /api/prompts/active/ HTTP/1.1" 500 93386
+     frontend │  GET / 200 in 22ms (compile: 4ms, render: 18ms)
+      backend │ Internal Server Error: /api/prompts/active/
+      backend │ Traceback (most recent call last):
+      backend │   File "/app/api/views.py", line 210, in get_active
+      backend │     prompt = SystemPrompt.objects.get(is_active=True, user=request.user)
+      backend │              ^^^^^^^^^^^^
+      backend │ NameError: name 'SystemPrompt' is not defined
+      backend │ 
+      backend │ During handling of the above exception, another exception occurred:
+      backend │ 
+      backend │ Traceback (most recent call last):
+      backend │   File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+      backend │     response = get_response(request)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+      backend │     response = wrapped_callback(request, *callback_args, **callback_kwargs)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+      backend │     return view_func(request, *args, **kwargs)
+      backend │            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/viewsets.py", line 125, in view
+      backend │     return self.dispatch(request, *args, **kwargs)
+      backend │            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 515, in dispatch
+      backend │     response = self.handle_exception(exc)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 475, in handle_exception
+      backend │     self.raise_uncaught_exception(exc)
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+      backend │     raise exc
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 512, in dispatch
+      backend │     response = handler(request, *args, **kwargs)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/app/api/views.py", line 212, in get_active
+      backend │     except SystemPrompt.DoesNotExist:
+      backend │            ^^^^^^^^^^^^
+      backend │ NameError: name 'SystemPrompt' is not defined
+      backend │ [02/Feb/2026 16:27:25] "GET /api/prompts/active/ HTTP/1.1" 500 93386
+      backend │ Internal Server Error: /api/documents/
+      backend │ Traceback (most recent call last):
+      backend │   File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+      backend │     response = get_response(request)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+      backend │     response = wrapped_callback(request, *callback_args, **callback_kwargs)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+      backend │     return view_func(request, *args, **kwargs)
+      backend │            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/viewsets.py", line 125, in view
+      backend │     return self.dispatch(request, *args, **kwargs)
+      backend │            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 515, in dispatch
+      backend │     response = self.handle_exception(exc)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 475, in handle_exception
+      backend │     self.raise_uncaught_exception(exc)
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+      backend │     raise exc
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 512, in dispatch
+      backend │     response = handler(request, *args, **kwargs)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/mixins.py", line 38, in list
+      backend │     queryset = self.filter_queryset(self.get_queryset())
+      backend │                                     ^^^^^^^^^^^^^^^^^^^
+      backend │   File "/app/api/views.py", line 36, in get_queryset
+      backend │     return Document.objects.filter(user=self.request.user)
+      backend │            ^^^^^^^^
+      backend │ NameError: name 'Document' is not defined
+      backend │ Internal Server Error: /api/documents/
+      backend │ Traceback (most recent call last):
+      backend │   File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+      backend │     response = get_response(request)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+      backend │     response = wrapped_callback(request, *callback_args, **callback_kwargs)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+      backend │     return view_func(request, *args, **kwargs)
+      backend │            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/viewsets.py", line 125, in view
+      backend │     return self.dispatch(request, *args, **kwargs)
+      backend │            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 515, in dispatch
+      backend │     response = self.handle_exception(exc)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 475, in handle_exception
+      backend │     self.raise_uncaught_exception(exc)
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+      backend │     raise exc
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 512, in dispatch
+      backend │     response = handler(request, *args, **kwargs)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/mixins.py", line 38, in list
+      backend │     queryset = self.filter_queryset(self.get_queryset())
+      backend │                                     ^^^^^^^^^^^^^^^^^^^
+      backend │   File "/app/api/views.py", line 36, in get_queryset
+      backend │     return Document.objects.filter(user=self.request.user)
+      backend │            ^^^^^^^^
+      backend │ NameError: name 'Document' is not defined
+      backend │ [02/Feb/2026 16:27:25] "GET /api/documents/ HTTP/1.1" 500 92705
+      backend │ Internal Server Error: /api/prompts/active/
+      backend │ Traceback (most recent call last):
+      backend │   File "/app/api/views.py", line 210, in get_active
+      backend │     prompt = SystemPrompt.objects.get(is_active=True, user=request.user)
+      backend │              ^^^^^^^^^^^^
+      backend │ NameError: name 'SystemPrompt' is not defined
+      backend │ 
+      backend │ During handling of the above exception, another exception occurred:
+      backend │ 
+      backend │ Traceback (most recent call last):
+      backend │   File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+      backend │     response = get_response(request)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+      backend │     response = wrapped_callback(request, *callback_args, **callback_kwargs)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+      backend │     return view_func(request, *args, **kwargs)
+      backend │            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/viewsets.py", line 125, in view
+      backend │     return self.dispatch(request, *args, **kwargs)
+      backend │            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 515, in dispatch
+      backend │     response = self.handle_exception(exc)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 475, in handle_exception
+      backend │     self.raise_uncaught_exception(exc)
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+      backend │     raise exc
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 512, in dispatch
+      backend │     response = handler(request, *args, **kwargs)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/app/api/views.py", line 212, in get_active
+      backend │     except SystemPrompt.DoesNotExist:
+      backend │            ^^^^^^^^^^^^
+      backend │ NameError: name 'SystemPrompt' is not defined
+      backend │ [02/Feb/2026 16:27:25] "GET /api/documents/ HTTP/1.1" 500 92705
+      backend │ [02/Feb/2026 16:27:25] "GET /api/prompts/active/ HTTP/1.1" 500 93386
+      backend │ [02/Feb/2026 16:27:35] "POST /api/token/ HTTP/1.1" 200 489
+      backend │ [02/Feb/2026 16:27:35] "GET /api/auth/me/ HTTP/1.1" 200 57
+     frontend │  GET / 200 in 21ms (compile: 6ms, render: 15ms)
+     frontend │  GET / 200 in 14ms (compile: 3ms, render: 12ms)
+      backend │ Internal Server Error: /api/documents/
+      backend │ Traceback (most recent call last):
+      backend │   File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+      backend │     response = get_response(request)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+      backend │     response = wrapped_callback(request, *callback_args, **callback_kwargs)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+      backend │     return view_func(request, *args, **kwargs)
+      backend │            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/viewsets.py", line 125, in view
+      backend │     return self.dispatch(request, *args, **kwargs)
+      backend │            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 515, in dispatch
+      backend │     response = self.handle_exception(exc)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 475, in handle_exception
+      backend │     self.raise_uncaught_exception(exc)
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+      backend │     raise exc
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 512, in dispatch
+      backend │     response = handler(request, *args, **kwargs)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/mixins.py", line 38, in list
+      backend │     queryset = self.filter_queryset(self.get_queryset())
+      backend │                                     ^^^^^^^^^^^^^^^^^^^
+      backend │   File "/app/api/views.py", line 36, in get_queryset
+      backend │     return Document.objects.filter(user=self.request.user)
+      backend │            ^^^^^^^^
+      backend │ NameError: name 'Document' is not defined
+      backend │ Internal Server Error: /api/prompts/active/
+      backend │ Traceback (most recent call last):
+      backend │   File "/app/api/views.py", line 210, in get_active
+      backend │     prompt = SystemPrompt.objects.get(is_active=True, user=request.user)
+      backend │              ^^^^^^^^^^^^
+      backend │ NameError: name 'SystemPrompt' is not defined
+      backend │ 
+      backend │ During handling of the above exception, another exception occurred:
+      backend │ 
+      backend │ Traceback (most recent call last):
+      backend │   File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+      backend │     response = get_response(request)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+      backend │     response = wrapped_callback(request, *callback_args, **callback_kwargs)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+      backend │     return view_func(request, *args, **kwargs)
+      backend │            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/viewsets.py", line 125, in view
+      backend │     return self.dispatch(request, *args, **kwargs)
+      backend │            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 515, in dispatch
+      backend │     response = self.handle_exception(exc)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 475, in handle_exception
+      backend │     self.raise_uncaught_exception(exc)
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+      backend │     raise exc
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 512, in dispatch
+      backend │     response = handler(request, *args, **kwargs)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/app/api/views.py", line 212, in get_active
+      backend │     except SystemPrompt.DoesNotExist:
+      backend │            ^^^^^^^^^^^^
+      backend │ NameError: name 'SystemPrompt' is not defined
+      backend │ [02/Feb/2026 16:27:35] "GET /api/documents/ HTTP/1.1" 500 92705
+      backend │ [02/Feb/2026 16:27:35] "GET /api/prompts/active/ HTTP/1.1" 500 93386
+      backend │ Internal Server Error: /api/documents/
+      backend │ Traceback (most recent call last):
+      backend │   File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+      backend │     response = get_response(request)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+      backend │     response = wrapped_callback(request, *callback_args, **callback_kwargs)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+      backend │     return view_func(request, *args, **kwargs)
+      backend │            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/viewsets.py", line 125, in view
+      backend │     return self.dispatch(request, *args, **kwargs)
+      backend │            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 515, in dispatch
+      backend │     response = self.handle_exception(exc)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 475, in handle_exception
+      backend │     self.raise_uncaught_exception(exc)
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+      backend │     raise exc
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 512, in dispatch
+      backend │     response = handler(request, *args, **kwargs)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/mixins.py", line 38, in list
+      backend │     queryset = self.filter_queryset(self.get_queryset())
+      backend │                                     ^^^^^^^^^^^^^^^^^^^
+      backend │   File "/app/api/views.py", line 36, in get_queryset
+      backend │     return Document.objects.filter(user=self.request.user)
+      backend │            ^^^^^^^^
+      backend │ NameError: name 'Document' is not defined
+      backend │ Internal Server Error: /api/prompts/active/
+      backend │ Traceback (most recent call last):
+      backend │   File "/app/api/views.py", line 210, in get_active
+      backend │     prompt = SystemPrompt.objects.get(is_active=True, user=request.user)
+      backend │              ^^^^^^^^^^^^
+      backend │ NameError: name 'SystemPrompt' is not defined
+      backend │ 
+      backend │ During handling of the above exception, another exception occurred:
+      backend │ 
+      backend │ Traceback (most recent call last):
+      backend │   File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+      backend │     response = get_response(request)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+      backend │     response = wrapped_callback(request, *callback_args, **callback_kwargs)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+      backend │     return view_func(request, *args, **kwargs)
+      backend │            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/viewsets.py", line 125, in view
+      backend │     return self.dispatch(request, *args, **kwargs)
+      backend │            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 515, in dispatch
+      backend │     response = self.handle_exception(exc)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 475, in handle_exception
+      backend │     self.raise_uncaught_exception(exc)
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+      backend │     raise exc
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 512, in dispatch
+      backend │     response = handler(request, *args, **kwargs)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/app/api/views.py", line 212, in get_active
+      backend │     except SystemPrompt.DoesNotExist:
+      backend │            ^^^^^^^^^^^^
+      backend │ NameError: name 'SystemPrompt' is not defined
+      backend │ [02/Feb/2026 16:27:35] "GET /api/documents/ HTTP/1.1" 500 92705
+      backend │ [02/Feb/2026 16:27:35] "GET /api/prompts/active/ HTTP/1.1" 500 93386
+      backend │ [02/Feb/2026 16:27:42] "OPTIONS /api/documents/upload/ HTTP/1.1" 200 0
+      backend │ Internal Server Error: /api/documents/upload/
+      backend │ Traceback (most recent call last):
+      backend │   File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+      backend │     response = get_response(request)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+      backend │     response = wrapped_callback(request, *callback_args, **callback_kwargs)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+      backend │     return view_func(request, *args, **kwargs)
+      backend │            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/viewsets.py", line 125, in view
+      backend │     return self.dispatch(request, *args, **kwargs)
+      backend │            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 515, in dispatch
+      backend │     response = self.handle_exception(exc)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 475, in handle_exception
+      backend │     self.raise_uncaught_exception(exc)
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+      backend │     raise exc
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 512, in dispatch
+      backend │     response = handler(request, *args, **kwargs)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/app/api/views.py", line 59, in upload
+      backend │     document = Document.objects.create(
+      backend │                ^^^^^^^^
+      backend │ NameError: name 'Document' is not defined
+      backend │ [02/Feb/2026 16:27:42] "POST /api/documents/upload/ HTTP/1.1" 500 95832
+      backend │ Internal Server Error: /api/documents/
+      backend │ Traceback (most recent call last):
+      backend │   File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+      backend │     response = get_response(request)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+      backend │     response = wrapped_callback(request, *callback_args, **callback_kwargs)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+      backend │     return view_func(request, *args, **kwargs)
+      backend │            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/viewsets.py", line 125, in view
+      backend │     return self.dispatch(request, *args, **kwargs)
+      backend │            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 515, in dispatch
+      backend │     response = self.handle_exception(exc)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 475, in handle_exception
+      backend │     self.raise_uncaught_exception(exc)
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+      backend │     raise exc
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 512, in dispatch
+      backend │     response = handler(request, *args, **kwargs)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/mixins.py", line 38, in list
+      backend │     queryset = self.filter_queryset(self.get_queryset())
+      backend │                                     ^^^^^^^^^^^^^^^^^^^
+      backend │   File "/app/api/views.py", line 36, in get_queryset
+      backend │     return Document.objects.filter(user=self.request.user)
+      backend │            ^^^^^^^^
+      backend │ NameError: name 'Document' is not defined
+      backend │ [02/Feb/2026 16:27:42] "GET /api/documents/ HTTP/1.1" 500 92705
+      backend │ Internal Server Error: /api/documents/upload/
+      backend │ Traceback (most recent call last):
+      backend │   File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+      backend │     response = get_response(request)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+      backend │     response = wrapped_callback(request, *callback_args, **callback_kwargs)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+      backend │     return view_func(request, *args, **kwargs)
+      backend │            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/viewsets.py", line 125, in view
+      backend │     return self.dispatch(request, *args, **kwargs)
+      backend │            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 515, in dispatch
+      backend │     response = self.handle_exception(exc)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 475, in handle_exception
+      backend │     self.raise_uncaught_exception(exc)
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+      backend │     raise exc
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 512, in dispatch
+      backend │     response = handler(request, *args, **kwargs)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/app/api/views.py", line 59, in upload
+      backend │     document = Document.objects.create(
+      backend │                ^^^^^^^^
+      backend │ NameError: name 'Document' is not defined
+      backend │ [02/Feb/2026 16:27:50] "POST /api/documents/upload/ HTTP/1.1" 500 95832
+      backend │ Internal Server Error: /api/documents/
+      backend │ Traceback (most recent call last):
+      backend │   File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+      backend │     response = get_response(request)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+      backend │     response = wrapped_callback(request, *callback_args, **callback_kwargs)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+      backend │     return view_func(request, *args, **kwargs)
+      backend │            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/viewsets.py", line 125, in view
+      backend │     return self.dispatch(request, *args, **kwargs)
+      backend │            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 515, in dispatch
+      backend │     response = self.handle_exception(exc)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 475, in handle_exception
+      backend │     self.raise_uncaught_exception(exc)
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+      backend │     raise exc
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 512, in dispatch
+      backend │     response = handler(request, *args, **kwargs)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/mixins.py", line 38, in list
+      backend │     queryset = self.filter_queryset(self.get_queryset())
+      backend │                                     ^^^^^^^^^^^^^^^^^^^
+      backend │   File "/app/api/views.py", line 36, in get_queryset
+      backend │     return Document.objects.filter(user=self.request.user)
+      backend │            ^^^^^^^^
+      backend │ NameError: name 'Document' is not defined
+      backend │ [02/Feb/2026 16:27:50] "GET /api/documents/ HTTP/1.1" 500 92705
+      backend │ Internal Server Error: /api/chat/
+      backend │ Traceback (most recent call last):
+      backend │   File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+      backend │     response = get_response(request)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+      backend │     response = wrapped_callback(request, *callback_args, **callback_kwargs)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+      backend │     return view_func(request, *args, **kwargs)
+      backend │            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/django/views/generic/base.py", line 105, in view
+      backend │     return self.dispatch(request, *args, **kwargs)
+      backend │            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 515, in dispatch
+      backend │     response = self.handle_exception(exc)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 475, in handle_exception
+      backend │     self.raise_uncaught_exception(exc)
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+      backend │     raise exc
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 512, in dispatch
+      backend │     response = handler(request, *args, **kwargs)
+      backend │                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/usr/local/lib/python3.11/site-packages/rest_framework/decorators.py", line 50, in handler
+      backend │     return func(*args, **kwargs)
+      backend │            ^^^^^^^^^^^^^^^^^^^^^
+      backend │   File "/app/api/views.py", line 155, in chat
+      backend │     session = ChatSession.objects.create(user=request.user)
+      backend │               ^^^^^^^^^^^
+      backend │ NameError: name 'ChatSession' is not defined
+      backend │ [02/Feb/2026 16:27:59] "POST /api/chat/ HTTP/1.1" 500 92907
+     frontend │  GET /login 200 in 19ms (compile: 4ms, render: 15ms)
+     frontend │  GET /login 200 in 16ms (compile: 3ms, render: 14ms)
+      backend │ [02/Feb/2026 16:29:01] "GET /admin/ HTTP/1.1" 302 0
+      backend │ [02/Feb/2026 16:29:01] "GET /admin/login/?next=/admin/ HTTP/1.1" 200 4173
+      backend │ [02/Feb/2026 16:29:01] "GET /static/admin/css/base.css HTTP/1.1" 200 22120
+      backend │ [02/Feb/2026 16:29:01] "GET /static/admin/js/theme.js HTTP/1.1" 200 1653
+      backend │ [02/Feb/2026 16:29:01] "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 200 2810
+      backend │ [02/Feb/2026 16:29:01] "GET /static/admin/css/dark_mode.css HTTP/1.1" 200 2808
+      backend │ [02/Feb/2026 16:29:01] "GET /static/admin/css/login.css HTTP/1.1" 200 951
+      backend │ [02/Feb/2026 16:29:01] "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 200 3063
+      backend │ [02/Feb/2026 16:29:01] "GET /static/admin/css/responsive.css HTTP/1.1" 200 16565
+      backend │ [02/Feb/2026 16:29:07] "POST /admin/login/?next=/admin/ HTTP/1.1" 302 0
+      backend │ [02/Feb/2026 16:29:08] "GET /admin/ HTTP/1.1" 200 8976
+      backend │ [02/Feb/2026 16:29:08] "GET /static/admin/css/dashboard.css HTTP/1.1" 200 441
+      backend │ [02/Feb/2026 16:29:08] "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 200 380
+      backend │ [02/Feb/2026 16:29:08] "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 200 331
+      backend │ [02/Feb/2026 16:29:12] "GET /admin/auth/user/ HTTP/1.1" 200 13940
+      backend │ [02/Feb/2026 16:29:12] "GET /static/admin/js/jquery.init.js HTTP/1.1" 200 347
+      backend │ [02/Feb/2026 16:29:12] "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 200 9777
+      backend │ [02/Feb/2026 16:29:12] "GET /static/admin/css/changelists.css HTTP/1.1" 200 6878
+      backend │ [02/Feb/2026 16:29:12] "GET /static/admin/js/core.js HTTP/1.1" 200 6208
+      backend │ [02/Feb/2026 16:29:12] "GET /static/admin/js/actions.js HTTP/1.1" 200 8076
+      backend │ [02/Feb/2026 16:29:12] "GET /static/admin/js/prepopulate.js HTTP/1.1" 200 1531
+      backend │ [02/Feb/2026 16:29:12] "GET /static/admin/js/urlify.js HTTP/1.1" 200 7887
+      backend │ [02/Feb/2026 16:29:12] "GET /static/admin/js/filters.js HTTP/1.1" 200 978
+      backend │ [02/Feb/2026 16:29:12] "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 200 285314
+      backend │ [02/Feb/2026 16:29:12] "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 200 325171
+      backend │ [02/Feb/2026 16:29:12] "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+      backend │ [02/Feb/2026 16:29:12] "GET /static/admin/img/icon-no.svg HTTP/1.1" 200 560
+      backend │ [02/Feb/2026 16:29:12] "GET /static/admin/img/search.svg HTTP/1.1" 200 458
+      backend │ [02/Feb/2026 16:29:12] "GET /static/admin/img/icon-yes.svg HTTP/1.1" 200 436
+      backend │ [02/Feb/2026 16:29:12] "GET /static/admin/img/sorting-icons.svg HTTP/1.1" 200 1097
+      backend │ [02/Feb/2026 16:29:12] "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 200 331
+      backend │ [02/Feb/2026 16:29:12] "GET /static/admin/img/icon-viewlink.svg HTTP/1.1" 200 581
+      backend │ [02/Feb/2026 16:29:19] "GET /admin/api/chatmessage/ HTTP/1.1" 200 16891
+      backend │ [02/Feb/2026 16:29:19] "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+      backend │ /app/api/views.py changed, reloading.
+      backend │ Watching for file changes with StatReloader
+      backend │ Performing system checks...
+      backend │ 
+      backend │ System check identified no issues (0 silenced).
+      backend │ February 02, 2026 - 16:29:52
+      backend │ Django version 5.2.10, using settings 'knowbot.settings'
+      backend │ Starting development server at http://0.0.0.0:8000/
+      backend │ Quit the server with CONTROL-C.
+      backend │ 
+      backend │ WARNING: This is a development server. Do not use it in a production setting. Use a production WSGI or ASGI server instead.
+      backend │ For more information on production servers see: https://docs.djangoproject.com/en/5.2/howto/deployment/
+      backend │ [02/Feb/2026 16:30:07] "POST /api/token/ HTTP/1.1" 200 489
+      backend │ [02/Feb/2026 16:30:07] "GET /api/auth/me/ HTTP/1.1" 200 38
+     frontend │  GET / 200 in 32ms (compile: 3ms, render: 28ms)
+     frontend │  GET / 200 in 17ms (compile: 3ms, render: 14ms)
+      backend │ [02/Feb/2026 16:30:07] "GET /api/documents/ HTTP/1.1" 200 2
+      backend │ [02/Feb/2026 16:30:07] "GET /api/documents/ HTTP/1.1" 200 2
+      backend │ [02/Feb/2026 16:30:07] "GET /api/prompts/active/ HTTP/1.1" 200 46
+      backend │ [02/Feb/2026 16:30:07] "GET /api/prompts/active/ HTTP/1.1" 200 46
+     frontend │ ✓ Compiled in 38ms
+       celery │ [2026-02-02 16:30:15,166: INFO/MainProcess] Task api.tasks.index_document_task[4d9ebdcc-0251-4651-8b09-a7f5e41516fe] received
+      backend │ [02/Feb/2026 16:30:15] "POST /api/documents/upload/ HTTP/1.1" 201 308
+      backend │ [02/Feb/2026 16:30:15] "GET /api/documents/ HTTP/1.1" 200 310
+       celery │ [2026-02-02 16:30:15,536: INFO/ForkPoolWorker-16] Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+       ollama │ time=2026-02-02T16:30:15.623Z level=WARN source=types.go:966 msg="invalid option provided" option=tfs_z
+       ollama │ time=2026-02-02T16:30:15.623Z level=WARN source=types.go:966 msg="invalid option provided" option=mirostat
+       ollama │ time=2026-02-02T16:30:15.623Z level=WARN source=types.go:966 msg="invalid option provided" option=mirostat_eta
+       ollama │ time=2026-02-02T16:30:15.623Z level=WARN source=types.go:966 msg="invalid option provided" option=mirostat_tau
+       ollama │ time=2026-02-02T16:30:15.628Z level=WARN source=cpu_linux.go:130 msg="failed to parse CPU allowed micro secs" error="strconv.ParseInt: parsing \"max\": invalid syntax"
+       ollama │ time=2026-02-02T16:30:15.639Z level=WARN source=server.go:167 msg="requested context size too large for model" num_ctx=8192 n_ctx_train=2048
+       ollama │ time=2026-02-02T16:30:15.640Z level=INFO source=server.go:429 msg="starting runner" cmd="/usr/bin/ollama runner --ollama-engine --model /root/.ollama/models/blobs/sha256-970aa74c0a90ef7482477cf803618e776e173c007bf957f635f1015bfcfef0e6 --port 45117"
+       ollama │ time=2026-02-02T16:30:15.640Z level=INFO source=sched.go:452 msg="system memory" total="30.6 GiB" free="27.8 GiB" free_swap="961.7 MiB"
+       ollama │ time=2026-02-02T16:30:15.640Z level=INFO source=server.go:755 msg="loading model" "model layers"=13 requested=-1
+       ollama │ time=2026-02-02T16:30:15.652Z level=INFO source=runner.go:1405 msg="starting ollama engine"
+       ollama │ time=2026-02-02T16:30:15.652Z level=INFO source=runner.go:1440 msg="Server listening on 127.0.0.1:45117"
+       ollama │ time=2026-02-02T16:30:15.662Z level=INFO source=runner.go:1278 msg=load request="{Operation:fit LoraPath:[] Parallel:1 BatchSize:512 FlashAttention:Disabled KvSize:2048 KvCacheType: NumThreads:8 GPULayers:[] MultiUserCache:false ProjectorPath: MainGPU:0 UseMmap:false}"
+       ollama │ time=2026-02-02T16:30:15.667Z level=INFO source=ggml.go:136 msg="" architecture=nomic-bert file_type=F16 name=nomic-embed-text-v1.5 description="" num_tensors=112 num_key_values=25
+       ollama │ load_backend: loaded CPU backend from /usr/lib/ollama/libggml-cpu-haswell.so
+       ollama │ time=2026-02-02T16:30:15.672Z level=INFO source=ggml.go:104 msg=system CPU.0.SSE3=1 CPU.0.SSSE3=1 CPU.0.AVX=1 CPU.0.AVX2=1 CPU.0.F16C=1 CPU.0.FMA=1 CPU.0.BMI2=1 CPU.0.LLAMAFILE=1 CPU.1.LLAMAFILE=1 compiler=cgo(gcc)
+       ollama │ time=2026-02-02T16:30:15.673Z level=WARN source=runner.go:1213 msg="model does not support caching, setting batch size to context length" batch_size=2048
+       ollama │ time=2026-02-02T16:30:15.674Z level=INFO source=runner.go:1278 msg=load request="{Operation:alloc LoraPath:[] Parallel:1 BatchSize:512 FlashAttention:Disabled KvSize:2048 KvCacheType: NumThreads:8 GPULayers:[] MultiUserCache:false ProjectorPath: MainGPU:0 UseMmap:false}"
+       ollama │ time=2026-02-02T16:30:15.678Z level=WARN source=runner.go:1213 msg="model does not support caching, setting batch size to context length" batch_size=2048
+       ollama │ time=2026-02-02T16:30:15.679Z level=INFO source=runner.go:1278 msg=load request="{Operation:commit LoraPath:[] Parallel:1 BatchSize:512 FlashAttention:Disabled KvSize:2048 KvCacheType: NumThreads:8 GPULayers:[] MultiUserCache:false ProjectorPath: MainGPU:0 UseMmap:false}"
+       ollama │ time=2026-02-02T16:30:15.680Z level=INFO source=ggml.go:482 msg="offloading 0 repeating layers to GPU"
+       ollama │ time=2026-02-02T16:30:15.680Z level=INFO source=ggml.go:486 msg="offloading output layer to CPU"
+       ollama │ time=2026-02-02T16:30:15.680Z level=INFO source=ggml.go:494 msg="offloaded 0/13 layers to GPU"
+       ollama │ time=2026-02-02T16:30:15.680Z level=INFO source=device.go:245 msg="model weights" device=CPU size="305.6 MiB"
+       ollama │ time=2026-02-02T16:30:15.680Z level=INFO source=device.go:267 msg="compute graph" device=CPU size="234.0 MiB"
+       ollama │ time=2026-02-02T16:30:15.680Z level=INFO source=device.go:272 msg="total memory" size="539.6 MiB"
+       ollama │ time=2026-02-02T16:30:15.680Z level=INFO source=sched.go:526 msg="loaded runners" count=1
+       ollama │ time=2026-02-02T16:30:15.680Z level=INFO source=server.go:1347 msg="waiting for llama runner to start responding"
+       ollama │ time=2026-02-02T16:30:15.681Z level=INFO source=server.go:1381 msg="waiting for server to become available" status="llm server loading model"
+       ollama │ time=2026-02-02T16:30:15.931Z level=INFO source=server.go:1385 msg="llama runner started in 0.29 seconds"
+      backend │ [02/Feb/2026 16:30:17] "OPTIONS /api/documents/4/status/ HTTP/1.1" 200 0
+      backend │ [02/Feb/2026 16:30:17] "GET /api/documents/4/status/ HTTP/1.1" 200 73
+      backend │ [02/Feb/2026 16:30:17] "GET /api/documents/ HTTP/1.1" 200 313
+      backend │ [02/Feb/2026 16:30:19] "GET /api/documents/4/status/ HTTP/1.1" 200 73
+      backend │ [02/Feb/2026 16:30:21] "GET /api/documents/4/status/ HTTP/1.1" 200 73
+      backend │ [02/Feb/2026 16:30:23] "GET /api/documents/4/status/ HTTP/1.1" 200 73
+      backend │ [02/Feb/2026 16:30:25] "GET /api/documents/4/status/ HTTP/1.1" 200 73
+       celery │ [2026-02-02 16:30:26,074: INFO/ForkPoolWorker-16] HTTP Request: POST http://ollama:11434/api/embed "HTTP/1.1 200 OK"
+       ollama │ [GIN] 2026/02/02 - 16:30:26 | 200 | 10.456240315s |      172.18.0.7 | POST     "/api/embed"
+       celery │ [2026-02-02 16:30:26,157: WARNING/ForkPoolWorker-16] Vector store created and saved.
+       celery │ [2026-02-02 16:30:26,161: INFO/ForkPoolWorker-16] Task api.tasks.index_document_task[4d9ebdcc-0251-4651-8b09-a7f5e41516fe] succeeded in 10.995022029999745s: {'success': True, 'document_id': 4, 'chunks': 70}
+      backend │ [02/Feb/2026 16:30:27] "GET /api/documents/4/status/ HTTP/1.1" 200 71
+      backend │ [02/Feb/2026 16:30:27] "GET /api/documents/ HTTP/1.1" 200 336
+     frontend │ ✓ Compiled in 18ms
+           db │ 2026-02-02 16:30:37.674 UTC [55] LOG:  checkpoint starting: time
+           db │ 2026-02-02 16:30:40.101 UTC [55] LOG:  checkpoint complete: wrote 25 buffers (0.2%); 0 WAL file(s) added, 0 removed, 0 recycled; write=2.407 s, sync=0.003 s, total=2.427 s; sync files=20, longest=0.002 s, average=0.001 s; distance=8 kB, estimate=436 kB; lsn=0/1A46850, redo lsn=0/1A46818
+      backend │ Internal Server Error: /api/chat/
+      backend │ [02/Feb/2026 16:30:40] "POST /api/chat/ HTTP/1.1" 500 43
+     frontend │ ✓ Compiled in 19ms
+      backend │ Operations to perform:
+      backend │   Apply all migrations: admin, api, auth, contenttypes, sessions
+      backend │ Running migrations:
+      backend │   No migrations to apply.
+      backend │ Watching for file changes with StatReloader
+      backend │ Performing system checks...
+      backend │ 
+      backend │ System check identified no issues (0 silenced).
+      backend │ February 02, 2026 - 16:31:08
+      backend │ Django version 5.2.10, using settings 'knowbot.settings'
+      backend │ Starting development server at http://0.0.0.0:8000/
+      backend │ Quit the server with CONTROL-C.
+      backend │ 
+      backend │ WARNING: This is a development server. Do not use it in a production setting. Use a production WSGI or ASGI server instead.
+      backend │ For more information on production servers see: https://docs.djangoproject.com/en/5.2/howto/deployment/
+      backend │ /app/api/views.py changed, reloading.
+      backend │ Watching for file changes with StatReloader
+      backend │ Performing system checks...
+      backend │ 
+      backend │ System check identified no issues (0 silenced).
+      backend │ February 02, 2026 - 16:31:43
+      backend │ Django version 5.2.10, using settings 'knowbot.settings'
+      backend │ Starting development server at http://0.0.0.0:8000/
+      backend │ Quit the server with CONTROL-C.
+      backend │ 
+      backend │ WARNING: This is a development server. Do not use it in a production setting. Use a production WSGI or ASGI server instead.
+      backend │ For more information on production servers see: https://docs.djangoproject.com/en/5.2/howto/deployment/
+      backend │ /app/api/views.py changed, reloading.
+      backend │ Watching for file changes with StatReloader
+      backend │ Performing system checks...
+      backend │ 
+      backend │ System check identified no issues (0 silenced).
+      backend │ February 02, 2026 - 16:32:04
+      backend │ Django version 5.2.10, using settings 'knowbot.settings'
+      backend │ Starting development server at http://0.0.0.0:8000/
+      backend │ Quit the server with CONTROL-C.
+      backend │ 
+      backend │ WARNING: This is a development server. Do not use it in a production setting. Use a production WSGI or ASGI server instead.
+      backend │ For more information on production servers see: https://docs.djangoproject.com/en/5.2/howto/deployment/

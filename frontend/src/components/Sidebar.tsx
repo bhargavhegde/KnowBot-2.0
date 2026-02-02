@@ -155,7 +155,7 @@ export function Sidebar() {
             {/* Header */}
             <div className="px-6 py-6 border-b border-white/5">
                 <h2 className="text-xl font-bold tracking-tight text-white flex items-center gap-2">
-                    <span className="text-indigo-400">●</span> KnowBot
+                    🧠 KnowBot
                 </h2>
             </div>
 
