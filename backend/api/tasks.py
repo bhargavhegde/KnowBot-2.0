@@ -18,7 +18,7 @@ def index_document_task(self, document_id: int):
     
     This task:
     1. Loads and chunks the document
-    2. Creates/updates the vector store
+    2. Creates/updates the vector store for the user's collection
     3. Updates document status in database
     """
     try:
@@ -26,17 +26,20 @@ def index_document_task(self, document_id: int):
     except Document.DoesNotExist:
         return {'error': f'Document {document_id} not found'}
     
+    # Get user ID for isolation
+    user_id = document.user_id
+    
     # Update status to processing
     document.index_status = Document.IndexStatus.PROCESSING
     document.save()
     
     try:
-        # Load and chunk document
+        # Load and chunk document with user context
         processor = DocumentProcessor()
-        chunks = processor.load_single_document(document.file_path)
+        chunks = processor.load_single_document(document.file_path, user_id=user_id)
         
-        # Create/update vector store
-        manager = VectorStoreManager()
+        # Create/update vector store for specific user
+        manager = VectorStoreManager(user_id=user_id)
         manager.create_vector_store(chunks)
         
         # Update document record
@@ -49,7 +52,8 @@ def index_document_task(self, document_id: int):
         return {
             'success': True,
             'document_id': document_id,
-            'chunks': len(chunks)
+            'chunks': len(chunks),
+            'user_id': user_id
         }
         
     except Exception as e:

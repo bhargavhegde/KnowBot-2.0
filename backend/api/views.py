@@ -75,8 +75,8 @@ class DocumentViewSet(viewsets.ModelViewSet):
         except Exception as e:
             try:
                 processor = DocumentProcessor()
-                chunks = processor.load_single_document(str(file_path))
-                manager = VectorStoreManager()
+                chunks = processor.load_single_document(str(file_path), user_id=request.user.id)
+                manager = VectorStoreManager(user_id=request.user.id)
                 manager.create_vector_store(chunks)
                 document.index_status = Document.IndexStatus.INDEXED
                 document.chunk_count = len(chunks)
@@ -171,7 +171,7 @@ def chat(request):
         pass
     
     try:
-        engine = RAGEngine(custom_prompt=custom_prompt)
+        engine = RAGEngine(custom_prompt=custom_prompt, user_id=request.user.id)
         result = engine.query(message)
         response_text = result['response']
         citations = result['citations']

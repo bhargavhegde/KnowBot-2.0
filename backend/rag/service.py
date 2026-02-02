@@ -5,6 +5,8 @@ This module provides the core RAG functionality:
 - Document loading and chunking
 - Vector store management (ChromaDB)
 - RAG chain building and execution
+
+Now supports multi-user isolation via user-specific collections.
 """
 
 import os
@@ -45,8 +47,8 @@ class DocumentProcessor:
             add_start_index=True,
         )
     
-    def load_single_document(self, file_path: str) -> List:
-        """Load a single document and return chunks."""
+    def load_single_document(self, file_path: str, user_id: int = None) -> List:
+        """Load a single document and return chunks with user metadata."""
         path = Path(file_path)
         
         if not path.exists():
@@ -63,6 +65,11 @@ class DocumentProcessor:
         
         documents = loader.load()
         chunks = self.text_splitter.split_documents(documents)
+        
+        # Add user_id to metadata for filtering
+        if user_id is not None:
+            for chunk in chunks:
+                chunk.metadata['user_id'] = user_id
         
         return chunks
     
@@ -105,35 +112,45 @@ class DocumentProcessor:
 
 
 class VectorStoreManager:
-    """Manages ChromaDB vector store operations."""
+    """Manages ChromaDB vector store operations with multi-user support."""
     
-    def __init__(self, persist_directory: str = CHROMA_DIR):
+    def __init__(self, persist_directory: str = CHROMA_DIR, user_id: int = None):
         self.persist_directory = persist_directory
+        self.user_id = user_id
+        self.collection_name = f"user_{user_id}" if user_id else "default"
         self.embeddings = OllamaEmbeddings(
             model=EMBEDDING_MODEL,
             base_url=OLLAMA_HOST
         )
     
     def create_vector_store(self, chunks: List) -> Chroma:
-        """Create a new vector store from document chunks."""
+        """Create or add to vector store from document chunks."""
         if not chunks:
             raise ValueError("No chunks provided to create vector store")
+        
+        # Add user_id to each chunk's metadata if not already set
+        if self.user_id is not None:
+            for chunk in chunks:
+                if 'user_id' not in chunk.metadata:
+                    chunk.metadata['user_id'] = self.user_id
         
         vector_store = Chroma.from_documents(
             documents=chunks,
             embedding=self.embeddings,
-            persist_directory=self.persist_directory
+            persist_directory=self.persist_directory,
+            collection_name=self.collection_name
         )
-        print("Vector store created and saved.")
+        print(f"Vector store updated for collection: {self.collection_name}")
         return vector_store
     
     def load_vector_store(self) -> Chroma:
-        """Load existing vector store."""
+        """Load existing vector store for user's collection."""
         vector_store = Chroma(
             persist_directory=self.persist_directory,
-            embedding_function=self.embeddings
+            embedding_function=self.embeddings,
+            collection_name=self.collection_name
         )
-        print("Loaded existing vector store.")
+        print(f"Loaded vector store for collection: {self.collection_name}")
         return vector_store
     
     def get_or_create_vector_store(self, chunks: List = None) -> Chroma:
@@ -144,7 +161,7 @@ class VectorStoreManager:
 
 
 class RAGEngine:
-    """Main RAG engine for building and executing RAG chains."""
+    """Main RAG engine for building and executing RAG chains with multi-user support."""
     
     DEFAULT_TEMPLATE = """You are a helpful, accurate assistant that answers questions based ONLY on the provided context.
 Use markdown formatting when appropriate.
@@ -156,14 +173,15 @@ Question: {question}
 
 Answer:"""
     
-    def __init__(self, custom_prompt: Optional[str] = None):
+    def __init__(self, custom_prompt: Optional[str] = None, user_id: int = None):
         self.custom_prompt = custom_prompt
+        self.user_id = user_id
         self.llm = ChatOllama(
             model=LLM_MODEL,
             temperature=0.2,
             base_url=OLLAMA_HOST
         )
-        self.vector_store_manager = VectorStoreManager()
+        self.vector_store_manager = VectorStoreManager(user_id=user_id)
     
     def build_prompt(self) -> ChatPromptTemplate:
         """Build the prompt template with optional custom instructions."""
@@ -242,13 +260,13 @@ def load_and_chunk_documents(directory: str = None) -> List:
     return processor.load_all_documents(directory)
 
 
-def get_vector_store(chunks: List = None) -> Chroma:
+def get_vector_store(chunks: List = None, user_id: int = None) -> Chroma:
     """Get or create vector store."""
-    manager = VectorStoreManager()
+    manager = VectorStoreManager(user_id=user_id)
     return manager.get_or_create_vector_store(chunks)
 
 
-def build_rag_chain(custom_prompt: Optional[str] = None) -> Dict[str, Any]:
+def build_rag_chain(custom_prompt: Optional[str] = None, user_id: int = None) -> Dict[str, Any]:
     """Build RAG chain with optional custom prompt."""
-    engine = RAGEngine(custom_prompt=custom_prompt)
+    engine = RAGEngine(custom_prompt=custom_prompt, user_id=user_id)
     return engine.build_chain()
