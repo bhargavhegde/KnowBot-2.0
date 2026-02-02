@@ -5,10 +5,13 @@ Implements BM25 + Semantic (Vector) search fusion using Reciprocal Rank Fusion (
 This improves retrieval accuracy by combining exact keyword matching with semantic understanding.
 """
 
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any, Optional, Callable
+
 from collections import defaultdict
 
 from langchain_core.documents import Document
+from langchain_core.retrievers import BaseRetriever
+from langchain_core.callbacks import CallbackManagerForRetrieverRun
 
 
 # Try to import rank_bm25
@@ -108,35 +111,23 @@ class BM25Index:
         self.bm25 = None
 
 
-class HybridRetriever:
+class HybridRetriever(BaseRetriever):
     """
     Hybrid retriever that fuses BM25 and semantic search results
     using Reciprocal Rank Fusion (RRF).
+    
+    Inherits from BaseRetriever for LangChain Runnable compatibility.
     """
     
-    def __init__(
-        self,
-        vector_retriever,
-        bm25_index: BM25Index,
-        semantic_weight: float = 0.5,
-        bm25_weight: float = 0.5,
-        rrf_k: int = 60
-    ):
-        """
-        Initialize hybrid retriever.
-        
-        Args:
-            vector_retriever: LangChain vector store retriever
-            bm25_index: BM25Index instance
-            semantic_weight: Weight for semantic search results (0-1)
-            bm25_weight: Weight for BM25 results (0-1)
-            rrf_k: RRF constant (typically 60)
-        """
-        self.vector_retriever = vector_retriever
-        self.bm25_index = bm25_index
-        self.semantic_weight = semantic_weight
-        self.bm25_weight = bm25_weight
-        self.rrf_k = rrf_k
+    # Pydantic fields for BaseRetriever
+    vector_retriever: Any
+    bm25_index: Any
+    semantic_weight: float = 0.6
+    bm25_weight: float = 0.4
+    rrf_k: int = 60
+    
+    class Config:
+        arbitrary_types_allowed = True
     
     def _reciprocal_rank_fusion(
         self,
@@ -148,14 +139,6 @@ class HybridRetriever:
         Fuse results using Reciprocal Rank Fusion.
         
         RRF score = sum(weight / (rrf_k + rank))
-        
-        Args:
-            semantic_docs: Documents from semantic search (in ranked order)
-            bm25_results: (doc, score) tuples from BM25 search
-            k: Number of final results
-        
-        Returns:
-            Fused list of documents sorted by RRF score
         """
         # Calculate RRF scores
         rrf_scores: Dict[str, float] = defaultdict(float)
@@ -163,7 +146,6 @@ class HybridRetriever:
         
         # Process semantic results
         for rank, doc in enumerate(semantic_docs, start=1):
-            # Use content hash as document ID
             doc_id = hash(doc.page_content)
             rrf_scores[doc_id] += self.semantic_weight / (self.rrf_k + rank)
             doc_map[doc_id] = doc
@@ -181,18 +163,16 @@ class HybridRetriever:
         # Return top k documents
         return [doc_map[doc_id] for doc_id in sorted_ids[:k]]
     
-    def invoke(self, query: str, k: int = 5) -> List[Document]:
+    def _get_relevant_documents(
+        self, 
+        query: str, 
+        *, 
+        run_manager: CallbackManagerForRetrieverRun = None
+    ) -> List[Document]:
         """
-        Retrieve documents using hybrid search.
-        
-        Args:
-            query: Search query
-            k: Number of documents to return
-        
-        Returns:
-            List of documents fused from both search methods
+        Required method for BaseRetriever - retrieves documents using hybrid search.
         """
-        # Get more results from each method, then fuse
+        k = 5  # Default number of documents
         fetch_k = k * 2
         
         # Semantic search
@@ -208,9 +188,9 @@ class HybridRetriever:
         # Fuse results
         return self._reciprocal_rank_fusion(semantic_docs, bm25_results, k)
     
-    def get_relevant_documents(self, query: str) -> List[Document]:
-        """LangChain-compatible method."""
-        return self.invoke(query)
+    def invoke(self, query: str, config: Any = None) -> List[Document]:
+        """Invoke method for direct calls."""
+        return self._get_relevant_documents(query)
 
 
 # Global BM25 index cache (per user)
