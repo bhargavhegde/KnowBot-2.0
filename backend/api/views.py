@@ -64,27 +64,27 @@ class DocumentViewSet(viewsets.ModelViewSet):
             index_status=Document.IndexStatus.PENDING
         )
         
-        # Trigger async indexing (will implement in Phase 3)
-        # For now, do synchronous indexing
+        # Trigger async indexing via Celery
         try:
-            processor = DocumentProcessor()
-            chunks = processor.load_single_document(str(file_path))
-            
-            manager = VectorStoreManager()
-            manager.create_vector_store(chunks)
-            
-            document.index_status = Document.IndexStatus.INDEXED
-            document.chunk_count = len(chunks)
-            document.indexed_at = timezone.now()
-            document.save()
+            from .tasks import index_document_task
+            index_document_task.delay(document.id)
         except Exception as e:
-            document.index_status = Document.IndexStatus.FAILED
-            document.error_message = str(e)
-            document.save()
-            return Response(
-                {'error': str(e)},
-                status=status.HTTP_500_INTERNAL_SERVER_ERROR
-            )
+            # Fallback to synchronous indexing if Celery is unavailable
+            try:
+                processor = DocumentProcessor()
+                chunks = processor.load_single_document(str(file_path))
+                
+                manager = VectorStoreManager()
+                manager.create_vector_store(chunks)
+                
+                document.index_status = Document.IndexStatus.INDEXED
+                document.chunk_count = len(chunks)
+                document.indexed_at = timezone.now()
+                document.save()
+            except Exception as sync_error:
+                document.index_status = Document.IndexStatus.FAILED
+                document.error_message = str(sync_error)
+                document.save()
         
         return Response(
             DocumentSerializer(document).data,
