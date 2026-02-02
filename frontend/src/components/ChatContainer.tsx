@@ -82,7 +82,6 @@ export function ChatContainer() {
                             <MessageBubble
                                 key={message.id || idx}
                                 message={message}
-                                isLatest={idx === messages.length - 1}
                             />
                         ))}
 
