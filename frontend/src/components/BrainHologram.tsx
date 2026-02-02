@@ -3,11 +3,11 @@
 import { motion } from 'framer-motion';
 
 export function BrainHologram() {
-    // Majestic Wing shapes
+    // Cybernetic Wing shapes
     const leftWing = [
-        "M 150,200 L 80,80 L 160,140 Z", // Top shard
-        "M 80,80 L 20,40 L 90,120 Z",   // Tip shard
-        "M 160,140 L 70,240 L 140,260 Z" // Bottom shard
+        "M 150,200 L 80,80 L 160,140 Z",
+        "M 80,80 L 20,40 L 90,120 Z",
+        "M 160,140 L 70,240 L 140,260 Z"
     ];
 
     const rightWing = [
@@ -20,104 +20,99 @@ export function BrainHologram() {
         <div className="relative w-[500px] h-[500px] flex items-center justify-center pointer-events-none select-none">
             {/* Ambient Nebula - subtle */}
             <motion.div
-                className="absolute inset-0 bg-blue-500/5 rounded-full blur-[100px]"
+                className="absolute inset-0 bg-cyan-500/5 rounded-full blur-[100px]"
                 animate={{
                     scale: [1, 1.1, 1],
-                    opacity: [0.2, 0.4, 0.2]
+                    opacity: [0.1, 0.3, 0.1]
                 }}
                 transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
             />
 
-            <svg viewBox="0 0 400 400" className="w-full h-full drop-shadow-[0_0_30px_rgba(59,130,246,0.3)] overflow-visible">
+            <svg viewBox="0 0 400 400" className="w-full h-full drop-shadow-[0_0_30px_rgba(6,182,212,0.3)] overflow-visible">
                 <defs>
                     <linearGradient id="holoWing" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="#60a5fa" stopOpacity="0.6" />
-                        <stop offset="100%" stopColor="#3b82f6" stopOpacity="0.2" />
+                        <stop offset="0%" stopColor="#22d3ee" stopOpacity="0.5" />
+                        <stop offset="100%" stopColor="#3b82f6" stopOpacity="0.1" />
                     </linearGradient>
-                    <linearGradient id="brainGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" stopColor="#93c5fd" />
-                        <stop offset="100%" stopColor="#3b82f6" />
+                    <linearGradient id="cyberBrainGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stopColor="#a5f3fc" />
+                        <stop offset="100%" stopColor="#0891b2" />
                     </linearGradient>
-                    <filter id="glow-strong">
-                        <feGaussianBlur stdDeviation="4" result="coloredBlur" />
+                    <filter id="cyber-glow">
+                        <feGaussianBlur stdDeviation="3" result="coloredBlur" />
                         <feMerge>
                             <feMergeNode in="coloredBlur" />
                             <feMergeNode in="SourceGraphic" />
                         </feMerge>
                     </filter>
+                    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                        <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(34, 211, 238, 0.1)" strokeWidth="0.5" />
+                    </pattern>
                 </defs>
 
                 <g transform="translate(0, -20)">
-                    {/* Left Wing Animation */}
+                    {/* Circuit Wings L */}
                     <g>
                         {leftWing.map((path, i) => (
                             <motion.path
                                 key={`l-${i}`}
                                 d={path}
                                 fill="url(#holoWing)"
-                                stroke="rgba(147, 197, 253, 0.3)"
+                                stroke="rgba(34, 211, 238, 0.4)"
                                 strokeWidth="1"
-                                initial={{ opacity: 0, x: 20, rotate: 10 }}
-                                animate={{ opacity: 1, x: 0, rotate: 0 }}
-                                transition={{
-                                    duration: 2,
-                                    delay: i * 0.2,
-                                    type: "spring",
-                                    stiffness: 40
-                                }}
+                                initial={{ opacity: 0, x: 20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ duration: 1.5, delay: i * 0.1 }}
                             />
                         ))}
                     </g>
-
-                    {/* Right Wing Animation */}
+                    {/* Circuit Wings R */}
                     <g>
                         {rightWing.map((path, i) => (
                             <motion.path
                                 key={`r-${i}`}
                                 d={path}
                                 fill="url(#holoWing)"
-                                stroke="rgba(147, 197, 253, 0.3)"
+                                stroke="rgba(34, 211, 238, 0.4)"
                                 strokeWidth="1"
-                                initial={{ opacity: 0, x: -20, rotate: -10 }}
-                                animate={{ opacity: 1, x: 0, rotate: 0 }}
-                                transition={{
-                                    duration: 2,
-                                    delay: i * 0.2,
-                                    type: "spring",
-                                    stiffness: 40
-                                }}
+                                initial={{ opacity: 0, x: -20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ duration: 1.5, delay: i * 0.1 }}
                             />
                         ))}
                     </g>
 
-                    {/* Central Brain - Larger */}
-                    <g transform="translate(140, 140) scale(1.2)" filter="url(#glow-strong)">
+                    {/* Central Cybernetic Brain */}
+                    <g transform="translate(140, 140) scale(1.2)" filter="url(#cyber-glow)">
+                        {/* Base Shape */}
                         <motion.path
                             d="M30,50 Q30,20 50,20 Q70,20 70,50 Q70,80 50,80 Q30,80 30,50"
-                            fill="url(#brainGrad)"
-                            stroke="#bfdbfe"
-                            strokeWidth="1.5"
+                            fill="url(#cyberBrainGrad)"
+                            stroke="#67e8f9"
+                            strokeWidth="2"
                             initial={{ scale: 0 }}
                             animate={{ scale: 1 }}
                             transition={{ duration: 1, ease: "backOut" }}
                         />
-                        {/* Synapses / Interaction */}
-                        <motion.circle cx="50" cy="50" r="28" fill="none" stroke="white" strokeOpacity="0.1"
-                            animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0, 0.1] }}
-                            transition={{ duration: 3, repeat: Infinity }}
+                        {/* Internal Circuitry */}
+                        <path d="M40,30 L60,30 L60,70 L40,70 Z" fill="url(#grid)" opacity="0.5" />
+                        <path d="M30,50 L45,50 M55,50 L70,50 M50,20 L50,40 M50,60 L50,80" stroke="#cffafe" strokeWidth="1" />
+                        <circle cx="50" cy="50" r="8" fill="#ec4899" fillOpacity="0.2" stroke="#ec4899" strokeWidth="1" />
+                        <circle cx="50" cy="50" r="4" fill="#ec4899" />
+
+                        {/* Data Pulses */}
+                        <motion.circle cx="50" cy="50" r="30" fill="none" stroke="#22d3ee" strokeOpacity="0.5" strokeWidth="1"
+                            animate={{ scale: [1, 1.4], opacity: [0.5, 0] }}
+                            transition={{ duration: 2, repeat: Infinity }}
                         />
                     </g>
                 </g>
 
-                {/* Integrated SVG Text - No layout shifts */}
-                <text x="200" y="350" textAnchor="middle" fill="url(#brainGrad)"
-                    style={{ fontSize: '40px', fontWeight: '900', letterSpacing: '0.1em', fontFamily: 'system-ui' }}
-                    filter="url(#glow-strong)">
+                {/* SVG Text - Just KNOWBOT */}
+                <text x="200" y="360" textAnchor="middle" fill="#ec4899"
+                    style={{ fontSize: '42px', fontWeight: '900', letterSpacing: '0.2em', fontFamily: 'system-ui' }}
+                    filter="url(#cyber-glow)">
                     KNOWBOT
-                </text>
-                <text x="200" y="390" textAnchor="middle" fill="#22d3ee"
-                    style={{ fontSize: '32px', fontWeight: '300', letterSpacing: '0.2em', fontFamily: 'system-ui' }}>
-                    2.0
                 </text>
             </svg>
         </div>

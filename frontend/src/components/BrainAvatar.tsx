@@ -28,17 +28,34 @@ export function BrainAvatar() {
                     </filter>
                 </defs>
 
-                {/* Brain Body with Eyes - Cute Version */}
+                {/* Brain Body with Animated "Horns" (Lobes) */}
                 <g filter="url(#glow)">
+                    {/* Left Lobe (Horn) */}
                     <motion.path
-                        d="M30,50 Q30,20 50,20 Q70,20 70,50 Q70,80 50,80 Q30,80 30,50"
+                        d="M30,50 Q30,20 50,20 L 50,80 Q30,80 30,50"
                         fill="url(#avatarGrad)"
                         stroke="rgba(255,255,255,0.4)"
                         strokeWidth="1.5"
-                        whileHover={{ scale: 1.1 }}
+                        initial={{ rotate: 0, transformOrigin: "50px 80px" }}
+                        whileHover={{ rotate: -15 }}
+                        transition={{ type: "spring", stiffness: 300, damping: 10 }}
                     />
 
-                    {/* Eyes Container */}
+                    {/* Right Lobe (Horn) */}
+                    <motion.path
+                        d="M70,50 Q70,20 50,20 L 50,80 Q70,80 70,50"
+                        fill="url(#avatarGrad)"
+                        stroke="rgba(255,255,255,0.4)"
+                        strokeWidth="1.5"
+                        initial={{ rotate: 0, transformOrigin: "50px 80px" }}
+                        whileHover={{ rotate: 15 }}
+                        transition={{ type: "spring", stiffness: 300, damping: 10 }}
+                    />
+
+                    {/* Central Connector/Face Base */}
+                    <path d="M45,20 L55,20 L55,80 L45,80 Z" fill="url(#avatarGrad)" opacity="0" />
+
+                    {/* Eyes Container - Stays Stable */}
                     <g transform="translate(0, 5)">
                         {/* Left Eye */}
                         <motion.ellipse
