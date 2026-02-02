@@ -98,6 +98,10 @@ export function Sidebar() {
             'application/pdf': ['.pdf'],
             'text/plain': ['.txt'],
             'text/markdown': ['.md'],
+            'image/png': ['.png'],
+            'image/jpeg': ['.jpg', '.jpeg'],
+            'image/tiff': ['.tiff', '.tif'],
+            'image/bmp': ['.bmp'],
         },
     });
 
