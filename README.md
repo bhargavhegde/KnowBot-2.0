@@ -1,21 +1,21 @@
 # KnowBot 2.0 - The Neural Knowledge Assistant 🧠⚡
 <img width="2404" height="1187" alt="image" src="https://github.com/user-attachments/assets/ed61a9c1-fd7e-42a5-9214-24f9cfea72c6" />
 
+**KnowBot 2.0** was an experimental migration phase exploring Docker containerization and Next.js frontend development. This version bridges the gap between the simple Streamlit v1.0 and the production-ready v3.0.
 
-**KnowBot 2.0** is a high-fidelity, private RAG (Retrieval-Augmented Generation) application designed for high-performance personal knowledge management. Featuring a stunning cybernetic interface and a robust full-stack architecture, it allows you to chat with your local documents with zero data leaks.
+> **Status**: This is an experimental/intermediate version. For production use, see [KnowBot 3.0](https://github.com/bhargavhegde/KnowBot3.0).
 
 ---
 
-## 🚀 What's New in 2.0?
+## 🚀 What's in 2.0?
 
-KnowBot has evolved from a simple Streamlit script into a professional-grade full-stack beast:
+This version experimented with:
 
-- **Next-Gen Cybernetic UI**: Built with Next.js 15, Framer Motion, and Tailwind CSS. Features glassmorphism, holographic effects, and a custom-animated "Cyber Brain" avatar.
-- **Persistent Chat History**: Full multi-session support. Save, resume, or delete your "neural threads" at any time.
-- **Neural Knowledge Sync**: The AI explicitly tracks which files it has indexed feedback during document retrieval.
-- **Enterprise-Ready Backend**: Django REST Framework handles orchestration, while **Celery + Redis** manage asynchronous document indexing.
-- **Secure Multi-User**: Built-in authentication system with JWT. Your knowledge base is isolated to your account.
-- **Async Indexing**: Upload mega-files and watch them process in the background without blocking the UI.
+- **Next-Gen Cybernetic UI**: Early prototype with Next.js 15, Framer Motion, and Tailwind CSS
+- **Persistent Chat History**: Multi-session support experiments
+- **Django Backend**: REST API with Celery/Redis async task queue
+- **Docker Setup**: Full-stack containerization attempt
+- **Multi-User Foundation**: JWT authentication groundwork
 
 ---
 
@@ -24,50 +24,54 @@ KnowBot has evolved from a simple Streamlit script into a professional-grade ful
 ### Frontend
 - **Framework**: Next.js 15 (App Router)
 - **Styling**: Tailwind CSS + Framer Motion
-- **Icons**: Custom SVG Cyber-Visuals
 - **State Management**: React Context API
 
 ### Backend
 - **Framework**: Django REST Framework
 - **Task Queue**: Celery + Redis
-- **Database**: PostgreSQL (Users/Sessions) + ChromaDB (Vector Store)
+- **Database**: PostgreSQL (metadata) + ChromaDB (vectors)
 - **RAG Engine**: LangChain + Ollama
 
 ### AI Core
 - **LLM**: Llama 3.1 8B (via Ollama)
 - **Embeddings**: Nomic Embed Text
-- **Vector Store**: Chroma (Persistent)
+- **Vector Store**: Chroma
 
 ---
 
-## 🏗️ Quick Start
+## 🏗️ Quick Start (Experimental)
 
-The entire stack is containerized for a single-command deployment.
+### Option 1: Streamlit (Legacy Mode)
 
-### 1. Prerequisites
-- **Docker & Docker Compose** installed.
-- **Ollama** running on your host machine (or accessible via network).
 ```bash
+cd ~/Desktop/Knowbot2.0
+python3 -m venv rag_env
+source rag_env/bin/activate
+pip install -r requirements.txt
+streamlit run app.py
+```
+
+### Option 2: Docker (Full Stack)
+
+**Prerequisites:**
+- Docker & Docker Compose installed
+- Ollama running locally
+
+```bash
+# Pull models first
 ollama pull llama3.1:8b
 ollama pull nomic-embed-text
-```
 
-### 2. Setup Environment
-Clone the repo and create your `.env` file:
-```bash
-git clone https://github.com/bhargavhegde/KnowBot-2.0.git
-cd KnowBot-2.0
+# Setup environment
 cp .env.example .env
-```
 
-### 3. Launch via Docker
-```bash
+# Launch stack
 docker-compose up --build
 ```
 
-- **Frontend**: [http://localhost:3000](http://localhost:3000)
-- **Backend API**: [http://localhost:8000/api](http://localhost:8000/api)
-- **Admin Dashboard**: [http://localhost:8000/admin](http://localhost:8000/admin)
+- **Frontend**: http://localhost:3000
+- **Backend API**: http://localhost:8000/api
+- **Admin**: http://localhost:8000/admin
 
 ---
 
@@ -76,32 +80,32 @@ docker-compose up --build
 ```text
 KnowBot-2.0/
 ├── backend/            # Django REST Framework app
-│   ├── api/            # Endpoints for chat, docs, and authentication
-│   ├── rag/            # The LangChain RAG engine logic
-│   └── knowbot/         # System settings & Celery config
+│   ├── api/            # Endpoints for chat, docs, auth
+│   ├── rag/            # LangChain RAG engine
+│   └── knowbot/        # Settings & Celery config
 ├── frontend/           # Next.js 15 Application
 │   ├── src/app/        # Pages (Login, Chat, Register)
-│   ├── src/components/ # Cybernetic UI Components
+│   ├── src/components/ # UI Components
 │   └── src/context/    # State management
-├── streamlit_backup/   # Legacy Streamlit code (v1.0)
+├── streamlit_backup/   # Legacy v1.0 code
 └── docker-compose.yml  # Full-stack orchestration
 ```
 
 ---
 
-## 📌 Features in Detail
+## 🔄 Version History
 
+- **[v1.0](https://github.com/bhargavhegde/RAG-KnowBot)**: Simple Streamlit app (fully local)
+- **v2.0** (this repo): Docker + Next.js experimentation
+- **[v3.0](https://github.com/bhargavhegde/KnowBot3.0)**: Production deployment on Vercel/Railway
 
-### 🧠 System Prompts
-Customize your AI's personality. Switch between a professional analyst, a creative tutor, or a strict fact-checker via the sidebar.
-
-### 📄 Managed Knowledge
-Upload **PDFs, TXTs, or MDs**. KnowBot chunks them, generates embeddings, and stores them in your private vector vault. You can delete documents individually or refresh your entire "Neural Memory" with one click.
+**Key Learnings from v2.0:**
+- Docker adds complexity for local RAG (Ollama networking issues)
+- Decided to go full cloud-native instead
+- Validated Django/Next.js stack choice for v3.0
 
 ---
 
-## 🤝 Contributing
-Feel free to fork this project and add new features! Whether it's more document loaders, new UI animations, or advanced RAG techniques, contributions are welcome.
-
 ## 📄 License
+
 MIT License - 2024 Bhargav Hegde
